@@ -37,6 +37,24 @@ tasks:
     export_form:
         class_path: cci_flowtoolkit_tasks.export_form.ExportFormMetadata
 
+    # Release-time mirror to the public companion repo: documentation, releases, and the
+    # unpackaged config a subscriber deploys after install. force-app is NEVER included.
+    # The public cumulusci.yml is copied verbatim, so every path a MetaDeploy plan step
+    # deploys and every repo-local task class a plan references must be in this list;
+    # a path the mirror never received fails at INSTALL time on the subscriber.
+    github_copy_subtree:
+        options:
+            repo_url: "https://github.com/common-unite/FlowToolKit_V4S_Extension_Public"
+            branch: "main"
+            create_release: true
+            release_body: true
+            include: [ "cumulusci.yml","sfdx-project.json","orgs/","README.md","documents/",
+                       "force-app-unpackaged-objects/","force-app-unpackaged-themes/",
+                       "force-app-unpackaged-contentAssets/","force-app-unpackaged-forms/",
+                       "force-app-unpackaged-layouts/","force-app-unpackaged-post/",
+                       "force-app-unpackaged-datetime-sync/",
+                       "scripts/","tasks/","datasets/","data/","scratch-org/" ]
+
     assert_site_payload:
         description: >
             Fails the flow when scratch-org/site would deploy less than it holds.
@@ -250,6 +268,20 @@ tasks:
             required_org_code_coverage_percent: 75
 
 flows:
+    release_2gp_beta:
+        steps:
+            90:
+                task: github_copy_subtree
+                options:
+                    tag_name: "latest_beta"
+
+    release_2gp_production:
+        steps:
+            90:
+                task: github_copy_subtree
+                options:
+                    tag_name: "latest"
+
     deploy_unpackaged_config:
         description: Deploys all unpackaged metadata in dependency order
         steps:

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Mailing Address</label>
+    <protected>false</protected>
+    <values>
+        <field>FlowToolKit__Default_Table_Form__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>FlowToolKit__Default_Table_Form_bulk__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>FlowToolKit__Delete__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>FlowToolKit__Form__c</field>
+        <value xsi:type="xsd:string">Volunteer_New_Volunteer_Group</value>
+    </values>
+    <values>
+        <field>FlowToolKit__PreventDelete__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>FlowToolKit__Theme__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>FlowToolKit__conditionalLogic__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>FlowToolKit__config__c</field>
+        <value xsi:type="xsd:string">{
+  &quot;attributes&quot; : {
+    &quot;type&quot; : &quot;FlowToolKit__Form_Component_Section__c&quot;
+  },
+  &quot;FlowToolKit__Form__c&quot; : &quot;Volunteer_New_Volunteer_Group&quot;,
+  &quot;FlowToolKit__displayType__c&quot; : &quot;SHOW&quot;,
+  &quot;FlowToolKit__horizontalAlign__c&quot; : &quot;start&quot;,
+  &quot;FlowToolKit__horizontalPadding__c&quot; : &quot;slds-p-horizontal_xx-small&quot;,
+  &quot;FlowToolKit__marginBottom__c&quot; : &quot;slds-m-bottom_none&quot;,
+  &quot;FlowToolKit__marginTop__c&quot; : &quot;slds-m-top_none&quot;,
+  &quot;FlowToolKit__paddingBottom__c&quot; : &quot;slds-p-bottom_none&quot;,
+  &quot;FlowToolKit__paddingLeft__c&quot; : &quot;slds-p-left_none&quot;,
+  &quot;FlowToolKit__paddingRight__c&quot; : &quot;slds-p-right_none&quot;,
+  &quot;FlowToolKit__paddingTop__c&quot; : &quot;slds-p-top_none&quot;,
+  &quot;FlowToolKit__position__c&quot; : 3.0,
+  &quot;FlowToolKit__sectionTheme__c&quot; : &quot;clean&quot;,
+  &quot;FlowToolKit__sectionType__c&quot; : &quot;addressSection&quot;,
+  &quot;FlowToolKit__title__c&quot; : &quot;Mailing Address&quot;,
+  &quot;FlowToolKit__widthLarge__c&quot; : &quot;12&quot;,
+  &quot;FlowToolKit__widthMedium__c&quot; : &quot;12&quot;,
+  &quot;FlowToolKit__widthSmall__c&quot; : &quot;12&quot;
+}</value>
+    </values>
+    <values>
+        <field>FlowToolKit__contentAssetName__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>FlowToolKit__formComponent__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>FlowToolKit__position__c</field>
+        <value xsi:type="xsd:double">3.0</value>
+    </values>
+</CustomMetadata>

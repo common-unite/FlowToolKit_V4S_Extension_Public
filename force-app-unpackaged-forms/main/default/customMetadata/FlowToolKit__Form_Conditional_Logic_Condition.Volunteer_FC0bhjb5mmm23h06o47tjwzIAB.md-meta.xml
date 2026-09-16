@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>New Condition</label>
+    <protected>false</protected>
+    <values>
+        <field>FlowToolKit__Delete__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>FlowToolKit__Form__c</field>
+        <value xsi:type="xsd:string">Volunteer_Waiver</value>
+    </values>
+    <values>
+        <field>FlowToolKit__Object__c</field>
+        <value xsi:type="xsd:string">FlowToolKit__Form_Submission__c</value>
+    </values>
+    <values>
+        <field>FlowToolKit__UserValidation__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>FlowToolKit__conditionalLogic__c</field>
+        <value xsi:type="xsd:string">Volunteer_FLbhjb5ml2f3h06o46jwzIAB</value>
+    </values>
+    <values>
+        <field>FlowToolKit__config__c</field>
+        <value xsi:type="xsd:string">{
+  &quot;attributes&quot; : {
+    &quot;type&quot; : &quot;FlowToolKit__Form_Component_Condition__c&quot;
+  },
+  &quot;FlowToolKit__Form__c&quot; : &quot;FlowToolKit__Volunteer_Waiver&quot;,
+  &quot;FlowToolKit__Object__c&quot; : &quot;FlowToolKit__Form_Submission__c&quot;,
+  &quot;FlowToolKit__conditionalLogic__c&quot; : &quot;FlowToolKit__Volunteer_FLbhjb5ml2f3h06o46jwzIAB&quot;,
+  &quot;FlowToolKit__fieldName__c&quot; : &quot;FlowToolKit__Contact1_Age_Calculated__c&quot;,
+  &quot;FlowToolKit__operation__c&quot; : &quot;&lt;&quot;,
+  &quot;FlowToolKit__position__c&quot; : 1.0,
+  &quot;FlowToolKit__value__c&quot; : &quot;18&quot;
+}</value>
+    </values>
+    <values>
+        <field>FlowToolKit__fieldName__c</field>
+        <value xsi:type="xsd:string">FlowToolKit__Form_Submission__c.FlowToolKit__Contact1_Age_Calculated__c</value>
+    </values>
+    <values>
+        <field>FlowToolKit__position__c</field>
+        <value xsi:type="xsd:double">1.0</value>
+    </values>
+    <values>
+        <field>FlowToolKit__value__c</field>
+        <value xsi:type="xsd:string">18</value>
+    </values>
+</CustomMetadata>

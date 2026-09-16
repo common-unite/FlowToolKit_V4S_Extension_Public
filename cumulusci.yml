@@ -1,0 +1,442 @@
+minimum_cumulusci_version: '3.58.0'
+project:
+    name: FlowToolKit_V4S_Ext
+    package:
+        name: 'Flow Tool Kit: V4S Extension'
+        namespace: FlowToolKit
+        api_version: '65.0'
+    dependencies:
+        - github: 'https://github.com/SalesforceFoundation/Volunteers-for-Salesforce'
+        - github: 'https://github.com/common-unite/cUnite_FormBuilder'
+        - github: 'https://github.com/common-unite/cUnite_Date_Time_Sync'
+    git:
+    source_format: sfdx
+
+sources:
+    source_date_time_sync:
+        github: 'https://github.com/common-unite/Date_Time_Sync_Public'
+
+orgs:
+    scratch:
+        dev_namespaced:
+            config_file: orgs/dev.json
+            days: 30
+            namespaced: True
+        sprint_2026-08-25:
+            config_file: orgs/dev.json
+            days: 30
+            namespaced: True
+        install_test:
+            # Install-testing a released managed package requires a NON-namespaced org:
+            # a scratch org linked to the same namespace cannot install that namespace's package.
+            config_file: orgs/dev.json
+            days: 7
+            namespaced: False
+
+tasks:
+    export_form:
+        class_path: cci_flowtoolkit_tasks.export_form.ExportFormMetadata
+
+    assert_site_payload:
+        description: >
+            Fails the flow when scratch-org/site would deploy less than it holds.
+            A metadata-format deploy cannot error on components package.xml never
+            requested, so a stale manifest ships nothing and still reports success.
+            That hid issue #29 for months. Deliberately has NO ignore_failure.
+        class_path: tasks.metadata_guard.AssertMetadataPayload
+        options:
+            path: scratch-org/site
+            require_types: ExperienceBundle,SharingRules
+
+    assert_site_usable:
+        description: >
+            Fails the flow when the demo site finished config_dev but would not
+            work for a guest - not Live, or the guest user is missing its
+            permission sets. Steps 50-55 are all ignore_failure, so none of them
+            report these. Asserts the outcome once instead. See issue #30.
+        class_path: tasks.site_guard.AssertSiteUsable
+        options:
+            network_name: Volunteer Portal
+
+    activate_volunteer_portal:
+        description: Activates the Volunteer Portal site (Network.Status = Live). A new site is UnderConstruction, which sends guests to the login page.
+        class_path: cumulusci.tasks.command.SalesforceCommand
+        options:
+            command: bash scripts/activate-volunteer-portal.sh
+
+    open_volunteer_portal_to_guests:
+        description: Sets isAvailableToGuests on the Volunteer Portal ExperienceBundle. Without it every route redirects guests to login, even on a Live site.
+        class_path: cumulusci.tasks.command.SalesforceCommand
+        options:
+            command: bash scripts/open-volunteer-portal-to-guests.sh
+
+    deploy_unpackaged_objects:
+        description: Deploys Form Object CMDT and custom fields
+        class_path: cumulusci.tasks.salesforce.Deploy
+        options:
+            path: unpackaged/config/objects
+
+    deploy_unpackaged_themes:
+        description: Deploys Form Theme CMDT records
+        class_path: cumulusci.tasks.salesforce.Deploy
+        options:
+            path: unpackaged/config/themes
+
+    deploy_unpackaged_content_assets:
+        description: Deploys volunteer banner content assets
+        class_path: cumulusci.tasks.salesforce.Deploy
+        options:
+            path: unpackaged/config/contentAssets
+
+    deploy_unpackaged_forms:
+        description: Deploys Form parent CMDT records
+        class_path: cumulusci.tasks.salesforce.Deploy
+        options:
+            path: unpackaged/config/forms
+
+    deploy_unpackaged_layout_metadata:
+        description: Deploys page layouts for V4S objects
+        class_path: cumulusci.tasks.salesforce.Deploy
+        options:
+            path: unpackaged/config/layouts
+
+    deploy_unpackaged_post_metadata:
+        description: Deploys Lightning App and FlexiPages
+        class_path: cumulusci.tasks.salesforce.Deploy
+        options:
+            path: unpackaged/config/post
+
+    deploy_unpackaged_datetime_sync:
+        description: Deploys Date Time Sync trigger, test, and CMDT config for Volunteer Shifts
+        class_path: cumulusci.tasks.salesforce.Deploy
+        options:
+            path: unpackaged/config/datetime_sync
+
+    load_volunteer_data:
+        class_path: cumulusci.tasks.bulkdata.generate_and_load_data_from_yaml.GenerateAndLoadDataFromYaml
+        description: Generate and load volunteer test data from Snowfakery recipe
+        options:
+            generator_yaml: datasets/snowfakery_recipe.yml
+            drop_missing_schema: True
+
+    load_form_templates:
+        class_path: cumulusci.tasks.bulkdata.generate_and_load_data_from_yaml.GenerateAndLoadDataFromYaml
+        description: Load the two Volunteer Application form templates. These are product config, not demo data - they are what an admin points a Volunteer Job at, so every org needs them. Always follow with cleanup_auto_created_template_children.
+        options:
+            generator_yaml: datasets/form_templates_recipe.yml
+            drop_missing_schema: True
+
+    cleanup_auto_created_template_children:
+        class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+        description: Remove the empty default page and section that base package triggers auto-insert on every new template. Without this the rendered form shows a stray blank Primary Contact Information page. Safe to re-run, and it never touches Volunteer Jobs.
+        options:
+            path: scripts/cleanup-auto-created-template-children.apex
+
+    stamp_demo_jobs_with_templates:
+        class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+        description: DEMO ORGS ONLY - point every Volunteer Job in the org at a Volunteer Application template. Deliberately unfiltered, so it would overwrite a client's hand-configured jobs. Never add this to an install path.
+        options:
+            path: scripts/stamp-demo-jobs-with-templates.apex
+
+    inject_conversion_type_value:
+        class_path: cumulusci.tasks.metadata_etl.picklists.AddPicklistEntries
+        description: Add the Volunteer Application option to the base package's Conversion Type picklist. This is the controlling value the volunteer conversion rule hangs off of.
+        options:
+            picklists: FlowToolKit__Form_Template__c.FlowToolKit__Conversion_Type__c
+            entries:
+                - fullName: Volunteer Application
+                  label: Volunteer Application
+
+    inject_conversion_rule_value:
+        class_path: cumulusci.tasks.metadata_etl.picklists.AddPicklistEntries
+        description: Add the Volunteer Application option to the base package's Conversion Rules picklist. All four volunteer conversion flows check for this value before they run, so without it nothing converts. Conversion Rules is a dependent picklist, so inject_conversion_rule_dependency must run after this to make the option selectable.
+        options:
+            picklists: FlowToolKit__Form_Template__c.FlowToolKit__Conversion_Rules__c
+            entries:
+                - fullName: Volunteer Application
+                  label: Volunteer Application
+
+    inject_conversion_rule_dependency:
+        class_path: cci_flowtoolkit_tasks.picklist_dependency.AddPicklistDependencies
+        description: Make the volunteer conversion rules selectable under the Volunteer Application conversion type. Conversion Rules is a dependent picklist, so adding a value is only half the job - unmapped, the option is hidden in the UI and any attempt to save it is rejected. Maps the Volunteer Application rule plus the Contact1/Contact2/Account rule families. Run after inject_conversion_rule_value.
+        options:
+            object_api_name: FlowToolKit__Form_Template__c
+            field_api_name: FlowToolKit__Conversion_Rules__c
+            controlling_field_api_name: FlowToolKit__Conversion_Type__c
+            dependencies:
+                - value: Contact1
+                  controlling_values:
+                      - Volunteer Application
+                - value: Contact1 👉 Set Mailing Address
+                  controlling_values:
+                      - Volunteer Application
+                - value: Contact1 👉 Set Other Address
+                  controlling_values:
+                      - Volunteer Application
+                - value: Contact1 👉 Create Campaign Member
+                  controlling_values:
+                      - Volunteer Application
+                - value: Contact2
+                  controlling_values:
+                      - Volunteer Application
+                - value: Contact2 👉 Set Mailing Address
+                  controlling_values:
+                      - Volunteer Application
+                - value: Contact2 👉 Set Other Address
+                  controlling_values:
+                      - Volunteer Application
+                - value: Contact2 👉 Create Campaign Member
+                  controlling_values:
+                      - Volunteer Application
+                - value: Account
+                  controlling_values:
+                      - Volunteer Application
+                - value: Account 👉 Set Billing Address
+                  controlling_values:
+                      - Volunteer Application
+                - value: Account 👉 Set Shipping Address
+                  controlling_values:
+                      - Volunteer Application
+                - value: Contact1 👉 Add to Account
+                  controlling_values:
+                      - Volunteer Application
+                - value: Contact2 👉 Add to Account
+                  controlling_values:
+                      - Volunteer Application
+                - value: Volunteer Application
+                  controlling_values:
+                      - Volunteer Application
+
+    inject_controller_map_flow_value:
+        class_path: cumulusci.tasks.metadata_etl.picklists.AddPicklistEntries
+        description: Add the volunteer controller clone to the base package's Conversion Map Flow Controller picklist, so an admin can select it on a Form Template.
+        options:
+            picklists: FlowToolKit__Form_Template__c.FlowToolKit__Conversion_Map_Flow_Controller__c
+            entries:
+                - fullName: FlowToolKit__Form_Submission_Convert_Process_Form_Submission_Volunteer_Overridable
+                  label: Volunteer Application Controller
+
+    inject_contact1_map_flow_value:
+        class_path: cumulusci.tasks.metadata_etl.picklists.AddPicklistEntries
+        description: Add the volunteer Contact mapping clone to the base package's Conversion Map Flow Contact1 picklist, so an admin can select it on a Form Template.
+        options:
+            picklists: FlowToolKit__Form_Template__c.FlowToolKit__Conversion_Map_Flow_Contact1__c
+            entries:
+                - fullName: FlowToolKit__Form_Submission_Convert_Process_Contact_Volunteer_Overridable
+                  label: Volunteer Contact Mapping
+
+    inject_account_map_flow_value:
+        class_path: cumulusci.tasks.metadata_etl.picklists.AddPicklistEntries
+        description: Add the volunteer group Account mapping clone to the base package's Conversion Map Flow Account picklist, so an admin can select it on a Form Template.
+        options:
+            picklists: FlowToolKit__Form_Template__c.FlowToolKit__Conversion_Map_Flow_Account__c
+            entries:
+                - fullName: FlowToolKit__Form_Submission_Convert_Process_Account_Volunteer_Overridable
+                  label: Volunteer Group Account Mapping
+
+    robot:
+        options:
+            suites: robot/FlowToolKit_V4SF_Ext/tests
+            options:
+                outputdir: robot/FlowToolKit_V4SF_Ext/results
+
+    robot_testdoc:
+        options:
+            path: robot/FlowToolKit_V4SF_Ext/tests
+            output: robot/FlowToolKit_V4SF_Ext/doc/cUnite_FormBuilder_V4SF_tests.html
+
+    run_tests:
+        options:
+            required_org_code_coverage_percent: 75
+
+flows:
+    deploy_unpackaged_config:
+        description: Deploys all unpackaged metadata in dependency order
+        steps:
+            1:
+                task: dx_convert_from
+                options:
+                    src_dir: unpackaged/config/objects
+                    extra: -r force-app-unpackaged-objects
+            1.1:
+                task: deploy_unpackaged_objects
+            2:
+                task: dx_convert_from
+                options:
+                    src_dir: unpackaged/config/themes
+                    extra: -r force-app-unpackaged-themes
+            2.1:
+                task: deploy_unpackaged_themes
+            3:
+                task: dx_convert_from
+                options:
+                    src_dir: unpackaged/config/contentAssets
+                    extra: -r force-app-unpackaged-contentAssets
+            3.1:
+                task: deploy_unpackaged_content_assets
+            4:
+                task: dx_convert_from
+                options:
+                    src_dir: unpackaged/config/forms
+                    extra: -r force-app-unpackaged-forms
+            4.1:
+                task: deploy_unpackaged_forms
+
+    deploy_unpackaged_datetime_sync_config:
+        description: Converts and deploys Date Time Sync unpackaged components
+        steps:
+            1:
+                task: dx_convert_from
+                options:
+                    src_dir: unpackaged/config/datetime_sync
+                    extra: -r force-app-unpackaged-datetime-sync
+            1.1:
+                task: deploy_unpackaged_datetime_sync
+                options:
+                    unmanaged: true
+
+    deploy_unpackaged_layouts:
+        steps:
+            1:
+                task: dx_convert_from
+                options:
+                    src_dir: unpackaged/config/layouts
+                    extra: -r force-app-unpackaged-layouts
+            1.1:
+                task: deploy_unpackaged_layout_metadata
+
+    deploy_unpackaged_post:
+        steps:
+            1:
+                task: dx_convert_from
+                options:
+                    src_dir: unpackaged/config/post
+                    extra: -r force-app-unpackaged-post
+            1.1:
+                task: deploy_unpackaged_post_metadata
+                options:
+                    unmanaged: true
+
+    config_dev:
+        steps:
+            30:
+                flow: deploy_unpackaged_config
+            31:
+                flow: deploy_unpackaged_datetime_sync_config
+            39.9:
+                # The unpackaged fields deployed at steps 30-39 have no FLS for the running
+                # admin until the profile is regranted, so the org describe omits them and
+                # load_volunteer_data (drop_missing_schema) silently drops every one: Roles
+                # loaded with only Name, no Job carried a Role. Grant before loading. See #37.
+                task: update_admin_profile
+            40:
+                task: load_volunteer_data
+            41:
+                flow: deploy_unpackaged_layouts
+            42:
+                flow: deploy_unpackaged_post
+            # Add the volunteer options to the base package's picklists. Without these the
+            # volunteer conversion flows have nothing to be selected by and never run.
+            #
+            # The task definitions carry the FlowToolKit__ prefix because that is how the
+            # base package's fields are named in a subscriber org, which is what the client
+            # post-install steps target. A namespaced scratch org sees those same fields
+            # WITHOUT the prefix, so each step below overrides the picklists option.
+            42.1:
+                task: inject_conversion_type_value
+                options:
+                    picklists: Form_Template__c.Conversion_Type__c
+            42.2:
+                task: inject_conversion_rule_value
+                options:
+                    picklists: Form_Template__c.Conversion_Rules__c
+            42.3:
+                task: inject_conversion_rule_dependency
+                options:
+                    object_api_name: Form_Template__c
+                    field_api_name: Conversion_Rules__c
+                    controlling_field_api_name: Conversion_Type__c
+            42.4:
+                task: inject_controller_map_flow_value
+                options:
+                    picklists: Form_Template__c.Conversion_Map_Flow_Controller__c
+            42.5:
+                task: inject_contact1_map_flow_value
+                options:
+                    picklists: Form_Template__c.Conversion_Map_Flow_Contact1__c
+            42.6:
+                task: inject_account_map_flow_value
+                options:
+                    picklists: Form_Template__c.Conversion_Map_Flow_Account__c
+            # The form templates are config, so they load on the install path and
+            # not with the demo data at step 40. The cleanup immediately after is
+            # required, not optional: base package triggers add an empty default
+            # page and section to every template on insert. See issue #26.
+            42.7:
+                task: load_form_templates
+            42.8:
+                task: cleanup_auto_created_template_children
+            43:
+                # The base package's Form_Builder_Admin/Form_Flow_User are the ONLY permission
+                # sets that grant FlowToolKit__Form_Submission_Upsert, which ships restricted
+                # (isAdditionalPermissionRequiredToRun). Without them any submission carrying
+                # related records - or any guest/iframe save - fails to start the interview with
+                # "Insufficient Privileges". The V4S pair grants only the V4S flows.
+                # See cUnite_FormBuilder#566.
+                task: assign_permission_sets
+                options:
+                    api_names: Form_Builder_Admin,Form_Flow_User,Form_Flow_V4S_Admin,Form_Flow_V4S_User
+            44:
+                # Re-grant admin FLS on unpackaged fields deployed at steps 30-42.
+                # Without this, Form_Template_Source__mdt rows whose MetadataRelationship
+                # values point at those fields drop out of SOQL entirely. See issue #8.
+                task: update_admin_profile
+            45:
+                # Demo only. Stamps EVERY Volunteer Job in the org, so it belongs
+                # in config_dev and must never reach a client install path.
+                task: stamp_demo_jobs_with_templates
+            # Demo Experience Cloud site. Guest-facing rendering is a core part of
+            # the product, so every dev org gets a site to test in.
+            50:
+                task: create_community
+                options:
+                    template: Build Your Own
+                    name: Volunteer Portal
+                    url_path_prefix: volunteers
+                    skip_existing: True
+                ignore_failure: True
+            51:
+                task: publish_community
+                options:
+                    name: Volunteer Portal
+                ignore_failure: True
+            52:
+                task: execute_anon
+                description: Assign guest user permission sets for the Volunteer Portal site
+                options:
+                    path: scripts/setup-volunteer-portal-site.apex
+                ignore_failure: True
+            53:
+                task: activate_volunteer_portal
+                ignore_failure: True
+            53.1:
+                task: open_volunteer_portal_to_guests
+                ignore_failure: True
+            53.9:
+                task: assert_site_payload
+                description: Guards that the captured site is actually declared in package.xml. No ignore_failure, on purpose - see #30.
+            54:
+                task: deploy
+                description: Built Volunteer Portal site (guest sharing rules, page assignments). No-ops until the site has been captured once, see scratch-org/site/README.md
+                options:
+                    path: scratch-org/site
+                ignore_failure: True
+            55:
+                task: publish_community
+                description: Republish so the captured site configuration is live for the guest user
+                options:
+                    name: Volunteer Portal
+                ignore_failure: True
+            55.1:
+                task: assert_site_usable
+                description: Guards that the demo site is genuinely usable by a guest. No ignore_failure, on purpose - see #30.

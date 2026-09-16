@@ -1,0 +1,2097 @@
+# Snowfakery Recipe: Volunteer Job Finder Test Data
+# Generates Campaigns, Volunteer Jobs, and Volunteer Shifts with
+# relative dates so data is always current when loaded.
+#
+# Usage:
+#   cci task run generate_and_load_from_yaml --org dev_namespaced \
+#       -o generator_yaml datasets/snowfakery_recipe.yml
+#
+# Or via the CCI flow defined in cumulusci.yml:
+#   cci flow run config_dev --org dev_namespaced
+
+# ──────────────────────────────────────────────────────────────
+# Campaign RecordTypes — resolved by DeveloperName
+# ──────────────────────────────────────────────────────────────
+
+# ──────────────────────────────────────────────────────────────
+# Campaigns (5 Volunteer Campaigns)
+# ──────────────────────────────────────────────────────────────
+- object: Campaign
+  nickname: campaign_environmental
+  fields:
+    Name: Environmental Impact
+    IsActive: true
+    RecordType: Volunteers_Campaign
+    GW_Volunteers__Volunteer_Website_Time_Zone__c: America/Chicago
+    cUnite_Excerpt__c: "<p>Green spaces, clean waterways, and neighbors who show up for both. One campaign, a full season of outdoor impact.</p>"
+    cUnite_Impact_Metric_1_Label__c: "acres restored"
+    cUnite_Impact_Metric_2_Label__c: "volunteers this season"
+    cUnite_Impact_Metric_3_Label__c: "cleanups remaining"
+
+- object: Campaign
+  nickname: campaign_food
+  fields:
+    Name: Food Distribution and Nutrition
+    IsActive: true
+    RecordType: Volunteers_Campaign
+    GW_Volunteers__Volunteer_Website_Time_Zone__c: America/Chicago
+    cUnite_Excerpt__c: "<p>Eleven weekends, nine partner organizations, one goal of 5,000 neighbors served. Your hours count toward the campaign total.</p>"
+    cUnite_Impact_Metric_1_Label__c: "neighbors served so far"
+    cUnite_Impact_Metric_2_Label__c: "volunteers this summer"
+    cUnite_Impact_Metric_3_Label__c: "weekends remaining"
+
+- object: Campaign
+  nickname: campaign_animal
+  fields:
+    Name: Animal Welfare
+    IsActive: true
+    RecordType: Volunteers_Campaign
+    GW_Volunteers__Volunteer_Website_Time_Zone__c: America/Chicago
+    cUnite_Excerpt__c: "<p>Every walk, every clean kennel, and every foster night moves an animal closer to a home.</p>"
+    cUnite_Impact_Metric_1_Label__c: "adoptions this year"
+    cUnite_Impact_Metric_2_Label__c: "volunteer hours logged"
+    cUnite_Impact_Metric_3_Label__c: "animals in care"
+
+- object: Campaign
+  nickname: campaign_equine
+  fields:
+    Name: Equine Therapy
+    IsActive: true
+    RecordType: Volunteers_Campaign
+    GW_Volunteers__Volunteer_Website_Time_Zone__c: America/Chicago
+    cUnite_Excerpt__c: "<p>Riders build strength and confidence one session at a time, and every session takes three volunteers.</p>"
+    cUnite_Impact_Metric_1_Label__c: "riders served"
+    cUnite_Impact_Metric_2_Label__c: "sessions this season"
+    cUnite_Impact_Metric_3_Label__c: "horses in the program"
+
+- object: Campaign
+  nickname: campaign_gala
+  fields:
+    Name: Annual Foundation Gala
+    IsActive: true
+    RecordType: Volunteers_Campaign
+    GW_Volunteers__Volunteer_Website_Time_Zone__c: America/Chicago
+    cUnite_Excerpt__c: "<p>One night that funds the rest of the year. Setup to teardown, volunteers make the gala possible.</p>"
+    cUnite_Impact_Metric_1_Label__c: "raised last year"
+    cUnite_Impact_Metric_2_Label__c: "guests expected"
+    cUnite_Impact_Metric_3_Label__c: "volunteer shifts"
+
+# ──────────────────────────────────────────────────────────────
+# Volunteer Jobs — Environmental Impact Campaign
+# ──────────────────────────────────────────────────────────────
+# ──────────────────────────────────────────────────────────────
+# Volunteer Roles - shared definitions reused across many Jobs
+# ──────────────────────────────────────────────────────────────
+# ──────────────────────────────────────────────────────────────
+# Staff contacts - Primary Contact on roles and jobs, so the portal
+# has a real "questions about this opportunity?" person to show.
+# ──────────────────────────────────────────────────────────────
+- object: Account
+  nickname: org_common_unite
+  fields:
+    Name: "Common Unite Volunteer Services"
+    Phone: "(816) 555-0100"
+    Website: "https://www.common-unite.com"
+    BillingStreet: "1330 Baltimore Ave"
+    BillingCity: Kansas City
+    BillingState: MO
+    BillingPostalCode: "64105"
+    BillingCountry: United States
+
+- object: Contact
+  nickname: staff_dana
+  fields:
+    FirstName: Dana
+    LastName: Whitfield
+    Title: "Volunteer Engagement Manager"
+    Email: "dana.whitfield@example.com"
+    Phone: "(816) 555-0121"
+    AccountId:
+      reference: org_common_unite
+
+- object: Contact
+  nickname: staff_marcus
+  fields:
+    FirstName: Marcus
+    LastName: Ellery
+    Title: "Food Program Coordinator"
+    Email: "marcus.ellery@example.com"
+    Phone: "(816) 555-0122"
+    AccountId:
+      reference: org_common_unite
+
+- object: Contact
+  nickname: staff_priya
+  fields:
+    FirstName: Priya
+    LastName: Raghunathan
+    Title: "Animal Programs Lead"
+    Email: "priya.raghunathan@example.com"
+    Phone: "(816) 555-0123"
+    AccountId:
+      reference: org_common_unite
+
+- object: Volunteer_Role__c
+  nickname: role_outdoor_cleanup
+  fields:
+    Name: "Outdoor Cleanup Crew"
+    Active__c: true
+    Category__c: Cleanup
+    Indoor_Outdoor__c: Outdoor
+    Skills_Needed__c: Manual Labor
+    Preferred_Skills__c: Landscaping;Manual Labor
+    Minimum_Age__c: 14
+    Adult_Supervision_Age__c: 16
+    Background_Check_Required__c: false
+    Training_Required__c: false
+    Physical_Requirements__c: "<p>Comfortable standing and walking for a full shift; bending and lifting up to 25 pounds.</p>"
+    Typical_Time_Commitment__c: "3-4 hour shifts, outdoors in most weather"
+    What_to_Wear__c: "<p>Closed-toe shoes and weather-appropriate layers. Long pants recommended.</p>"
+    What_We_Provide__c: "<p>Gloves, grabbers, bags, water, and sunscreen.</p>"
+    Accommodations_Available__c: "<p>Every cleanup has a pavilion station for sorting and tallying that involves no walking or lifting. Paved-trail assignments are available on request for anyone who cannot manage uneven ground.</p>"
+    Waiver_Language__c: "<p>I understand that outdoor cleanup work involves uneven terrain, roadside areas, and handling of discarded materials. I release the organization, its staff, and its partners from liability for injuries arising from ordinary volunteer activity, and I consent to emergency medical treatment if I cannot be reached.</p>"
+    FAQ__c: "<p><b>What if it rains?</b> We work in light rain and cancel for lightning; you will get a text two hours before the shift either way.</p><p><b>Can I bring my kids?</b> See the minimum age above; younger volunteers need an adult on the same shift.</p><p><b>Do you sign service hour forms?</b> Yes. Bring your form to check-in or request a signed letter any time.</p>"
+    Service_Hours_Letter_Available__c: true
+    Role_Icon__c: "utility:trail"
+    Testimonial_Quote__c: "<p>I signed up alone for one Saturday and ended up coming back every month. You can see exactly where your work went.</p>"
+    Testimonial_Attribution__c: "Marisol T. · 38 shifts since 2024"
+    Excerpt__c: "<p>The most visible volunteering we do. Four hours, a full bag count at the end, and a park that looks different when you leave than when you arrived.</p>"
+    Requirements__c: "<p>Able to walk uneven ground for most of a shift and lift up to 25 pounds. No experience needed; a crew lead runs every shift.</p>"
+    Banner_Image__c: /file-asset-public/FlowToolKit__FlowToolKit_VolunteerParkCleanup
+    Description__c: "<p>Cleanup crews are the backbone of our parks and waterways work. Each shift gathers at a pavilion, splits into teams of four to six with a crew lead, and works a marked section of trail, shoreline, or roadside. You will bag litter, clear debris from drains and paths, and log the count at the end so we can report acres restored to the city.</p><p>No two shifts look the same: spring brings storm debris, summer brings event litter, autumn brings leaf and brush work. Groups, families with teens, and first-timers all fit here.</p>"
+    Training_URL__c: "https://training.example.org/orientation/outdoor-cleanup"
+    Remote__c: false
+- object: Volunteer_Role__c
+  nickname: role_warehouse_sorter
+  fields:
+    Name: "Warehouse Sorter"
+    Active__c: true
+    Category__c: Warehouse
+    Indoor_Outdoor__c: Indoor
+    Skills_Needed__c: Manual Labor
+    Minimum_Age__c: 14
+    Adult_Supervision_Age__c: 16
+    Background_Check_Required__c: false
+    Training_Required__c: false
+    Physical_Requirements__c: "<p>Steady standing work on a sorting line; repetitive lifting up to 20 pounds.</p>"
+    Typical_Time_Commitment__c: "2-4 hour line shifts with a mid-shift break"
+    What_to_Wear__c: "<p>Closed-toe shoes required on the warehouse floor.</p>"
+    What_We_Provide__c: "<p>Gloves, aprons, and a locker for your things.</p>"
+    Accommodations_Available__c: "<p>Seated sorting stations and the label-and-scan desk involve no lifting. Tell us at signup and we will hold one for you; the warehouse floor is step-free throughout.</p>"
+    Waiver_Language__c: "<p>I understand that warehouse work involves conveyor equipment, pallets, and moving carts. I release the organization, its staff, and its partners from liability for injuries arising from ordinary volunteer activity, and I consent to emergency medical treatment if I cannot be reached.</p>"
+    FAQ__c: "<p><b>Is the warehouse cold?</b> The sorting floor is kept around 65°F; the produce cooler is colder, and cooler assignments come with a jacket.</p><p><b>Can I bring my kids?</b> See the minimum age above; younger volunteers need an adult on the same shift.</p><p><b>Do you sign service hour forms?</b> Yes. Bring your form to check-in or request a signed letter any time.</p>"
+    Service_Hours_Letter_Available__c: true
+    Role_Icon__c: "utility:package"
+    Testimonial_Quote__c: "<p>Two hours on the line flies by. The team makes it fun and the pallets don't stand a chance.</p>"
+    Testimonial_Attribution__c: "Derek W. · Tuesday regular"
+    Excerpt__c: "<p>Sorting and boxing donated food in a climate-controlled warehouse. Steady work, good music, and a clear count of meals packed at the end of every shift.</p>"
+    Requirements__c: "<p>Standing at a sorting table for up to three hours, lifting boxes up to 30 pounds. Seated sorting stations are available on request.</p>"
+    Banner_Image__c: /file-asset-public/FlowToolKit__FlowToolKit_VolunteerFoodSort
+    Description__c: "<p>Sorters keep the food bank moving. Donations arrive by the pallet and leave as packed family boxes, and everything in between happens on the sorting line: checking dates, culling damaged goods, weighing, and boxing by category. A line lead sets the pace and calls the meal count when the shift ends.</p><p>This is the shift to pick when you want clear tasks, a climate-controlled room, and a number at the end that tells you exactly what you did.</p>"
+    Preferred_Skills__c: Computer usage
+    Training_URL__c: "https://training.example.org/orientation/warehouse-floor"
+    Remote__c: false
+- object: Volunteer_Role__c
+  nickname: role_kitchen_crew
+  fields:
+    Name: "Community Kitchen Crew"
+    Active__c: true
+    Category__c: Food Service
+    Indoor_Outdoor__c: Indoor
+    Skills_Needed__c: Manual Labor
+    Preferred_Skills__c: Event Planning
+    Minimum_Age__c: 16
+    Adult_Supervision_Age__c: 18
+    Background_Check_Required__c: false
+    Training_Required__c: true
+    Training_URL__c: "https://training.example.org/food-handler"
+    Physical_Requirements__c: "<p>Fast-paced standing work near hot equipment; lifting stock pots with a partner.</p>"
+    Typical_Time_Commitment__c: "4-hour prep or service shifts"
+    What_to_Wear__c: "<p>Closed-toe non-slip shoes. Hair ties for long hair.</p>"
+    What_We_Provide__c: "<p>Aprons, hairnets, gloves, and a staff meal.</p>"
+    Accommodations_Available__c: "<p>Dining-room host and beverage-station roles are seated or low-movement and away from hot equipment. Fragrance-free and glove-only prep stations are available on request.</p>"
+    Waiver_Language__c: "<p>I understand that kitchen work involves knives, hot surfaces, and food allergens. I release the organization, its staff, and its partners from liability for injuries arising from ordinary volunteer activity, and I consent to emergency medical treatment if I cannot be reached.</p>"
+    FAQ__c: "<p><b>I have a food allergy. Can I still volunteer?</b> Yes. Tell us at signup and we will keep you on stations away from that allergen.</p><p><b>Can I bring my kids?</b> See the minimum age above; younger volunteers need an adult on the same shift.</p><p><b>Do you sign service hour forms?</b> Yes. Bring your form to check-in or request a signed letter any time.</p>"
+    Service_Hours_Letter_Available__c: true
+    Role_Icon__c: "utility:food_and_drink"
+    Testimonial_Quote__c: "<p>Chef runs a tight, joyful kitchen. I have learned more knife skills here than anywhere.</p>"
+    Testimonial_Attribution__c: "Priya S. · 60 meals plated weekly"
+    Excerpt__c: "<p>Everything from chopping prep to plating a hot meal and resetting the dining room. Our longest-running shift and the one volunteers most often come back to.</p>"
+    Requirements__c: "<p>Closed-toe shoes required. Food handler training is provided on your first shift; no certification needed in advance.</p>"
+    Banner_Image__c: /file-asset-public/FlowToolKit__FlowToolKit_VolunteerHospitality
+    Description__c: "<p>The kitchen crew preps, cooks, plates, and serves a hot meal for up to 120 neighbors, then resets the dining room for the next day. Prep shifts run knives and stock pots under the chef; service shifts run the line and the dining room, where the conversation matters as much as the food.</p><p>Food handler training happens on your first shift, and regulars are rostered onto a fixed weekly slot so the chef can plan the menu around a crew that knows the kitchen.</p>"
+    Remote__c: false
+- object: Volunteer_Role__c
+  nickname: role_delivery_driver
+  fields:
+    Name: "Delivery Driver"
+    Active__c: true
+    Category__c: Transportation
+    Indoor_Outdoor__c: Mixed
+    Preferred_Skills__c: Computer usage
+    Minimum_Age__c: 21
+    Adult_Supervision_Age__c: 21
+    Background_Check_Required__c: true
+    Training_Required__c: true
+    Training_URL__c: "https://training.example.org/delivery-driver"
+    Physical_Requirements__c: "<p>Loading and carrying boxes to the door; getting in and out of a vehicle repeatedly.</p>"
+    Typical_Time_Commitment__c: "2-3 hour routes on a fixed schedule"
+    What_to_Wear__c: "<p>Comfortable clothes and supportive shoes.</p>"
+    What_We_Provide__c: "<p>Route sheets, a loaded vehicle or mileage reimbursement, and a phone contact for every stop.</p>"
+    Accommodations_Available__c: "<p>Curbside routes with no carrying are available, and a navigator seat on the agency van suits anyone who would rather not drive. Tell us at signup and we will match you.</p>"
+    Waiver_Language__c: "<p>I understand that delivery driving requires a valid license, uses my own or an agency vehicle, and involves entering private residences. I release the organization, its staff, and its partners from liability for injuries arising from ordinary volunteer activity, and I consent to emergency medical treatment if I cannot be reached.</p>"
+    FAQ__c: "<p><b>Do I need my own car?</b> Most routes use your vehicle with mileage reimbursed; the county routes run in an agency van with a second volunteer.</p><p><b>Can I bring my kids?</b> See the minimum age above; younger volunteers need an adult on the same shift.</p><p><b>Do you sign service hour forms?</b> Yes. Bring your form to check-in or request a signed letter any time.</p>"
+    Service_Hours_Letter_Available__c: true
+    Role_Icon__c: "utility:location"
+    Testimonial_Quote__c: "<p>Some weeks I am the only person my seniors see. The route takes two hours; the visits are the point.</p>"
+    Testimonial_Attribution__c: "Gene R. · Route 7 driver"
+    Excerpt__c: "<p>Pick up a packed route, deliver to neighbors on it, and check back in. Most routes take under two hours and you set your own pace.</p>"
+    Requirements__c: "<p>Valid driver license, current insurance, and a vehicle with trunk or back-seat space. We reimburse mileage on request.</p>"
+    Banner_Image__c: /file-asset-public/FlowToolKit__FlowToolKit_VolunteerSeniorHomeDelivery
+    Description__c: "<p>Drivers pick up a packed route of eight to twelve stops, deliver meals or groceries to homebound neighbors, and check in with each of them at the door. For many recipients the driver is the only visitor that day, so a route takes as long as the conversations do.</p><p>Routes are fixed, so you meet the same people each week. You use your own vehicle with mileage reimbursed, or take an agency van on the longer county routes.</p>"
+    Skills_Needed__c: Manual Labor
+    Remote__c: false
+- object: Volunteer_Role__c
+  nickname: role_animal_care
+  fields:
+    Name: "Animal Care Assistant"
+    Active__c: true
+    Category__c: Animal Care
+    Indoor_Outdoor__c: Mixed
+    Skills_Needed__c: Manual Labor
+    Minimum_Age__c: 16
+    Adult_Supervision_Age__c: 18
+    Background_Check_Required__c: false
+    Training_Required__c: true
+    Training_URL__c: "https://training.example.org/animal-handling"
+    Physical_Requirements__c: "<p>Kneeling, scrubbing, and controlling dogs up to 80 pounds on leash.</p>"
+    Typical_Time_Commitment__c: "Flexible 2-hour shifts, mornings busiest"
+    What_to_Wear__c: "<p>Clothes that can get dirty and closed-toe shoes.</p>"
+    What_We_Provide__c: "<p>Leashes, waste bags, treats, and a dog-handling orientation.</p>"
+    Accommodations_Available__c: "<p>Cat socializing and laundry-and-supply prep are seated, low-exertion roles with no large-animal handling. Tell us at signup and we will reserve one for you.</p>"
+    Waiver_Language__c: "<p>I understand that working with shelter animals carries a risk of scratches and bites, and animal behavior cannot be fully predicted. I release the organization, its staff, and its partners from liability for injuries arising from ordinary volunteer activity, and I consent to emergency medical treatment if I cannot be reached.</p>"
+    FAQ__c: "<p><b>Will I be matched with a specific animal?</b> Regulars are paired with the same dogs each week so the animals see a familiar face; drop-in shifts take whoever needs a walk.</p><p><b>Can I bring my kids?</b> See the minimum age above; younger volunteers need an adult on the same shift.</p><p><b>Do you sign service hour forms?</b> Yes. Bring your form to check-in or request a signed letter any time.</p>"
+    Service_Hours_Letter_Available__c: true
+    Role_Icon__c: "utility:animal_and_nature"
+    Testimonial_Quote__c: "<p>The first walk of the morning is the best part of my week, for me and for the dogs.</p>"
+    Testimonial_Attribution__c: "Alexis M. · 120 walks logged"
+    Excerpt__c: "<p>Shelter animals need handling every day, not just on adoption weekends. This is the shift that keeps them ready for a home.</p>"
+    Requirements__c: "<p>Comfortable around dogs and cats of any size. Bite-prevention and handling training is required before your first solo shift.</p>"
+    Banner_Image__c: /file-asset-public/FlowToolKit__FlowToolKit_VolunteerDog1
+    Description__c: "<p>Animal care assistants walk, feed, and socialize shelter dogs and cats, clean kennels and catteries, and note behavior for the adoption team. Morning shifts are the busiest, when every animal needs to be out, fed, and settled before the shelter opens to the public.</p><p>The handling orientation covers reading body language, leash control, and bite prevention; after your first supervised shift you are cleared to walk on your own.</p>"
+    Preferred_Skills__c: Event Planning
+    Remote__c: false
+- object: Volunteer_Role__c
+  nickname: role_therapy_sidewalker
+  fields:
+    Name: "Therapy Ride Side-Walker"
+    Active__c: true
+    Category__c: Therapy Support
+    Indoor_Outdoor__c: Outdoor
+    Preferred_Skills__c: Event Planning
+    Minimum_Age__c: 16
+    Adult_Supervision_Age__c: 18
+    Background_Check_Required__c: true
+    Training_Required__c: true
+    Training_URL__c: "https://training.example.org/side-walker"
+    Physical_Requirements__c: "<p>Walking beside a moving horse with arms raised for the length of a session.</p>"
+    Typical_Time_Commitment__c: "90-minute sessions on a weekly commitment"
+    What_to_Wear__c: "<p>Long pants and hard-toe shoes. No dangling jewelry.</p>"
+    What_We_Provide__c: "<p>Session training, a horse-handling orientation, and a mentor for your first month.</p>"
+    Accommodations_Available__c: "<p>Arena-side roles, such as running the mounting block, timing sessions, and greeting families, involve no walking beside a horse. Tell us at signup and we will place you there.</p>"
+    Waiver_Language__c: "<p>I understand that working around horses carries inherent risk, and I will follow the instructor and horse leader at all times. I release the organization, its staff, and its partners from liability for injuries arising from ordinary volunteer activity, and I consent to emergency medical treatment if I cannot be reached.</p>"
+    FAQ__c: "<p><b>Do I need to be strong?</b> You need to walk at horse pace for a lesson and keep an arm raised; the horse leader carries the load. Nobody lifts a rider alone.</p><p><b>Can I bring my kids?</b> See the minimum age above; younger volunteers need an adult on the same shift.</p><p><b>Do you sign service hour forms?</b> Yes. Bring your form to check-in or request a signed letter any time.</p>"
+    Service_Hours_Letter_Available__c: true
+    Role_Icon__c: "utility:heart"
+    Testimonial_Quote__c: "<p>Watching my rider trot on her own for the first time had the whole arena in tears.</p>"
+    Testimonial_Attribution__c: "Sam K. · Side-walker, 3 seasons"
+    Excerpt__c: "<p>Side-walkers make therapeutic riding possible. You walk beside the horse for a 45-minute lesson, steady the rider, and follow the instructor's lead.</p>"
+    Requirements__c: "<p>Able to walk at horse pace for a full lesson on soft footing. Horse experience is welcome but not required; we train every side-walker on site.</p>"
+    Banner_Image__c: /file-asset-public/FlowToolKit__FlowToolKit_VolunteerHorseTherapy
+    Description__c: "<p>Side-walkers make therapeutic riding possible. In a 45-minute lesson you walk beside the horse, keep a hand on the rider when the instructor asks for it, and help with the exercises that build balance, core strength, and confidence. Every rider has a horse leader and one or two side-walkers.</p><p>Sessions run on a weekly commitment for the length of a term so riders work with the same team. Horse experience is welcome but not needed; the barn trains every side-walker on site.</p>"
+    Skills_Needed__c: Manual Labor
+    Remote__c: false
+- object: Volunteer_Role__c
+  nickname: role_event_support
+  fields:
+    Name: "Event Support Crew"
+    Active__c: true
+    Category__c: Events
+    Indoor_Outdoor__c: Mixed
+    Skills_Needed__c: Event Planning;Manual Labor
+    Preferred_Skills__c: Marketing
+    Minimum_Age__c: 16
+    Adult_Supervision_Age__c: 18
+    Background_Check_Required__c: false
+    Training_Required__c: false
+    Physical_Requirements__c: "<p>On your feet for the shift; setup and teardown involve tables and staging up to 40 pounds with a partner.</p>"
+    Typical_Time_Commitment__c: "3-5 hour event shifts, evenings and weekends"
+    What_to_Wear__c: "<p>Black pants and comfortable shoes; event shirt provided.</p>"
+    What_We_Provide__c: "<p>Event shirt, radio when assigned, and a meal during long shifts.</p>"
+    Accommodations_Available__c: "<p>Check-in, coat check, and auction-desk shifts are seated and involve no lifting. Tell us at signup and we will reserve one for you.</p>"
+    Waiver_Language__c: "<p>I understand that event work involves crowds, staging equipment, and vehicle traffic in loading areas. I release the organization, its staff, and its partners from liability for injuries arising from ordinary volunteer activity, and I consent to emergency medical treatment if I cannot be reached.</p>"
+    FAQ__c: "<p><b>Do I get to attend the event?</b> Crew on service shifts see the whole program from the floor; setup and teardown crews are welcome to stay for the reception between their shifts.</p><p><b>Can I bring my kids?</b> See the minimum age above; younger volunteers need an adult on the same shift.</p><p><b>Do you sign service hour forms?</b> Yes. Bring your form to check-in or request a signed letter any time.</p>"
+    Service_Hours_Letter_Available__c: true
+    Role_Icon__c: "utility:event"
+    Testimonial_Quote__c: "<p>Setup to teardown, gala night runs on volunteers. Being backstage for it is a blast.</p>"
+    Testimonial_Attribution__c: "Jordan P. · 4 galas running"
+    Excerpt__c: "<p>Tables, signage, guest check-in, and the teardown that everyone forgets to staff. High energy, clear tasks, and the best view of the event.</p>"
+    Requirements__c: "<p>Lifting up to 30 pounds for setup and teardown shifts. Check-in shifts are seated and involve no lifting.</p>"
+    Banner_Image__c: /file-asset-public/FlowToolKit__FlowToolKit_VolunteerEventSetup
+    Description__c: "<p>Event crews run everything guests do not see: the table and staging setup, signage, check-in desk, silent auction tables, parking flow, and the teardown that turns a gala back into an empty hall by midnight. Shifts are split by task so you can pick setup, service, or teardown.</p><p>The best fit for people who like a clear job and a visible finish line, and for groups who want to work a shift together.</p>"
+    Training_URL__c: "https://training.example.org/orientation/event-crew"
+    Remote__c: false
+- object: Volunteer_Role__c
+  nickname: role_community_outreach
+  fields:
+    Name: "Community Outreach Ambassador"
+    Active__c: true
+    Category__c: Outreach
+    Indoor_Outdoor__c: Outdoor
+    Skills_Needed__c: Marketing
+    Preferred_Skills__c: Fundraising;Computer usage
+    Minimum_Age__c: 18
+    Adult_Supervision_Age__c: 18
+    Background_Check_Required__c: true
+    Training_Required__c: true
+    Training_URL__c: "https://training.example.org/ambassador"
+    Physical_Requirements__c: "<p>Walking neighborhood routes and standing at doorsteps for the length of a canvass.</p>"
+    Typical_Time_Commitment__c: "2-3 hour canvass windows, evenings and Saturdays"
+    What_to_Wear__c: "<p>Weather-appropriate clothes and comfortable walking shoes.</p>"
+    What_We_Provide__c: "<p>Talking points, leave-behind materials, an ID badge, and a canvass partner.</p>"
+    Accommodations_Available__c: "<p>Phone and text banking shifts are done from home with a laptop and a headset; market-table shifts are seated. Tell us at signup and we will schedule you on one.</p>"
+    Waiver_Language__c: "<p>I understand that outreach involves conversations with the public at private residences. I release the organization, its staff, and its partners from liability for injuries arising from ordinary volunteer activity, and I consent to emergency medical treatment if I cannot be reached.</p>"
+    FAQ__c: "<p><b>Do I have to knock on doors?</b> No. Market tables, phone banking, and community events are all ambassador shifts; door-to-door canvassing is one option among several.</p><p><b>Can I bring my kids?</b> See the minimum age above; younger volunteers need an adult on the same shift.</p><p><b>Do you sign service hour forms?</b> Yes. Bring your form to check-in or request a signed letter any time.</p>"
+    Service_Hours_Letter_Available__c: true
+    Role_Icon__c: "utility:groups"
+    Testimonial_Quote__c: "<p>Every porch conversation is different. Neighbors just want honest answers.</p>"
+    Testimonial_Attribution__c: "Tessa V. · Canvass partner"
+    Excerpt__c: "<p>Meet neighbors where they already are: a farmers market table, a phone list, a block party. The role that grows every other role.</p>"
+    Requirements__c: "<p>Comfortable starting conversations with strangers. Phone banking shifts can be done from home with a laptop and a headset.</p>"
+    Banner_Image__c: /file-asset-public/FlowToolKit__FlowToolKit_VolunteersHandsIn
+    Description__c: "<p>Ambassadors are how new neighbors find us. You staff a farmers market table, canvass a block with a partner, or work a phone list from home, answering honest questions about programs and pointing people to the right signup. Every conversation is logged so the team can follow up.</p><p>Training covers the talking points, the boundaries of what we promise, and how to hand off a neighbor who needs more than information. Ambassadors who stick with it often move into leading a canvass team.</p>"
+    Remote__c: true
+- object: Volunteer_Role__c
+  nickname: role_sponsor
+  fields:
+    Name: "Program Sponsor"
+    Active__c: true
+    Category__c: Other
+    Indoor_Outdoor__c: Mixed
+    Preferred_Skills__c: basic accounting;Fundraising
+    Minimum_Age__c: 18
+    Adult_Supervision_Age__c: 18
+    Background_Check_Required__c: false
+    Training_Required__c: false
+    Physical_Requirements__c: "<p>No physical requirements. This is a recurring support commitment, not shift work.</p>"
+    Typical_Time_Commitment__c: "A monthly commitment with open-barn visit days"
+    What_to_Wear__c: "<p>Come as you are for visits; boots recommended around the barn.</p>"
+    What_We_Provide__c: "<p>Updates on your sponsored program and invitations to open days.</p>"
+    Accommodations_Available__c: "<p>Every sponsor visit day has an accessible route through the barn and kitchen, and updates are available in large print or by phone on request.</p>"
+    Waiver_Language__c: "<p>I understand that barn visits happen around large animals and working equipment. I release the organization, its staff, and its partners from liability for injuries arising from ordinary volunteer activity, and I consent to emergency medical treatment if I cannot be reached.</p>"
+    FAQ__c: "<p><b>Is a sponsorship tax deductible?</b> Yes, in full; you receive a receipt for each payment and a year-end summary.</p><p><b>Can I visit what I sponsor?</b> Yes. Open days run quarterly and sponsors are the first invited.</p><p><b>Do you sign service hour forms?</b> Yes. Bring your form to check-in or request a signed letter any time.</p>"
+    Service_Hours_Letter_Available__c: true
+    Role_Icon__c: "utility:money"
+    Testimonial_Quote__c: "<p>Sponsoring a horse costs less than my coffee habit and does a lot more good.</p>"
+    Testimonial_Attribution__c: "The Nguyen Family · Sponsors since 2025"
+
+    Excerpt__c: "<p>Sponsorship is a standing commitment rather than a shift. Sponsors get program updates, site visits, and named recognition at events.</p>"
+    Requirements__c: "<p>No physical requirements. Sponsors complete a short intake conversation so we can match the commitment to the right program.</p>"
+    Banner_Image__c: /file-asset-public/FlowToolKit__FlowToolKit_VolunteerHorseTherapy2
+    Description__c: "<p>Program sponsors fund a specific animal, rider, or route for a year and stay connected to it. Sponsors receive quarterly updates, an invitation to open-barn and open-kitchen days, and named recognition at the annual gala. Sponsorship is a standing commitment rather than shift work, which makes it the right fit for supporters who cannot volunteer on a schedule.</p><p>A short intake conversation matches each sponsor to the program that fits, and sponsors are always welcome to add a shift when they can.</p>"
+    Skills_Needed__c: Fundraising
+    Training_URL__c: "https://training.example.org/sponsor-briefing"
+    Remote__c: true
+
+# ──────────────────────────────────────────────────────────────
+# Venue Accounts - shared locations with logistics content
+# ──────────────────────────────────────────────────────────────
+- object: Account
+  nickname: venue_swope_park
+  fields:
+    Name: "Swope Park Pavilion"
+    cUnite_Volunteer_Location__c: true
+    ShippingStreet: "6601 Swope Pkwy"
+    ShippingCity: Kansas City
+    ShippingState: MO
+    ShippingPostalCode: "64132"
+    cUnite_Parking_Instructions__c: "<p>Free lot at the pavilion; overflow along Oakwood Drive.</p>"
+    cUnite_Transit_Instructions__c: "<p>Bus 47 to Swope Pkwy and Elmwood, five minute walk.</p>"
+    cUnite_Accessibility_Info__c: "<p>Paved paths to the pavilion. Accessible restrooms at the north end.</p>"
+    cUnite_Entrance_Instructions__c: "Meet at the pavilion signboard"
+    cUnite_Location_Photo_URL__c: /resource/FlowToolKit__VolunteerOpportunityArt/location-placeholder.svg
+- object: Account
+  nickname: venue_recycling_center
+  fields:
+    Name: "Riverside Recycling Center"
+    cUnite_Volunteer_Location__c: true
+    ShippingStreet: "1420 Riverside Ave"
+    ShippingCity: Kansas City
+    ShippingState: MO
+    ShippingPostalCode: "64116"
+    cUnite_Parking_Instructions__c: "<p>Free lot on the north side. Overflow street parking on Ash.</p>"
+    cUnite_Transit_Instructions__c: "<p>Bus 14 to Riverside and Ash, two minute walk.</p>"
+    cUnite_Accessibility_Info__c: "<p>Step-free entry at the dock. Accessible restrooms on the main floor.</p>"
+    cUnite_Entrance_Instructions__c: "Loading dock entrance, rear of the building"
+    cUnite_Location_Photo_URL__c: /resource/FlowToolKit__VolunteerOpportunityArt/location-placeholder.svg
+- object: Account
+  nickname: venue_food_bank
+  fields:
+    Name: "Harvesters Food Bank Warehouse"
+    cUnite_Volunteer_Location__c: true
+    ShippingStreet: "3801 Topping Ave"
+    ShippingCity: Kansas City
+    ShippingState: MO
+    ShippingPostalCode: "64129"
+    cUnite_Parking_Instructions__c: "<p>Volunteer lot left of the main gate; badge in at the kiosk.</p>"
+    cUnite_Transit_Instructions__c: "<p>Bus 24 to Topping and 39th, three minute walk.</p>"
+    cUnite_Accessibility_Info__c: "<p>Level entry throughout. Seated sorting stations on request.</p>"
+    cUnite_Entrance_Instructions__c: "Volunteer entrance, door V on the west face"
+    cUnite_Location_Photo_URL__c: /resource/FlowToolKit__VolunteerOpportunityArt/location-placeholder.svg
+- object: Account
+  nickname: venue_community_kitchen
+  fields:
+    Name: "Riverside Community Kitchen"
+    cUnite_Volunteer_Location__c: true
+    ShippingStreet: "1420 Riverside Ave"
+    ShippingCity: Portland
+    ShippingState: OR
+    ShippingPostalCode: "97214"
+    cUnite_Parking_Instructions__c: "<p>Free lot on the north side. Overflow street parking on Ash.</p>"
+    cUnite_Transit_Instructions__c: "<p>Bus 14 to Riverside and Ash, two minute walk.</p>"
+    cUnite_Accessibility_Info__c: "<p>Step-free entry at the dock. Accessible restrooms on the main floor.</p>"
+    cUnite_Entrance_Instructions__c: "Loading dock entrance, rear of the building"
+    cUnite_Location_Photo_URL__c: /resource/FlowToolKit__VolunteerOpportunityArt/location-placeholder.svg
+- object: Account
+  nickname: venue_animal_shelter
+  fields:
+    Name: "KC Pet Project Shelter"
+    cUnite_Volunteer_Location__c: true
+    ShippingStreet: "7077 Elmwood Ave"
+    ShippingCity: Kansas City
+    ShippingState: MO
+    ShippingPostalCode: "64132"
+    cUnite_Parking_Instructions__c: "<p>Visitor lot out front; volunteer spots along the fence.</p>"
+    cUnite_Transit_Instructions__c: "<p>Bus 47 to Elmwood and Gregory, four minute walk.</p>"
+    cUnite_Accessibility_Info__c: "<p>Ground-floor kennels, ramped throughout.</p>"
+    cUnite_Entrance_Instructions__c: "Volunteer check-in inside the main lobby"
+    cUnite_Location_Photo_URL__c: /resource/FlowToolKit__VolunteerOpportunityArt/location-placeholder.svg
+- object: Account
+  nickname: venue_equine_center
+  fields:
+    Name: "Meadowbrook Equine Therapy Center"
+    cUnite_Volunteer_Location__c: true
+    ShippingStreet: "18200 Ranch Rd"
+    ShippingCity: Belton
+    ShippingState: MO
+    ShippingPostalCode: "64012"
+    cUnite_Parking_Instructions__c: "<p>Gravel lot by the arena; park facing out.</p>"
+    cUnite_Transit_Instructions__c: "<p>No transit service; carpool board in the tack room.</p>"
+    cUnite_Accessibility_Info__c: "<p>Level arena viewing; mounting ramp at the west gate.</p>"
+    cUnite_Entrance_Instructions__c: "Check in at the barn office"
+    cUnite_Location_Photo_URL__c: /resource/FlowToolKit__VolunteerOpportunityArt/location-placeholder.svg
+- object: Account
+  nickname: venue_grand_hall
+  fields:
+    Name: "The Grand Hall at Power and Light"
+    cUnite_Volunteer_Location__c: true
+    ShippingStreet: "1330 Baltimore Ave"
+    ShippingCity: Kansas City
+    ShippingState: MO
+    ShippingPostalCode: "64105"
+    cUnite_Parking_Instructions__c: "<p>Event garage on 14th; validation at the volunteer desk.</p>"
+    cUnite_Transit_Instructions__c: "<p>Streetcar to Power and Light stop, one block.</p>"
+    cUnite_Accessibility_Info__c: "<p>Elevator to all levels. Accessible restrooms on each floor.</p>"
+    cUnite_Entrance_Instructions__c: "Staff entrance on 14th Street"
+    cUnite_Location_Photo_URL__c: /resource/FlowToolKit__VolunteerOpportunityArt/location-placeholder.svg
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: job_park_cleanup
+  fields:
+    Name: Monthly Cleanup @ Swope Park
+    GW_Volunteers__Campaign__c:
+      reference: campaign_environmental
+    GW_Volunteers__Display_on_Website__c: true
+    GW_Volunteers__Inactive__c: false
+    GW_Volunteers__Ongoing__c: false
+    GW_Volunteers__Skills_Needed__c: Manual Labor
+    GW_Volunteers__Volunteer_Website_Time_Zone__c: America/Chicago
+    GW_Volunteers__Description__c: <p>Join our monthly park cleanup to help maintain and preserve this local park. Tasks include picking up trash and debris, landscaping maintenance, and trail upkeep.</p>
+    cUnite_Type__c: Cleanup
+    cUnite_Volunteer_Types__c: Groups;Individuals
+    cUnite_Featured__c: false
+    cUnite_Contact_FormQualifiedApiName__c: FlowToolKit__Volunteer_Primary_Contact
+    cUnite_Hours_Group_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Group_Signup
+    cUnite_Job_Page_FormQualifiedApiName__c: FlowToolKit__JobFinder_DetailsComponent_Form
+    cUnite_Waiver_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Waiver
+    cUnite_Banner_Image__c: /file-asset-public/FlowToolKit__FlowToolKit_VolunteerParkCleanup
+    cUnite_Accepting_Applications__c: true
+    cUnite_Subtitle__c: "Keep Swope Park green, one Saturday at a time"
+    cUnite_Excerpt__c: "<p>Steady outdoor work with a friendly monthly crew. Gloves, bags, and grabbers provided; every bag you fill keeps the trails open for everyone.</p>"
+    cUnite_Confirmation_Page_Message__c: "<p>Thank you for signing up! Watch your inbox for a confirmation with the address, parking details, and your shift lead's phone number.</p>"
+    cUnite_Offline_Message__c: "<p>Signups for this opportunity are closed right now. Check the finder for open shifts, or contact us and we will let you know when this one reopens.</p>"
+    cUnite_Application_Start__c:
+      fake.date_time_between:
+        start_date: -45d
+        end_date: -10d
+    cUnite_Application_End__c:
+      fake.date_time_between:
+        start_date: +120d
+        end_date: +200d
+    cUnite_Remote__c: false
+    cUnite_Allow_Waitlisting__c: true
+    cUnite_Waitlist_Limit__c: 10
+    cUnite_Shift_Signup_Limit__c: 5
+    cUnite_Volunteer_Role__c:
+      reference: role_outdoor_cleanup
+    cUnite_Primary_Contact__c:
+      reference: staff_dana
+    cUnite_Location__c:
+      reference: venue_swope_park
+    cUnite_Cancellation_Notice_Hours__c: 24
+    cUnite_Onsite_Contact_Phone__c: "(816) 555-0112"
+    cUnite_Related_Job_1__c:
+      reference: job_recycling
+    cUnite_Related_Job_2__c:
+      reference: job_beach_cleanup
+    cUnite_Related_Job_3__c:
+      reference: job_solarize
+    cUnite_Location_Name__c: "Swope Park Pavilion"
+    cUnite_Location_Country__c: United States
+    GW_Volunteers__Location_Street__c: "6601 Swope Pkwy"
+    GW_Volunteers__Location_City__c: Kansas City
+    GW_Volunteers__Location__c: MO
+    GW_Volunteers__Location_Zip_Postal_Code__c: "64132"
+  friends:
+    - object: GW_Volunteers__Volunteer_Shift__c
+      count: 8
+      fields:
+        GW_Volunteers__Volunteer_Job__c:
+          reference: job_park_cleanup
+        GW_Volunteers__Start_Date_Time__c:
+          fake.date_time_between:
+            start_date: +1d
+            end_date: +180d
+        GW_Volunteers__Duration__c: 4.0
+        GW_Volunteers__Desired_Number_of_Volunteers__c: 25
+
+    - object: GW_Volunteers__Volunteer_Shift__c
+      count: 2
+      fields:
+        GW_Volunteers__Volunteer_Job__c:
+          reference: job_park_cleanup
+        GW_Volunteers__Start_Date_Time__c:
+          fake.date_time_between:
+            start_date: +20d
+            end_date: +60d
+        GW_Volunteers__Duration__c: 4.0
+        GW_Volunteers__Desired_Number_of_Volunteers__c: 25
+        GW_Volunteers__Description__c: "Held while we confirm the park permit. Watch this page for the release date."
+        cUnite_Hold__c: true
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: job_recycling
+  fields:
+    Name: Recycling Center Support Team
+    GW_Volunteers__Campaign__c:
+      reference: campaign_environmental
+    GW_Volunteers__Display_on_Website__c: true
+    GW_Volunteers__Inactive__c: false
+    GW_Volunteers__Ongoing__c: false
+    GW_Volunteers__Skills_Needed__c:
+    GW_Volunteers__Volunteer_Website_Time_Zone__c: America/Chicago
+    GW_Volunteers__Description__c: <p>Help the public at the recycling center by guiding visitors on where to sort glass, cardboard, and cans. A great way to promote recycling in the community.</p>
+    cUnite_Type__c: Organizational Support
+    cUnite_Volunteer_Types__c: Individuals
+    cUnite_Featured__c: false
+    cUnite_Contact_FormQualifiedApiName__c: FlowToolKit__Volunteer_Primary_Contact
+    cUnite_Hours_Group_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Group_Signup
+    cUnite_Job_Page_FormQualifiedApiName__c: FlowToolKit__JobFinder_DetailsComponent_Form
+    cUnite_Waiver_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Waiver
+    cUnite_Banner_Image__c: /file-asset-public/FlowToolKit__FlowToolKit_VolunteerRecycleCenter
+    cUnite_Accepting_Applications__c: true
+    cUnite_Subtitle__c: "Sort it right so it actually gets recycled"
+    cUnite_Excerpt__c: "<p>Indoor line work at the recycling center. You will learn what really happens to every bin and keep contamination out of the stream.</p>"
+    cUnite_Confirmation_Page_Message__c: "<p>Thank you for signing up! Watch your inbox for a confirmation with the address, parking details, and your shift lead's phone number.</p>"
+    cUnite_Offline_Message__c: "<p>Signups for this opportunity are closed right now. Check the finder for open shifts, or contact us and we will let you know when this one reopens.</p>"
+    cUnite_Application_Start__c:
+      fake.date_time_between:
+        start_date: -45d
+        end_date: -10d
+    cUnite_Application_End__c:
+      fake.date_time_between:
+        start_date: +120d
+        end_date: +200d
+    cUnite_Remote__c: false
+    cUnite_Allow_Waitlisting__c: false
+    cUnite_Shift_Signup_Limit__c: 5
+    cUnite_Volunteer_Role__c:
+      reference: role_warehouse_sorter
+    cUnite_Primary_Contact__c:
+      reference: staff_marcus
+    cUnite_Location__c:
+      reference: venue_recycling_center
+    cUnite_Cancellation_Notice_Hours__c: 24
+    cUnite_Onsite_Contact_Phone__c: "(816) 555-0115"
+    cUnite_Related_Job_1__c:
+      reference: job_beach_cleanup
+    cUnite_Related_Job_2__c:
+      reference: job_solarize
+    cUnite_Related_Job_3__c:
+      reference: job_adopt_park
+    cUnite_Location_Name__c: "Riverside Recycling Center"
+    cUnite_Location_Country__c: United States
+    GW_Volunteers__Location_Street__c: "1420 Riverside Ave"
+    GW_Volunteers__Location_City__c: Kansas City
+    GW_Volunteers__Location__c: MO
+    GW_Volunteers__Location_Zip_Postal_Code__c: "64116"
+  friends:
+    - object: GW_Volunteers__Volunteer_Shift__c
+      count: 30
+      fields:
+        GW_Volunteers__Volunteer_Job__c:
+          reference: job_recycling
+        GW_Volunteers__Start_Date_Time__c:
+          fake.date_time_between:
+            start_date: +1d
+            end_date: +180d
+        GW_Volunteers__Duration__c: 3.0
+        GW_Volunteers__Desired_Number_of_Volunteers__c: 5
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: job_beach_cleanup
+  fields:
+    Name: Monthly Cleanup @ Sunshine Beach
+    GW_Volunteers__Campaign__c:
+      reference: campaign_environmental
+    GW_Volunteers__Display_on_Website__c: true
+    GW_Volunteers__Inactive__c: false
+    GW_Volunteers__Ongoing__c: false
+    GW_Volunteers__Skills_Needed__c: Manual Labor
+    GW_Volunteers__Volunteer_Website_Time_Zone__c: Pacific/Auckland
+    GW_Volunteers__Description__c: <p>Help keep our beautiful beach clean and safe for people and wildlife. Tasks include collecting trash, sorting materials, and maintaining natural habitats.</p>
+    cUnite_Type__c: Cleanup
+    cUnite_Volunteer_Types__c: Groups;Individuals
+    cUnite_Featured__c: false
+    cUnite_Contact_FormQualifiedApiName__c: FlowToolKit__Volunteer_Primary_Contact
+    cUnite_Hours_Group_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Group_Signup
+    cUnite_Job_Page_FormQualifiedApiName__c: FlowToolKit__JobFinder_DetailsComponent_Form
+    cUnite_Waiver_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Waiver
+    cUnite_Banner_Image__c: /file-asset-public/FlowToolKit__FlowToolKit_VolunteerBeachCleanup
+    cUnite_Accepting_Applications__c: true
+    cUnite_Subtitle__c: "A morning on the water's edge that leaves it better"
+    cUnite_Excerpt__c: "<p>Shoreline sweep with buckets and pickers. Great for groups; every item logged feeds the watershed study.</p>"
+    cUnite_Confirmation_Page_Message__c: "<p>Thank you for signing up! Watch your inbox for a confirmation with the address, parking details, and your shift lead's phone number.</p>"
+    cUnite_Offline_Message__c: "<p>Signups for this opportunity are closed right now. Check the finder for open shifts, or contact us and we will let you know when this one reopens.</p>"
+    cUnite_Application_Start__c:
+      fake.date_time_between:
+        start_date: -45d
+        end_date: -10d
+    cUnite_Application_End__c:
+      fake.date_time_between:
+        start_date: +120d
+        end_date: +200d
+    cUnite_Remote__c: false
+    cUnite_Allow_Waitlisting__c: true
+    cUnite_Waitlist_Limit__c: 10
+    cUnite_Shift_Signup_Limit__c: 5
+    cUnite_Volunteer_Role__c:
+      reference: role_outdoor_cleanup
+    cUnite_Primary_Contact__c:
+      reference: staff_dana
+    cUnite_Location__c:
+      reference: venue_swope_park
+    cUnite_Cancellation_Notice_Hours__c: 24
+    cUnite_Onsite_Contact_Phone__c: "(816) 555-0103"
+    cUnite_Related_Job_1__c:
+      reference: job_solarize
+    cUnite_Related_Job_2__c:
+      reference: job_adopt_park
+    cUnite_Related_Job_3__c:
+      reference: job_bike_park
+    cUnite_Location_Name__c: "Swope Park Pavilion"
+    cUnite_Location_Country__c: United States
+    GW_Volunteers__Location_Street__c: "6601 Swope Pkwy"
+    GW_Volunteers__Location_City__c: Kansas City
+    GW_Volunteers__Location__c: MO
+    GW_Volunteers__Location_Zip_Postal_Code__c: "64132"
+  friends:
+    - object: GW_Volunteers__Volunteer_Shift__c
+      count: 7
+      fields:
+        GW_Volunteers__Volunteer_Job__c:
+          reference: job_beach_cleanup
+        GW_Volunteers__Start_Date_Time__c:
+          fake.date_time_between:
+            start_date: +1d
+            end_date: +180d
+        GW_Volunteers__Duration__c: 4.0
+        GW_Volunteers__Desired_Number_of_Volunteers__c: 25
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: job_solarize
+  fields:
+    Name: Promote Solarize Program @ Dreamforce
+    GW_Volunteers__Campaign__c:
+      reference: campaign_environmental
+    GW_Volunteers__Display_on_Website__c: true
+    GW_Volunteers__Inactive__c: false
+    GW_Volunteers__Ongoing__c: false
+    GW_Volunteers__Skills_Needed__c: Marketing
+    GW_Volunteers__Volunteer_Website_Time_Zone__c: America/Chicago
+    GW_Volunteers__Location_City__c: San Francisco
+    GW_Volunteers__Location__c: CA
+    GW_Volunteers__Location_Zip_Postal_Code__c: "94105"
+    GW_Volunteers__Description__c: <p>Promote the Solarize renewable energy program at Dreamforce. Engage attendees about community solar options and collect signups.</p>
+    cUnite_Type__c: Tabling
+    cUnite_Volunteer_Types__c: Individuals
+    cUnite_Featured__c: false
+    cUnite_Location_Country__c: United States
+    cUnite_Location_Name__c: Salesforce Tower
+    cUnite_Shift_Signup_Limit__c: 5
+    cUnite_Contact_FormQualifiedApiName__c: FlowToolKit__Volunteer_Primary_Contact
+    cUnite_Hours_Group_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Group_Signup
+    cUnite_Job_Page_FormQualifiedApiName__c: FlowToolKit__JobFinder_DetailsComponent_Form
+    cUnite_Waiver_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Waiver
+    cUnite_Banner_Image__c: /file-asset-public/FlowToolKit__FlowToolKit_VolunteerArborDay
+    cUnite_Accepting_Applications__c: true
+    cUnite_Subtitle__c: "Talk neighbors through going solar"
+    cUnite_Excerpt__c: "<p>Door-to-door conversations with homeowners, no selling. You share the co-op basics and leave the decision with them.</p>"
+    cUnite_Confirmation_Page_Message__c: "<p>Thank you for signing up! Watch your inbox for a confirmation with the address, parking details, and your shift lead's phone number.</p>"
+    cUnite_Offline_Message__c: "<p>Signups for this opportunity are closed right now. Check the finder for open shifts, or contact us and we will let you know when this one reopens.</p>"
+    cUnite_Application_Start__c:
+      fake.date_time_between:
+        start_date: -45d
+        end_date: -10d
+    cUnite_Application_End__c:
+      fake.date_time_between:
+        start_date: +120d
+        end_date: +200d
+    cUnite_Remote__c: false
+    cUnite_Allow_Waitlisting__c: false
+    cUnite_Volunteer_Role__c:
+      reference: role_community_outreach
+    cUnite_Cancellation_Notice_Hours__c: 24
+    cUnite_Onsite_Contact_Phone__c: "(816) 555-0118"
+    cUnite_Related_Job_1__c:
+      reference: job_adopt_park
+    cUnite_Related_Job_2__c:
+      reference: job_bike_park
+    cUnite_Related_Job_3__c:
+      reference: job_park_cleanup
+    cUnite_Primary_Contact__c:
+      reference: staff_dana
+  friends:
+    - object: GW_Volunteers__Volunteer_Shift__c
+      count: 3
+      fields:
+        GW_Volunteers__Volunteer_Job__c:
+          reference: job_solarize
+        GW_Volunteers__Start_Date_Time__c:
+          fake.date_time_between:
+            start_date: +7d
+            end_date: +30d
+        GW_Volunteers__Duration__c: 6.0
+        GW_Volunteers__Desired_Number_of_Volunteers__c: 10
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: job_adopt_park
+  fields:
+    Name: Adopt a City Park
+    GW_Volunteers__Campaign__c:
+      reference: campaign_environmental
+    GW_Volunteers__Display_on_Website__c: true
+    GW_Volunteers__Inactive__c: false
+    GW_Volunteers__Ongoing__c: true
+    GW_Volunteers__Skills_Needed__c: Manual Labor
+    GW_Volunteers__Volunteer_Website_Time_Zone__c: America/Chicago
+    GW_Volunteers__Description__c: <p>Adopt and maintain a city park by committing to weekly cleanups. A great opportunity for groups to make a direct impact on their community.</p>
+    cUnite_Type__c: Foster/Adopt
+    cUnite_Volunteer_Types__c: Groups
+    cUnite_Featured__c: false
+    cUnite_Contact_FormQualifiedApiName__c: FlowToolKit__Volunteer_Primary_Contact
+    cUnite_Hours_Group_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Group_Signup
+    cUnite_Job_Page_FormQualifiedApiName__c: FlowToolKit__JobFinder_DetailsComponent_Form
+    cUnite_Waiver_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Waiver
+    cUnite_Banner_Image__c: /file-asset-public/FlowToolKit__FlowToolKit_VolunteerTrashPickup
+
+    cUnite_Accepting_Applications__c: true
+    cUnite_Subtitle__c: "Your own corner of the park, cared for year round"
+    cUnite_Excerpt__c: "<p>Adopt a section and keep it tidy on your own schedule. Perfect for families who want a standing commitment.</p>"
+    cUnite_Confirmation_Page_Message__c: "<p>Thank you for signing up! Watch your inbox for a confirmation with the address, parking details, and your shift lead's phone number.</p>"
+    cUnite_Offline_Message__c: "<p>Signups for this opportunity are closed right now. Check the finder for open shifts, or contact us and we will let you know when this one reopens.</p>"
+    cUnite_Application_Start__c:
+      fake.date_time_between:
+        start_date: -45d
+        end_date: -10d
+    cUnite_Application_End__c:
+      fake.date_time_between:
+        start_date: +120d
+        end_date: +200d
+    cUnite_Remote__c: false
+    cUnite_Allow_Waitlisting__c: false
+    cUnite_Shift_Signup_Limit__c: 5
+    cUnite_Volunteer_Role__c:
+      reference: role_outdoor_cleanup
+    cUnite_Primary_Contact__c:
+      reference: staff_dana
+    cUnite_Location__c:
+      reference: venue_swope_park
+    cUnite_Cancellation_Notice_Hours__c: 24
+    cUnite_Onsite_Contact_Phone__c: "(816) 555-0101"
+    cUnite_Related_Job_1__c:
+      reference: job_bike_park
+    cUnite_Related_Job_2__c:
+      reference: job_park_cleanup
+    cUnite_Related_Job_3__c:
+      reference: job_recycling
+    cUnite_Location_Name__c: "Swope Park Pavilion"
+    cUnite_Location_Country__c: United States
+    GW_Volunteers__Location_Street__c: "6601 Swope Pkwy"
+    GW_Volunteers__Location_City__c: Kansas City
+    GW_Volunteers__Location__c: MO
+    GW_Volunteers__Location_Zip_Postal_Code__c: "64132"
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: job_bike_park
+  fields:
+    Name: Spring Maintenance @ Bike Park
+    GW_Volunteers__Campaign__c:
+      reference: campaign_environmental
+    GW_Volunteers__Display_on_Website__c: true
+    GW_Volunteers__Inactive__c: false
+    GW_Volunteers__Ongoing__c: false
+    GW_Volunteers__Skills_Needed__c: Manual Labor
+    GW_Volunteers__Volunteer_Website_Time_Zone__c: America/Chicago
+    GW_Volunteers__Description__c: <p>Help prepare the bike park for spring season. Tasks include trail clearing, sign maintenance, and jump repairs.</p>
+    cUnite_Type__c: Trail Building
+    cUnite_Volunteer_Types__c: Groups;Individuals;Youth/Children
+    cUnite_Featured__c: false
+    cUnite_Contact_FormQualifiedApiName__c: FlowToolKit__Volunteer_Primary_Contact
+    cUnite_Hours_Group_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Group_Signup
+    cUnite_Job_Page_FormQualifiedApiName__c: FlowToolKit__JobFinder_DetailsComponent_Form
+    cUnite_Waiver_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Waiver
+    cUnite_Banner_Image__c: /file-asset-public/FlowToolKit__FlowToolKit_VolunteerTrailBuilding1
+    cUnite_Accepting_Applications__c: true
+    cUnite_Subtitle__c: "Build the trails you will ride"
+    cUnite_Excerpt__c: "<p>Hand tools, dirt, and berms. Trail-building experience welcome but not needed; crew leads teach as you go.</p>"
+    cUnite_Confirmation_Page_Message__c: "<p>Thank you for signing up! Watch your inbox for a confirmation with the address, parking details, and your shift lead's phone number.</p>"
+    cUnite_Offline_Message__c: "<p>Signups for this opportunity are closed right now. Check the finder for open shifts, or contact us and we will let you know when this one reopens.</p>"
+    cUnite_Application_Start__c:
+      fake.date_time_between:
+        start_date: -45d
+        end_date: -10d
+    cUnite_Application_End__c:
+      fake.date_time_between:
+        start_date: +120d
+        end_date: +200d
+    cUnite_Remote__c: false
+    cUnite_Allow_Waitlisting__c: false
+    cUnite_Shift_Signup_Limit__c: 5
+    cUnite_Volunteer_Role__c:
+      reference: role_outdoor_cleanup
+    cUnite_Primary_Contact__c:
+      reference: staff_dana
+    cUnite_Location__c:
+      reference: venue_swope_park
+    cUnite_Cancellation_Notice_Hours__c: 24
+    cUnite_Onsite_Contact_Phone__c: "(816) 555-0104"
+    cUnite_Related_Job_1__c:
+      reference: job_park_cleanup
+    cUnite_Related_Job_2__c:
+      reference: job_recycling
+    cUnite_Related_Job_3__c:
+      reference: job_beach_cleanup
+    cUnite_Location_Name__c: "Swope Park Pavilion"
+    cUnite_Location_Country__c: United States
+    GW_Volunteers__Location_Street__c: "6601 Swope Pkwy"
+    GW_Volunteers__Location_City__c: Kansas City
+    GW_Volunteers__Location__c: MO
+    GW_Volunteers__Location_Zip_Postal_Code__c: "64132"
+  friends:
+    - object: GW_Volunteers__Volunteer_Shift__c
+      count: 8
+      fields:
+        GW_Volunteers__Volunteer_Job__c:
+          reference: job_bike_park
+        GW_Volunteers__Start_Date_Time__c:
+          fake.date_time_between:
+            start_date: +14d
+            end_date: +90d
+        GW_Volunteers__Duration__c: 5.0
+        GW_Volunteers__Desired_Number_of_Volunteers__c: 40
+
+# ──────────────────────────────────────────────────────────────
+# Volunteer Jobs — Food Distribution and Nutrition Campaign
+# ──────────────────────────────────────────────────────────────
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: job_senior_delivery
+  fields:
+    Name: Senior Home Delivery
+    GW_Volunteers__Campaign__c:
+      reference: campaign_food
+    GW_Volunteers__Display_on_Website__c: true
+    GW_Volunteers__Inactive__c: false
+    GW_Volunteers__Ongoing__c: false
+    GW_Volunteers__Skills_Needed__c:
+    GW_Volunteers__Volunteer_Website_Time_Zone__c: America/Chicago
+    GW_Volunteers__External_Signup_Url__c: https://commonunite.force.com/s/
+    GW_Volunteers__Description__c: <p>Pick up meal kits from our food bank and deliver them to seniors in need. A rewarding way to make a difference for vulnerable community members.</p>
+    cUnite_Type__c: Provide Transportation
+    cUnite_Volunteer_Types__c: Individuals
+    cUnite_Featured__c: false
+    cUnite_Contact_FormQualifiedApiName__c: FlowToolKit__Volunteer_Primary_Contact
+    cUnite_Hours_Group_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Group_Signup
+    cUnite_Job_Page_FormQualifiedApiName__c: FlowToolKit__JobFinder_DetailsComponent_Form
+    cUnite_Waiver_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Waiver
+    cUnite_Banner_Image__c: /file-asset-public/FlowToolKit__FlowToolKit_VolunteerSeniorHomeDelivery
+    cUnite_Accepting_Applications__c: true
+    cUnite_Subtitle__c: "Groceries to the door, a check-in at the same time"
+    cUnite_Excerpt__c: "<p>Drive a short route delivering boxes to homebound seniors. You are often the only visitor of the week.</p>"
+    cUnite_Confirmation_Page_Message__c: "<p>Thank you for signing up! Watch your inbox for a confirmation with the address, parking details, and your shift lead's phone number.</p>"
+    cUnite_Offline_Message__c: "<p>Signups for this opportunity are closed right now. Check the finder for open shifts, or contact us and we will let you know when this one reopens.</p>"
+    cUnite_Application_Start__c:
+      fake.date_time_between:
+        start_date: -45d
+        end_date: -10d
+    cUnite_Application_End__c:
+      fake.date_time_between:
+        start_date: +120d
+        end_date: +200d
+    cUnite_Remote__c: false
+    cUnite_Allow_Waitlisting__c: false
+    cUnite_Shift_Signup_Limit__c: 5
+    cUnite_Volunteer_Role__c:
+      reference: role_delivery_driver
+    cUnite_Primary_Contact__c:
+      reference: staff_marcus
+    cUnite_Location__c:
+      reference: venue_food_bank
+    cUnite_Cancellation_Notice_Hours__c: 24
+    cUnite_Onsite_Contact_Phone__c: "(816) 555-0116"
+    cUnite_Related_Job_1__c:
+      reference: job_kitchen
+    cUnite_Related_Job_2__c:
+      reference: job_weekday_sort
+    cUnite_Related_Job_3__c:
+      reference: job_weekend_sort
+    cUnite_Location_Name__c: "Harvesters Food Bank Warehouse"
+    cUnite_Location_Country__c: United States
+    GW_Volunteers__Location_Street__c: "3801 Topping Ave"
+    GW_Volunteers__Location_City__c: Kansas City
+    GW_Volunteers__Location__c: MO
+    GW_Volunteers__Location_Zip_Postal_Code__c: "64129"
+  friends:
+    - object: GW_Volunteers__Volunteer_Shift__c
+      count: 26
+      fields:
+        GW_Volunteers__Volunteer_Job__c:
+          reference: job_senior_delivery
+        GW_Volunteers__Start_Date_Time__c:
+          fake.date_time_between:
+            start_date: +1d
+            end_date: +180d
+        GW_Volunteers__Duration__c: 3.0
+        GW_Volunteers__Desired_Number_of_Volunteers__c: 3
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: job_kitchen
+  fields:
+    Name: Community Kitchen Crew
+    GW_Volunteers__Campaign__c:
+      reference: campaign_food
+    GW_Volunteers__Display_on_Website__c: true
+    GW_Volunteers__Inactive__c: false
+    GW_Volunteers__Ongoing__c: false
+    GW_Volunteers__Skills_Needed__c:
+    GW_Volunteers__Volunteer_Website_Time_Zone__c: America/Chicago
+    GW_Volunteers__External_Signup_Url__c: https://commonunite.force.com/s/
+    GW_Volunteers__Description__c: <p>Cook and serve meals to families in need at our community kitchen. Work with a team of volunteers in a friendly, welcoming environment.</p>
+    cUnite_Type__c: Hospitality
+    cUnite_Volunteer_Types__c: Individuals
+    cUnite_Featured__c: false
+    cUnite_Contact_FormQualifiedApiName__c: FlowToolKit__Volunteer_Primary_Contact
+    cUnite_Hours_Group_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Group_Signup
+    cUnite_Job_Page_FormQualifiedApiName__c: FlowToolKit__JobFinder_DetailsComponent_Form
+    cUnite_Waiver_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Waiver
+    cUnite_Banner_Image__c: /file-asset-public/FlowToolKit__FlowToolKit_VolunteerHospitality
+    cUnite_Accepting_Applications__c: true
+    cUnite_Subtitle__c: "Prep, cook, and plate alongside our chef"
+    cUnite_Excerpt__c: "<p>Fast-moving kitchen shifts producing hundreds of hot meals. Aprons and hairnets provided; closed-toe shoes required.</p>"
+    cUnite_Confirmation_Page_Message__c: "<p>Thank you for signing up! Watch your inbox for a confirmation with the address, parking details, and your shift lead's phone number.</p>"
+    cUnite_Offline_Message__c: "<p>Signups for this opportunity are closed right now. Check the finder for open shifts, or contact us and we will let you know when this one reopens.</p>"
+    cUnite_Application_Start__c:
+      fake.date_time_between:
+        start_date: -45d
+        end_date: -10d
+    cUnite_Application_End__c:
+      fake.date_time_between:
+        start_date: +120d
+        end_date: +200d
+    cUnite_Remote__c: false
+    cUnite_Allow_Waitlisting__c: true
+    cUnite_Waitlist_Limit__c: 10
+    cUnite_Shift_Signup_Limit__c: 5
+    cUnite_Volunteer_Role__c:
+      reference: role_kitchen_crew
+    cUnite_Primary_Contact__c:
+      reference: staff_marcus
+    cUnite_Location__c:
+      reference: venue_community_kitchen
+    cUnite_Cancellation_Notice_Hours__c: 24
+    cUnite_Onsite_Contact_Phone__c: "(816) 555-0111"
+    cUnite_Related_Job_1__c:
+      reference: job_weekday_sort
+    cUnite_Related_Job_2__c:
+      reference: job_weekend_sort
+    cUnite_Related_Job_3__c:
+      reference: job_evening_sort
+    cUnite_Location_Name__c: "Riverside Community Kitchen"
+    cUnite_Location_Country__c: United States
+    GW_Volunteers__Location_Street__c: "1420 Riverside Ave"
+    GW_Volunteers__Location_City__c: Portland
+    GW_Volunteers__Location__c: OR
+    GW_Volunteers__Location_Zip_Postal_Code__c: "97214"
+  friends:
+    - object: GW_Volunteers__Volunteer_Shift__c
+      count: 14
+      fields:
+        GW_Volunteers__Volunteer_Job__c:
+          reference: job_kitchen
+        GW_Volunteers__Start_Date_Time__c:
+          fake.date_time_between:
+            start_date: +1d
+            end_date: +120d
+        GW_Volunteers__Duration__c: 2.0
+        GW_Volunteers__Desired_Number_of_Volunteers__c: 10
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: job_weekday_sort
+  fields:
+    Name: Weekday Food Sorting @ Food Bank
+    GW_Volunteers__Campaign__c:
+      reference: campaign_food
+    GW_Volunteers__Display_on_Website__c: true
+    GW_Volunteers__Inactive__c: false
+    GW_Volunteers__Ongoing__c: false
+    GW_Volunteers__Skills_Needed__c: Manual Labor
+    GW_Volunteers__Volunteer_Website_Time_Zone__c: America/Chicago
+    GW_Volunteers__External_Signup_Url__c: https://commonunite.force.com/s/
+    GW_Volunteers__Description__c: <p>Sort and package donated food for distribution to families in need. Work in a team environment at our local food bank during weekday hours.</p>
+    cUnite_Type__c: Food Sorting
+    cUnite_Volunteer_Types__c: Groups;Individuals;Youth/Children
+    cUnite_Featured__c: true
+    cUnite_Contact_FormQualifiedApiName__c: FlowToolKit__Volunteer_Primary_Contact
+    cUnite_Hours_Group_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Group_Signup
+    cUnite_Job_Page_FormQualifiedApiName__c: FlowToolKit__JobFinder_DetailsComponent_Form
+    cUnite_Waiver_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Waiver
+    cUnite_Banner_Image__c: /file-asset-public/FlowToolKit__FlowToolKit_VolunteerSortClothes
+    cUnite_Accepting_Applications__c: true
+    cUnite_Subtitle__c: "The quiet engine of the food bank"
+    cUnite_Excerpt__c: "<p>Weekday sorting on the warehouse line. Steady standing work, mostly indoors, with a short break mid-shift.</p>"
+    cUnite_Confirmation_Page_Message__c: "<p>Thank you for signing up! Watch your inbox for a confirmation with the address, parking details, and your shift lead's phone number.</p>"
+    cUnite_Offline_Message__c: "<p>Signups for this opportunity are closed right now. Check the finder for open shifts, or contact us and we will let you know when this one reopens.</p>"
+    cUnite_Application_Start__c:
+      fake.date_time_between:
+        start_date: -45d
+        end_date: -10d
+    cUnite_Application_End__c:
+      fake.date_time_between:
+        start_date: +120d
+        end_date: +200d
+    cUnite_Remote__c: false
+    cUnite_Allow_Waitlisting__c: false
+    cUnite_Shift_Signup_Limit__c: 5
+    cUnite_Volunteer_Role__c:
+      reference: role_warehouse_sorter
+    cUnite_Primary_Contact__c:
+      reference: staff_marcus
+    cUnite_Location__c:
+      reference: venue_food_bank
+    cUnite_Cancellation_Notice_Hours__c: 24
+    cUnite_Onsite_Contact_Phone__c: "(816) 555-0120"
+    cUnite_Related_Job_1__c:
+      reference: job_weekend_sort
+    cUnite_Related_Job_2__c:
+      reference: job_evening_sort
+    cUnite_Related_Job_3__c:
+      reference: job_senior_delivery
+    cUnite_Location_Name__c: "Harvesters Food Bank Warehouse"
+    cUnite_Location_Country__c: United States
+    GW_Volunteers__Location_Street__c: "3801 Topping Ave"
+    GW_Volunteers__Location_City__c: Kansas City
+    GW_Volunteers__Location__c: MO
+    GW_Volunteers__Location_Zip_Postal_Code__c: "64129"
+  friends:
+    - object: GW_Volunteers__Volunteer_Shift__c
+      count: 50
+      fields:
+        GW_Volunteers__Volunteer_Job__c:
+          reference: job_weekday_sort
+        GW_Volunteers__Start_Date_Time__c:
+          fake.date_time_between:
+            start_date: +1d
+            end_date: +180d
+        GW_Volunteers__Duration__c: 3.0
+        GW_Volunteers__Desired_Number_of_Volunteers__c: 45
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: job_weekend_sort
+  fields:
+    Name: Weekend Food Sorting @ Food Bank
+    GW_Volunteers__Campaign__c:
+      reference: campaign_food
+    GW_Volunteers__Display_on_Website__c: true
+    GW_Volunteers__Inactive__c: false
+    GW_Volunteers__Ongoing__c: false
+    GW_Volunteers__Skills_Needed__c: Manual Labor
+    GW_Volunteers__Volunteer_Website_Time_Zone__c: America/Chicago
+    GW_Volunteers__Description__c: <p>Weekend food sorting shifts at the food bank. Great for families and groups who want to volunteer together on weekends.</p>
+    cUnite_Type__c: Food Sorting
+    cUnite_Volunteer_Types__c: Groups;Individuals
+    cUnite_Featured__c: true
+    cUnite_Contact_FormQualifiedApiName__c: FlowToolKit__Volunteer_Primary_Contact
+    cUnite_Hours_Group_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Group_Signup
+    cUnite_Job_Page_FormQualifiedApiName__c: FlowToolKit__JobFinder_DetailsComponent_Form
+    cUnite_Waiver_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Waiver
+    cUnite_Banner_Image__c: /file-asset-public/FlowToolKit__FlowToolKit_VolunteerFoodSort
+    cUnite_Accepting_Applications__c: true
+    cUnite_Subtitle__c: "Saturday mornings that stock the shelves"
+    cUnite_Excerpt__c: "<p>Weekend warehouse sorting for people who cannot make weekdays. Bring the family; ages 14 and up.</p>"
+    cUnite_Confirmation_Page_Message__c: "<p>Thank you for signing up! Watch your inbox for a confirmation with the address, parking details, and your shift lead's phone number.</p>"
+    cUnite_Offline_Message__c: "<p>Signups for this opportunity are closed right now. Check the finder for open shifts, or contact us and we will let you know when this one reopens.</p>"
+    cUnite_Application_Start__c:
+      fake.date_time_between:
+        start_date: -45d
+        end_date: -10d
+    cUnite_Application_End__c:
+      fake.date_time_between:
+        start_date: +120d
+        end_date: +200d
+    cUnite_Remote__c: false
+    cUnite_Allow_Waitlisting__c: false
+    cUnite_Shift_Signup_Limit__c: 5
+    cUnite_Volunteer_Role__c:
+      reference: role_warehouse_sorter
+    cUnite_Primary_Contact__c:
+      reference: staff_marcus
+    cUnite_Location__c:
+      reference: venue_food_bank
+    cUnite_Cancellation_Notice_Hours__c: 24
+    cUnite_Onsite_Contact_Phone__c: "(816) 555-0122"
+    cUnite_Related_Job_1__c:
+      reference: job_evening_sort
+    cUnite_Related_Job_2__c:
+      reference: job_senior_delivery
+    cUnite_Related_Job_3__c:
+      reference: job_kitchen
+    cUnite_Location_Name__c: "Harvesters Food Bank Warehouse"
+    cUnite_Location_Country__c: United States
+    GW_Volunteers__Location_Street__c: "3801 Topping Ave"
+    GW_Volunteers__Location_City__c: Kansas City
+    GW_Volunteers__Location__c: MO
+    GW_Volunteers__Location_Zip_Postal_Code__c: "64129"
+  friends:
+    - object: GW_Volunteers__Volunteer_Shift__c
+      count: 21
+      fields:
+        GW_Volunteers__Volunteer_Job__c:
+          reference: job_weekend_sort
+        GW_Volunteers__Start_Date_Time__c:
+          fake.date_time_between:
+            start_date: +1d
+            end_date: +180d
+        GW_Volunteers__Duration__c: 4.0
+        GW_Volunteers__Desired_Number_of_Volunteers__c: 70
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: job_evening_sort
+  fields:
+    Name: Evening Food Sorting @ Food Bank
+    GW_Volunteers__Campaign__c:
+      reference: campaign_food
+    GW_Volunteers__Display_on_Website__c: true
+    GW_Volunteers__Inactive__c: false
+    GW_Volunteers__Ongoing__c: false
+    GW_Volunteers__Skills_Needed__c: Manual Labor
+    GW_Volunteers__Volunteer_Website_Time_Zone__c: America/Chicago
+    GW_Volunteers__Description__c: <p>Evening food sorting shifts for those who prefer to volunteer after work. Sort and package food for community distribution.</p>
+    cUnite_Type__c: Food Sorting
+    cUnite_Volunteer_Types__c: Individuals
+    cUnite_Featured__c: true
+    cUnite_Contact_FormQualifiedApiName__c: FlowToolKit__Volunteer_Primary_Contact
+    cUnite_Hours_Group_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Group_Signup
+    cUnite_Job_Page_FormQualifiedApiName__c: FlowToolKit__JobFinder_DetailsComponent_Form
+    cUnite_Waiver_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Waiver
+    cUnite_Banner_Image__c: /file-asset-public/FlowToolKit__FlowToolKit_VolunteerFoodSort2
+    cUnite_Accepting_Applications__c: true
+    cUnite_Subtitle__c: "After-work shifts that finish the day's donations"
+    cUnite_Excerpt__c: "<p>Evening line work clearing the day's inbound pallets. Good lighting, good music, good company.</p>"
+    cUnite_Confirmation_Page_Message__c: "<p>Thank you for signing up! Watch your inbox for a confirmation with the address, parking details, and your shift lead's phone number.</p>"
+    cUnite_Offline_Message__c: "<p>Signups for this opportunity are closed right now. Check the finder for open shifts, or contact us and we will let you know when this one reopens.</p>"
+    cUnite_Application_Start__c:
+      fake.date_time_between:
+        start_date: -45d
+        end_date: -10d
+    cUnite_Application_End__c:
+      fake.date_time_between:
+        start_date: +120d
+        end_date: +200d
+    cUnite_Remote__c: false
+    cUnite_Allow_Waitlisting__c: false
+    cUnite_Shift_Signup_Limit__c: 5
+    cUnite_Volunteer_Role__c:
+      reference: role_warehouse_sorter
+    cUnite_Primary_Contact__c:
+      reference: staff_marcus
+    cUnite_Location__c:
+      reference: venue_food_bank
+    cUnite_Cancellation_Notice_Hours__c: 24
+    cUnite_Onsite_Contact_Phone__c: "(816) 555-0106"
+    cUnite_Related_Job_1__c:
+      reference: job_senior_delivery
+    cUnite_Related_Job_2__c:
+      reference: job_kitchen
+    cUnite_Related_Job_3__c:
+      reference: job_weekday_sort
+    cUnite_Location_Name__c: "Harvesters Food Bank Warehouse"
+    cUnite_Location_Country__c: United States
+    GW_Volunteers__Location_Street__c: "3801 Topping Ave"
+    GW_Volunteers__Location_City__c: Kansas City
+    GW_Volunteers__Location__c: MO
+    GW_Volunteers__Location_Zip_Postal_Code__c: "64129"
+  friends:
+    - object: GW_Volunteers__Volunteer_Shift__c
+      count: 43
+      fields:
+        GW_Volunteers__Volunteer_Job__c:
+          reference: job_evening_sort
+        GW_Volunteers__Start_Date_Time__c:
+          fake.date_time_between:
+            start_date: +1d
+            end_date: +180d
+        GW_Volunteers__Duration__c: 2.0
+        GW_Volunteers__Desired_Number_of_Volunteers__c: 5
+
+# ──────────────────────────────────────────────────────────────
+# Volunteer Jobs — Animal Welfare Campaign
+# ──────────────────────────────────────────────────────────────
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: job_kennels
+  fields:
+    Name: Clean Kennels at Shelter
+    GW_Volunteers__Campaign__c:
+      reference: campaign_animal
+    GW_Volunteers__Display_on_Website__c: true
+    GW_Volunteers__Inactive__c: false
+    GW_Volunteers__Ongoing__c: false
+    GW_Volunteers__Skills_Needed__c: Manual Labor
+    GW_Volunteers__Volunteer_Website_Time_Zone__c: America/Chicago
+    GW_Volunteers__Description__c: <p>Help keep kennels clean and provide a comfortable living space for shelter animals awaiting their forever homes.</p>
+    cUnite_Type__c: Organizational Support
+    cUnite_Volunteer_Types__c: Individuals
+    cUnite_Featured__c: false
+    cUnite_Contact_FormQualifiedApiName__c: FlowToolKit__Volunteer_Primary_Contact
+    cUnite_Hours_Group_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Group_Signup
+    cUnite_Job_Page_FormQualifiedApiName__c: FlowToolKit__JobFinder_DetailsComponent_Form
+    cUnite_Waiver_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Waiver
+    cUnite_Banner_Image__c: /file-asset-public/FlowToolKit__FlowToolKit_VolunteerKennelCleaning
+    cUnite_Accepting_Applications__c: true
+    cUnite_Subtitle__c: "Clean kennels are the first step to adoption"
+    cUnite_Excerpt__c: "<p>Morning kennel care: cleaning, feeding, and fresh water. Physical work that directly improves animal welfare scores.</p>"
+    cUnite_Confirmation_Page_Message__c: "<p>Thank you for signing up! Watch your inbox for a confirmation with the address, parking details, and your shift lead's phone number.</p>"
+    cUnite_Offline_Message__c: "<p>Signups for this opportunity are closed right now. Check the finder for open shifts, or contact us and we will let you know when this one reopens.</p>"
+    cUnite_Application_Start__c:
+      fake.date_time_between:
+        start_date: -45d
+        end_date: -10d
+    cUnite_Application_End__c:
+      fake.date_time_between:
+        start_date: +120d
+        end_date: +200d
+    cUnite_Remote__c: false
+    cUnite_Allow_Waitlisting__c: false
+    cUnite_Shift_Signup_Limit__c: 5
+    cUnite_Volunteer_Role__c:
+      reference: role_animal_care
+    cUnite_Primary_Contact__c:
+      reference: staff_priya
+    cUnite_Location__c:
+      reference: venue_animal_shelter
+    cUnite_Cancellation_Notice_Hours__c: 24
+    cUnite_Onsite_Contact_Phone__c: "(816) 555-0110"
+    cUnite_Related_Job_1__c:
+      reference: job_dog_walking
+    cUnite_Related_Job_2__c:
+      reference: job_foster_dog
+    cUnite_Related_Job_3__c:
+      reference: job_pet_adoption
+    cUnite_Location_Name__c: "KC Pet Project Shelter"
+    cUnite_Location_Country__c: United States
+    GW_Volunteers__Location_Street__c: "7077 Elmwood Ave"
+    GW_Volunteers__Location_City__c: Kansas City
+    GW_Volunteers__Location__c: MO
+    GW_Volunteers__Location_Zip_Postal_Code__c: "64132"
+  friends:
+    - object: GW_Volunteers__Volunteer_Shift__c
+      count: 40
+      fields:
+        GW_Volunteers__Volunteer_Job__c:
+          reference: job_kennels
+        GW_Volunteers__Start_Date_Time__c:
+          fake.date_time_between:
+            start_date: +1d
+            end_date: +180d
+        GW_Volunteers__Duration__c: 3.0
+        GW_Volunteers__Desired_Number_of_Volunteers__c: 5
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: job_dog_walking
+  fields:
+    Name: Daily Dog Walking
+    GW_Volunteers__Campaign__c:
+      reference: campaign_animal
+    GW_Volunteers__Display_on_Website__c: true
+    GW_Volunteers__Inactive__c: false
+    GW_Volunteers__Ongoing__c: false
+    GW_Volunteers__Skills_Needed__c:
+    GW_Volunteers__Volunteer_Website_Time_Zone__c: America/Chicago
+    GW_Volunteers__Description__c: <p>Walk shelter dogs daily to ensure they get exercise and socialization while awaiting adoption.</p>
+    cUnite_Type__c: One-on-One Support
+    cUnite_Volunteer_Types__c: Individuals
+    cUnite_Featured__c: false
+    cUnite_Contact_FormQualifiedApiName__c: FlowToolKit__Volunteer_Primary_Contact
+    cUnite_Hours_Group_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Group_Signup
+    cUnite_Job_Page_FormQualifiedApiName__c: FlowToolKit__JobFinder_DetailsComponent_Form
+    cUnite_Waiver_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Waiver
+    cUnite_Banner_Image__c: /file-asset-public/FlowToolKit__FlowToolKit_VolunteerDog1
+    cUnite_Accepting_Applications__c: true
+    cUnite_Subtitle__c: "Every dog gets a walk, every day"
+    cUnite_Excerpt__c: "<p>Leash walks on the shelter trail loop. Dog-handling orientation required once; after that, drop in on your schedule.</p>"
+    cUnite_Confirmation_Page_Message__c: "<p>Thank you for signing up! Watch your inbox for a confirmation with the address, parking details, and your shift lead's phone number.</p>"
+    cUnite_Offline_Message__c: "<p>Signups for this opportunity are closed right now. Check the finder for open shifts, or contact us and we will let you know when this one reopens.</p>"
+    cUnite_Application_Start__c:
+      fake.date_time_between:
+        start_date: -45d
+        end_date: -10d
+    cUnite_Application_End__c:
+      fake.date_time_between:
+        start_date: +120d
+        end_date: +200d
+    cUnite_Remote__c: false
+    cUnite_Allow_Waitlisting__c: true
+    cUnite_Waitlist_Limit__c: 10
+    cUnite_Shift_Signup_Limit__c: 5
+    cUnite_Volunteer_Role__c:
+      reference: role_animal_care
+    cUnite_Primary_Contact__c:
+      reference: staff_priya
+    cUnite_Location__c:
+      reference: venue_animal_shelter
+    cUnite_Cancellation_Notice_Hours__c: 24
+    cUnite_Onsite_Contact_Phone__c: "(816) 555-0105"
+    cUnite_Related_Job_1__c:
+      reference: job_foster_dog
+    cUnite_Related_Job_2__c:
+      reference: job_pet_adoption
+    cUnite_Related_Job_3__c:
+      reference: job_transport_gus
+    cUnite_Location_Name__c: "KC Pet Project Shelter"
+    cUnite_Location_Country__c: United States
+    GW_Volunteers__Location_Street__c: "7077 Elmwood Ave"
+    GW_Volunteers__Location_City__c: Kansas City
+    GW_Volunteers__Location__c: MO
+    GW_Volunteers__Location_Zip_Postal_Code__c: "64132"
+  friends:
+    - object: GW_Volunteers__Volunteer_Shift__c
+      count: 50
+      fields:
+        GW_Volunteers__Volunteer_Job__c:
+          reference: job_dog_walking
+        GW_Volunteers__Start_Date_Time__c:
+          fake.date_time_between:
+            start_date: +1d
+            end_date: +180d
+        GW_Volunteers__Duration__c: 2.0
+        GW_Volunteers__Desired_Number_of_Volunteers__c: 3
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: job_foster_dog
+  fields:
+    Name: Foster a Dog
+    GW_Volunteers__Campaign__c:
+      reference: campaign_animal
+    GW_Volunteers__Display_on_Website__c: true
+    GW_Volunteers__Inactive__c: false
+    GW_Volunteers__Ongoing__c: true
+    GW_Volunteers__Skills_Needed__c:
+    GW_Volunteers__Volunteer_Website_Time_Zone__c: America/Chicago
+    GW_Volunteers__Description__c: <p>Open your home to a shelter dog in need. Foster families provide temporary care while we find permanent homes.</p>
+    cUnite_Type__c: Foster/Adopt
+    cUnite_Volunteer_Types__c: Individuals
+    cUnite_Featured__c: true
+    cUnite_Contact_FormQualifiedApiName__c: FlowToolKit__Volunteer_Primary_Contact
+    cUnite_Hours_Group_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Group_Signup
+    cUnite_Job_Page_FormQualifiedApiName__c: FlowToolKit__JobFinder_DetailsComponent_Form
+    cUnite_Waiver_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Waiver
+    cUnite_Banner_Image__c: /file-asset-public/FlowToolKit__FlowToolKit_VolunteerFosterADog
+
+    cUnite_Accepting_Applications__c: true
+    cUnite_Subtitle__c: "A couch tonight, a family for good soon"
+    cUnite_Excerpt__c: "<p>Short-term fostering with food and supplies provided. You are the bridge between the kennel and a forever home.</p>"
+    cUnite_Confirmation_Page_Message__c: "<p>Thank you for signing up! Watch your inbox for a confirmation with the address, parking details, and your shift lead's phone number.</p>"
+    cUnite_Offline_Message__c: "<p>Signups for this opportunity are closed right now. Check the finder for open shifts, or contact us and we will let you know when this one reopens.</p>"
+    cUnite_Application_Start__c:
+      fake.date_time_between:
+        start_date: -45d
+        end_date: -10d
+    cUnite_Application_End__c:
+      fake.date_time_between:
+        start_date: +120d
+        end_date: +200d
+    cUnite_Remote__c: false
+    cUnite_Allow_Waitlisting__c: false
+    cUnite_Shift_Signup_Limit__c: 5
+    cUnite_Volunteer_Role__c:
+      reference: role_animal_care
+    cUnite_Primary_Contact__c:
+      reference: staff_priya
+    cUnite_Location__c:
+      reference: venue_animal_shelter
+    cUnite_Cancellation_Notice_Hours__c: 24
+    cUnite_Onsite_Contact_Phone__c: "(816) 555-0109"
+    cUnite_Related_Job_1__c:
+      reference: job_pet_adoption
+    cUnite_Related_Job_2__c:
+      reference: job_transport_gus
+    cUnite_Related_Job_3__c:
+      reference: job_kennels
+    cUnite_Location_Name__c: "KC Pet Project Shelter"
+    cUnite_Location_Country__c: United States
+    GW_Volunteers__Location_Street__c: "7077 Elmwood Ave"
+    GW_Volunteers__Location_City__c: Kansas City
+    GW_Volunteers__Location__c: MO
+    GW_Volunteers__Location_Zip_Postal_Code__c: "64132"
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: job_pet_adoption
+  fields:
+    Name: Volunteer @ Pet Adoption Center
+    GW_Volunteers__Campaign__c:
+      reference: campaign_animal
+    GW_Volunteers__Display_on_Website__c: true
+    GW_Volunteers__Inactive__c: false
+    GW_Volunteers__Ongoing__c: false
+    GW_Volunteers__Skills_Needed__c:
+    GW_Volunteers__Volunteer_Website_Time_Zone__c: America/Chicago
+    GW_Volunteers__Description__c: <p>Help at the pet adoption center by greeting visitors, introducing them to available pets, and assisting with adoption paperwork.</p>
+    cUnite_Type__c: Organizational Support
+    cUnite_Volunteer_Types__c: Individuals
+    cUnite_Featured__c: true
+    cUnite_Contact_FormQualifiedApiName__c: FlowToolKit__Volunteer_Primary_Contact
+    cUnite_Hours_Group_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Group_Signup
+    cUnite_Job_Page_FormQualifiedApiName__c: FlowToolKit__JobFinder_DetailsComponent_Form
+    cUnite_Waiver_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Waiver
+    cUnite_Banner_Image__c: /file-asset-public/FlowToolKit__FlowToolKit_VolunteerFosterAPet2
+    cUnite_Accepting_Applications__c: true
+    cUnite_Subtitle__c: "Match people with their next best friend"
+    cUnite_Excerpt__c: "<p>Adoption-day floor support: greeting families, handling paperwork, and celebrating the go-home photos.</p>"
+    cUnite_Confirmation_Page_Message__c: "<p>Thank you for signing up! Watch your inbox for a confirmation with the address, parking details, and your shift lead's phone number.</p>"
+    cUnite_Offline_Message__c: "<p>Signups for this opportunity are closed right now. Check the finder for open shifts, or contact us and we will let you know when this one reopens.</p>"
+    cUnite_Application_Start__c:
+      fake.date_time_between:
+        start_date: -45d
+        end_date: -10d
+    cUnite_Application_End__c:
+      fake.date_time_between:
+        start_date: +120d
+        end_date: +200d
+    cUnite_Remote__c: false
+    cUnite_Allow_Waitlisting__c: false
+    cUnite_Shift_Signup_Limit__c: 5
+    cUnite_Volunteer_Role__c:
+      reference: role_animal_care
+    cUnite_Primary_Contact__c:
+      reference: staff_priya
+    cUnite_Location__c:
+      reference: venue_animal_shelter
+    cUnite_Cancellation_Notice_Hours__c: 24
+    cUnite_Onsite_Contact_Phone__c: "(816) 555-0114"
+    cUnite_Related_Job_1__c:
+      reference: job_transport_gus
+    cUnite_Related_Job_2__c:
+      reference: job_kennels
+    cUnite_Related_Job_3__c:
+      reference: job_dog_walking
+    cUnite_Location_Name__c: "KC Pet Project Shelter"
+    cUnite_Location_Country__c: United States
+    GW_Volunteers__Location_Street__c: "7077 Elmwood Ave"
+    GW_Volunteers__Location_City__c: Kansas City
+    GW_Volunteers__Location__c: MO
+    GW_Volunteers__Location_Zip_Postal_Code__c: "64132"
+  friends:
+    - object: GW_Volunteers__Volunteer_Shift__c
+      count: 30
+      fields:
+        GW_Volunteers__Volunteer_Job__c:
+          reference: job_pet_adoption
+        GW_Volunteers__Start_Date_Time__c:
+          fake.date_time_between:
+            start_date: +1d
+            end_date: +180d
+        GW_Volunteers__Duration__c: 3.0
+        GW_Volunteers__Desired_Number_of_Volunteers__c: 5
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: job_transport_gus
+  fields:
+    Name: Transport Gus to Annual Checkup
+    GW_Volunteers__Campaign__c:
+      reference: campaign_animal
+    GW_Volunteers__Display_on_Website__c: true
+    GW_Volunteers__Inactive__c: false
+    GW_Volunteers__Ongoing__c: false
+    GW_Volunteers__Skills_Needed__c:
+    GW_Volunteers__Volunteer_Website_Time_Zone__c: America/Chicago
+    GW_Volunteers__Description__c: <p>Help transport Gus the therapy dog to his annual veterinary checkup. Must have a vehicle and be comfortable with large dogs.</p>
+    cUnite_Type__c: Provide Transportation
+    cUnite_Volunteer_Types__c: Individuals
+    cUnite_Featured__c: false
+    cUnite_Contact_FormQualifiedApiName__c: FlowToolKit__Volunteer_Primary_Contact
+    cUnite_Hours_Group_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Group_Signup
+    cUnite_Job_Page_FormQualifiedApiName__c: FlowToolKit__JobFinder_DetailsComponent_Form
+    cUnite_Waiver_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Waiver
+    cUnite_Banner_Image__c: /file-asset-public/FlowToolKit__FlowToolKit_VolunteerDog2
+    cUnite_Accepting_Applications__c: true
+    cUnite_Subtitle__c: "The ride between shelters saves lives"
+    cUnite_Excerpt__c: "<p>Drive scheduled transport legs moving animals to partner rescues. Van provided; standard license is all you need.</p>"
+    cUnite_Confirmation_Page_Message__c: "<p>Thank you for signing up! Watch your inbox for a confirmation with the address, parking details, and your shift lead's phone number.</p>"
+    cUnite_Offline_Message__c: "<p>Signups for this opportunity are closed right now. Check the finder for open shifts, or contact us and we will let you know when this one reopens.</p>"
+    cUnite_Application_Start__c:
+      fake.date_time_between:
+        start_date: -45d
+        end_date: -10d
+    cUnite_Application_End__c:
+      fake.date_time_between:
+        start_date: +120d
+        end_date: +200d
+    cUnite_Remote__c: false
+    cUnite_Allow_Waitlisting__c: false
+    cUnite_Shift_Signup_Limit__c: 5
+    cUnite_Volunteer_Role__c:
+      reference: role_delivery_driver
+    cUnite_Primary_Contact__c:
+      reference: staff_marcus
+    cUnite_Location__c:
+      reference: venue_animal_shelter
+    cUnite_Cancellation_Notice_Hours__c: 24
+    cUnite_Onsite_Contact_Phone__c: "(816) 555-0119"
+    cUnite_Related_Job_1__c:
+      reference: job_kennels
+    cUnite_Related_Job_2__c:
+      reference: job_dog_walking
+    cUnite_Related_Job_3__c:
+      reference: job_foster_dog
+    cUnite_Location_Name__c: "KC Pet Project Shelter"
+    cUnite_Location_Country__c: United States
+    GW_Volunteers__Location_Street__c: "7077 Elmwood Ave"
+    GW_Volunteers__Location_City__c: Kansas City
+    GW_Volunteers__Location__c: MO
+    GW_Volunteers__Location_Zip_Postal_Code__c: "64132"
+  friends:
+    - object: GW_Volunteers__Volunteer_Shift__c
+      count: 1
+      fields:
+        GW_Volunteers__Volunteer_Job__c:
+          reference: job_transport_gus
+        GW_Volunteers__Start_Date_Time__c:
+          fake.date_time_between:
+            start_date: +7d
+            end_date: +60d
+        GW_Volunteers__Duration__c: 4.0
+        GW_Volunteers__Desired_Number_of_Volunteers__c: 1
+
+# ──────────────────────────────────────────────────────────────
+# Volunteer Jobs — Equine Therapy Campaign
+# ──────────────────────────────────────────────────────────────
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: job_after_school_ride
+  fields:
+    Name: After School Ride Support
+    GW_Volunteers__Campaign__c:
+      reference: campaign_equine
+    GW_Volunteers__Display_on_Website__c: true
+    GW_Volunteers__Inactive__c: false
+    GW_Volunteers__Ongoing__c: false
+    GW_Volunteers__Skills_Needed__c:
+    GW_Volunteers__Volunteer_Website_Time_Zone__c: America/Chicago
+    GW_Volunteers__Description__c: <p>Support the after-school equine therapy program by helping children with therapeutic horseback riding sessions.</p>
+    cUnite_Type__c: One-on-One Support
+    cUnite_Volunteer_Types__c: Individuals
+    cUnite_Featured__c: false
+    cUnite_Shift_Signup_Limit__c: 50
+    cUnite_Contact_FormQualifiedApiName__c: FlowToolKit__Volunteer_Primary_Contact
+    cUnite_Hours_Group_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Group_Signup
+    cUnite_Job_Page_FormQualifiedApiName__c: FlowToolKit__JobFinder_DetailsComponent_Form
+    cUnite_Waiver_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Waiver
+    cUnite_Banner_Image__c: /file-asset-public/FlowToolKit__FlowToolKit_VolunteerHorseTherapy
+    cUnite_Accepting_Applications__c: true
+    cUnite_Subtitle__c: "Side-walker for a rider finding their balance"
+    cUnite_Excerpt__c: "<p>Walk beside a young rider during afternoon therapy sessions. Training provided; horse experience not required.</p>"
+    cUnite_Confirmation_Page_Message__c: "<p>Thank you for signing up! Watch your inbox for a confirmation with the address, parking details, and your shift lead's phone number.</p>"
+    cUnite_Offline_Message__c: "<p>Signups for this opportunity are closed right now. Check the finder for open shifts, or contact us and we will let you know when this one reopens.</p>"
+    cUnite_Application_Start__c:
+      fake.date_time_between:
+        start_date: -45d
+        end_date: -10d
+    cUnite_Application_End__c:
+      fake.date_time_between:
+        start_date: +120d
+        end_date: +200d
+    cUnite_Remote__c: false
+    cUnite_Allow_Waitlisting__c: false
+    cUnite_Volunteer_Role__c:
+      reference: role_therapy_sidewalker
+    cUnite_Primary_Contact__c:
+      reference: staff_priya
+    cUnite_Location__c:
+      reference: venue_equine_center
+    cUnite_Cancellation_Notice_Hours__c: 24
+    cUnite_Onsite_Contact_Phone__c: "(816) 555-0102"
+    cUnite_Related_Job_1__c:
+      reference: job_weekend_ride
+    cUnite_Related_Job_2__c:
+      reference: job_adopt_horse
+    cUnite_Related_Job_3__c:
+      reference: job_kennels
+    cUnite_Location_Name__c: "Meadowbrook Equine Therapy Center"
+    cUnite_Location_Country__c: United States
+    GW_Volunteers__Location_Street__c: "18200 Ranch Rd"
+    GW_Volunteers__Location_City__c: Belton
+    GW_Volunteers__Location__c: MO
+    GW_Volunteers__Location_Zip_Postal_Code__c: "64012"
+  friends:
+    - object: GW_Volunteers__Volunteer_Shift__c
+      count: 42
+      fields:
+        GW_Volunteers__Volunteer_Job__c:
+          reference: job_after_school_ride
+        GW_Volunteers__Start_Date_Time__c:
+          fake.date_time_between:
+            start_date: +1d
+            end_date: +180d
+        GW_Volunteers__Duration__c: 2.0
+        GW_Volunteers__Desired_Number_of_Volunteers__c: 5
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: job_weekend_ride
+  fields:
+    Name: Weekend Ride Support
+    GW_Volunteers__Campaign__c:
+      reference: campaign_equine
+    GW_Volunteers__Display_on_Website__c: true
+    GW_Volunteers__Inactive__c: false
+    GW_Volunteers__Ongoing__c: false
+    GW_Volunteers__Skills_Needed__c:
+    GW_Volunteers__Volunteer_Website_Time_Zone__c: America/Chicago
+    GW_Volunteers__Description__c: <p>Help with weekend equine therapy sessions for adults and children with disabilities.</p>
+    cUnite_Type__c: One-on-One Support
+    cUnite_Volunteer_Types__c: Individuals
+    cUnite_Featured__c: false
+    cUnite_Contact_FormQualifiedApiName__c: FlowToolKit__Volunteer_Primary_Contact
+    cUnite_Hours_Group_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Group_Signup
+    cUnite_Job_Page_FormQualifiedApiName__c: FlowToolKit__JobFinder_DetailsComponent_Form
+    cUnite_Waiver_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Waiver
+    cUnite_Banner_Image__c: /file-asset-public/FlowToolKit__FlowToolKit_VolunteerHorseTherapy2
+    cUnite_Accepting_Applications__c: true
+    cUnite_Subtitle__c: "Weekend sessions in the arena"
+    cUnite_Excerpt__c: "<p>Lead or side-walk during Saturday therapy rides. A calm presence matters more than horse experience.</p>"
+    cUnite_Confirmation_Page_Message__c: "<p>Thank you for signing up! Watch your inbox for a confirmation with the address, parking details, and your shift lead's phone number.</p>"
+    cUnite_Offline_Message__c: "<p>Signups for this opportunity are closed right now. Check the finder for open shifts, or contact us and we will let you know when this one reopens.</p>"
+    cUnite_Application_Start__c:
+      fake.date_time_between:
+        start_date: -45d
+        end_date: -10d
+    cUnite_Application_End__c:
+      fake.date_time_between:
+        start_date: +120d
+        end_date: +200d
+    cUnite_Remote__c: false
+    cUnite_Allow_Waitlisting__c: false
+    cUnite_Shift_Signup_Limit__c: 5
+    cUnite_Volunteer_Role__c:
+      reference: role_therapy_sidewalker
+    cUnite_Primary_Contact__c:
+      reference: staff_priya
+    cUnite_Location__c:
+      reference: venue_equine_center
+    cUnite_Cancellation_Notice_Hours__c: 24
+    cUnite_Onsite_Contact_Phone__c: "(816) 555-0121"
+    cUnite_Related_Job_1__c:
+      reference: job_adopt_horse
+    cUnite_Related_Job_2__c:
+      reference: job_after_school_ride
+    cUnite_Related_Job_3__c:
+      reference: job_dog_walking
+    cUnite_Location_Name__c: "Meadowbrook Equine Therapy Center"
+    cUnite_Location_Country__c: United States
+    GW_Volunteers__Location_Street__c: "18200 Ranch Rd"
+    GW_Volunteers__Location_City__c: Belton
+    GW_Volunteers__Location__c: MO
+    GW_Volunteers__Location_Zip_Postal_Code__c: "64012"
+  friends:
+    - object: GW_Volunteers__Volunteer_Shift__c
+      count: 8
+      fields:
+        GW_Volunteers__Volunteer_Job__c:
+          reference: job_weekend_ride
+        GW_Volunteers__Start_Date_Time__c:
+          fake.date_time_between:
+            start_date: +1d
+            end_date: +180d
+        GW_Volunteers__Duration__c: 4.0
+        GW_Volunteers__Desired_Number_of_Volunteers__c: 10
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: job_adopt_horse
+  fields:
+    Name: Adopt a Therapy Horse
+    GW_Volunteers__Campaign__c:
+      reference: campaign_equine
+    GW_Volunteers__Display_on_Website__c: true
+    GW_Volunteers__Inactive__c: false
+    GW_Volunteers__Ongoing__c: true
+    GW_Volunteers__Skills_Needed__c:
+    GW_Volunteers__Volunteer_Website_Time_Zone__c: America/Chicago
+    GW_Volunteers__Description__c: <p>Sponsor and adopt a therapy horse. Ongoing commitment to support the care and feeding of a horse used in our therapy program.</p>
+    cUnite_Type__c: Foster/Adopt
+    cUnite_Volunteer_Types__c: Individuals
+    cUnite_Featured__c: false
+    cUnite_Contact_FormQualifiedApiName__c: FlowToolKit__Volunteer_Primary_Contact
+    cUnite_Hours_Group_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Group_Signup
+    cUnite_Job_Page_FormQualifiedApiName__c: FlowToolKit__JobFinder_DetailsComponent_Form
+    cUnite_Waiver_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Waiver
+    cUnite_Banner_Image__c: /file-asset-public/FlowToolKit__FlowToolKit_VolunteerHorseTherapy3
+
+# ──────────────────────────────────────────────────────────────
+# Volunteer Jobs — Annual Foundation Gala Campaign
+# ──────────────────────────────────────────────────────────────
+    cUnite_Accepting_Applications__c: true
+    cUnite_Subtitle__c: "Sponsor the hay, the farrier, and the vet"
+    cUnite_Excerpt__c: "<p>A monthly commitment that keeps one therapy horse healthy and working. Visit your horse any open barn day.</p>"
+    cUnite_Confirmation_Page_Message__c: "<p>Thank you for signing up! Watch your inbox for a confirmation with the address, parking details, and your shift lead's phone number.</p>"
+    cUnite_Offline_Message__c: "<p>Signups for this opportunity are closed right now. Check the finder for open shifts, or contact us and we will let you know when this one reopens.</p>"
+    cUnite_Application_Start__c:
+      fake.date_time_between:
+        start_date: -45d
+        end_date: -10d
+    cUnite_Application_End__c:
+      fake.date_time_between:
+        start_date: +120d
+        end_date: +200d
+    cUnite_Remote__c: false
+    cUnite_Allow_Waitlisting__c: false
+    cUnite_Shift_Signup_Limit__c: 5
+    cUnite_Volunteer_Role__c:
+      reference: role_sponsor
+    cUnite_Primary_Contact__c:
+      reference: staff_dana
+    cUnite_Location__c:
+      reference: venue_equine_center
+    cUnite_Cancellation_Notice_Hours__c: 24
+    cUnite_Onsite_Contact_Phone__c: "(816) 555-0100"
+    cUnite_Related_Job_1__c:
+      reference: job_after_school_ride
+    cUnite_Related_Job_2__c:
+      reference: job_weekend_ride
+    cUnite_Related_Job_3__c:
+      reference: job_foster_dog
+    cUnite_Location_Name__c: "Meadowbrook Equine Therapy Center"
+    cUnite_Location_Country__c: United States
+    GW_Volunteers__Location_Street__c: "18200 Ranch Rd"
+    GW_Volunteers__Location_City__c: Belton
+    GW_Volunteers__Location__c: MO
+    GW_Volunteers__Location_Zip_Postal_Code__c: "64012"
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: job_event_setup
+  fields:
+    Name: Event Setup
+    GW_Volunteers__Campaign__c:
+      reference: campaign_gala
+    GW_Volunteers__Display_on_Website__c: true
+    GW_Volunteers__Inactive__c: false
+    GW_Volunteers__Ongoing__c: false
+    GW_Volunteers__Skills_Needed__c: Manual Labor
+    GW_Volunteers__Volunteer_Website_Time_Zone__c: America/Chicago
+    GW_Volunteers__Description__c: <p>Help set up for the annual foundation gala event including tables, chairs, decorations, and audio/visual equipment.</p>
+    cUnite_Type__c: Organizational Support
+    cUnite_Volunteer_Types__c: Groups;Individuals
+    cUnite_Featured__c: false
+    cUnite_Contact_FormQualifiedApiName__c: FlowToolKit__Volunteer_Primary_Contact
+    cUnite_Hours_Group_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Group_Signup
+    cUnite_Job_Page_FormQualifiedApiName__c: FlowToolKit__JobFinder_DetailsComponent_Form
+    cUnite_Waiver_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Waiver
+    cUnite_Banner_Image__c: /file-asset-public/FlowToolKit__FlowToolKit_VolunteerEventSetup
+    cUnite_Accepting_Applications__c: true
+    cUnite_Subtitle__c: "Build the room before the doors open"
+    cUnite_Excerpt__c: "<p>Tables, linens, signage, and staging for the gala. Afternoon shift with the events team; lifting involved.</p>"
+    cUnite_Confirmation_Page_Message__c: "<p>Thank you for signing up! Watch your inbox for a confirmation with the address, parking details, and your shift lead's phone number.</p>"
+    cUnite_Offline_Message__c: "<p>Signups for this opportunity are closed right now. Check the finder for open shifts, or contact us and we will let you know when this one reopens.</p>"
+    cUnite_Application_Start__c:
+      fake.date_time_between:
+        start_date: -45d
+        end_date: -10d
+    cUnite_Application_End__c:
+      fake.date_time_between:
+        start_date: +120d
+        end_date: +200d
+    cUnite_Remote__c: false
+    cUnite_Allow_Waitlisting__c: true
+    cUnite_Waitlist_Limit__c: 10
+    cUnite_Shift_Signup_Limit__c: 5
+    cUnite_Volunteer_Role__c:
+      reference: role_event_support
+    cUnite_Primary_Contact__c:
+      reference: staff_dana
+    cUnite_Location__c:
+      reference: venue_grand_hall
+    cUnite_Cancellation_Notice_Hours__c: 24
+    cUnite_Onsite_Contact_Phone__c: "(816) 555-0108"
+    cUnite_Related_Job_1__c:
+      reference: job_silent_auction
+    cUnite_Related_Job_2__c:
+      reference: job_event_cleanup
+    cUnite_Related_Job_3__c:
+      reference: job_parking
+    cUnite_Location_Name__c: "The Grand Hall at Power and Light"
+    cUnite_Location_Country__c: United States
+    GW_Volunteers__Location_Street__c: "1330 Baltimore Ave"
+    GW_Volunteers__Location_City__c: Kansas City
+    GW_Volunteers__Location__c: MO
+    GW_Volunteers__Location_Zip_Postal_Code__c: "64105"
+  friends:
+    - object: GW_Volunteers__Volunteer_Shift__c
+      count: 2
+      fields:
+        GW_Volunteers__Volunteer_Job__c:
+          reference: job_event_setup
+        GW_Volunteers__Start_Date_Time__c:
+          fake.date_time_between:
+            start_date: +30d
+            end_date: +90d
+        GW_Volunteers__Duration__c: 8.0
+        GW_Volunteers__Desired_Number_of_Volunteers__c: 20
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: job_silent_auction
+  fields:
+    Name: Event Silent Auction Support
+    GW_Volunteers__Campaign__c:
+      reference: campaign_gala
+    GW_Volunteers__Display_on_Website__c: true
+    GW_Volunteers__Inactive__c: false
+    GW_Volunteers__Ongoing__c: false
+    GW_Volunteers__Skills_Needed__c:
+    GW_Volunteers__Volunteer_Website_Time_Zone__c: America/Chicago
+    GW_Volunteers__Description__c: <p>Manage the silent auction table at the annual gala. Help attendees browse items, process bids, and close out winning bids.</p>
+    cUnite_Type__c: Organizational Support
+    cUnite_Volunteer_Types__c: Individuals
+    cUnite_Featured__c: false
+    cUnite_Contact_FormQualifiedApiName__c: FlowToolKit__Volunteer_Primary_Contact
+    cUnite_Hours_Group_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Group_Signup
+    cUnite_Job_Page_FormQualifiedApiName__c: FlowToolKit__JobFinder_DetailsComponent_Form
+    cUnite_Waiver_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Waiver
+    cUnite_Banner_Image__c: /file-asset-public/FlowToolKit__FlowToolKit_VolunteerSilentAuction
+    cUnite_Accepting_Applications__c: true
+    cUnite_Subtitle__c: "Keep the bids moving and the tables tidy"
+    cUnite_Excerpt__c: "<p>Auction-table hosting during the gala: answering questions, closing sheets, and recording winners.</p>"
+    cUnite_Confirmation_Page_Message__c: "<p>Thank you for signing up! Watch your inbox for a confirmation with the address, parking details, and your shift lead's phone number.</p>"
+    cUnite_Offline_Message__c: "<p>Signups for this opportunity are closed right now. Check the finder for open shifts, or contact us and we will let you know when this one reopens.</p>"
+    cUnite_Application_Start__c:
+      fake.date_time_between:
+        start_date: -45d
+        end_date: -10d
+    cUnite_Application_End__c:
+      fake.date_time_between:
+        start_date: +120d
+        end_date: +200d
+    cUnite_Remote__c: false
+    cUnite_Allow_Waitlisting__c: true
+    cUnite_Waitlist_Limit__c: 10
+    cUnite_Shift_Signup_Limit__c: 5
+    cUnite_Volunteer_Role__c:
+      reference: role_event_support
+    cUnite_Primary_Contact__c:
+      reference: staff_dana
+    cUnite_Location__c:
+      reference: venue_grand_hall
+    cUnite_Cancellation_Notice_Hours__c: 24
+    cUnite_Onsite_Contact_Phone__c: "(816) 555-0117"
+    cUnite_Related_Job_1__c:
+      reference: job_event_cleanup
+    cUnite_Related_Job_2__c:
+      reference: job_parking
+    cUnite_Related_Job_3__c:
+      reference: job_event_setup
+    cUnite_Location_Name__c: "The Grand Hall at Power and Light"
+    cUnite_Location_Country__c: United States
+    GW_Volunteers__Location_Street__c: "1330 Baltimore Ave"
+    GW_Volunteers__Location_City__c: Kansas City
+    GW_Volunteers__Location__c: MO
+    GW_Volunteers__Location_Zip_Postal_Code__c: "64105"
+  friends:
+    - object: GW_Volunteers__Volunteer_Shift__c
+      count: 1
+      fields:
+        GW_Volunteers__Volunteer_Job__c:
+          reference: job_silent_auction
+        GW_Volunteers__Start_Date_Time__c:
+          fake.date_time_between:
+            start_date: +30d
+            end_date: +90d
+        GW_Volunteers__Duration__c: 4.0
+        GW_Volunteers__Desired_Number_of_Volunteers__c: 10
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: job_event_cleanup
+  fields:
+    Name: Event Cleanup
+    GW_Volunteers__Campaign__c:
+      reference: campaign_gala
+    GW_Volunteers__Display_on_Website__c: true
+    GW_Volunteers__Inactive__c: false
+    GW_Volunteers__Ongoing__c: false
+    GW_Volunteers__Skills_Needed__c: Manual Labor
+    GW_Volunteers__Volunteer_Website_Time_Zone__c: America/Chicago
+    GW_Volunteers__Description__c: <p>Help clean up after the annual foundation gala. Tasks include breaking down tables, cleaning the venue, and disposing of decorations.</p>
+    cUnite_Type__c: Cleanup
+    cUnite_Volunteer_Types__c: Groups;Individuals
+    cUnite_Featured__c: false
+    cUnite_Contact_FormQualifiedApiName__c: FlowToolKit__Volunteer_Primary_Contact
+    cUnite_Hours_Group_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Group_Signup
+    cUnite_Job_Page_FormQualifiedApiName__c: FlowToolKit__JobFinder_DetailsComponent_Form
+    cUnite_Waiver_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Waiver
+    cUnite_Banner_Image__c: /file-asset-public/FlowToolKit__FlowToolKit_VolunteerEventCleanup
+    cUnite_Accepting_Applications__c: true
+    cUnite_Subtitle__c: "Strike the room and send the rentals home"
+    cUnite_Excerpt__c: "<p>Late-evening teardown after the gala. Fast, physical, and done by midnight with pizza at the end.</p>"
+    cUnite_Confirmation_Page_Message__c: "<p>Thank you for signing up! Watch your inbox for a confirmation with the address, parking details, and your shift lead's phone number.</p>"
+    cUnite_Offline_Message__c: "<p>Signups for this opportunity are closed right now. Check the finder for open shifts, or contact us and we will let you know when this one reopens.</p>"
+    cUnite_Application_Start__c:
+      fake.date_time_between:
+        start_date: -45d
+        end_date: -10d
+    cUnite_Application_End__c:
+      fake.date_time_between:
+        start_date: +120d
+        end_date: +200d
+    cUnite_Remote__c: false
+    cUnite_Allow_Waitlisting__c: false
+    cUnite_Shift_Signup_Limit__c: 5
+    cUnite_Volunteer_Role__c:
+      reference: role_event_support
+    cUnite_Primary_Contact__c:
+      reference: staff_dana
+    cUnite_Location__c:
+      reference: venue_grand_hall
+    cUnite_Cancellation_Notice_Hours__c: 24
+    cUnite_Onsite_Contact_Phone__c: "(816) 555-0107"
+    cUnite_Related_Job_1__c:
+      reference: job_parking
+    cUnite_Related_Job_2__c:
+      reference: job_event_setup
+    cUnite_Related_Job_3__c:
+      reference: job_silent_auction
+    cUnite_Location_Name__c: "The Grand Hall at Power and Light"
+    cUnite_Location_Country__c: United States
+    GW_Volunteers__Location_Street__c: "1330 Baltimore Ave"
+    GW_Volunteers__Location_City__c: Kansas City
+    GW_Volunteers__Location__c: MO
+    GW_Volunteers__Location_Zip_Postal_Code__c: "64105"
+  friends:
+    - object: GW_Volunteers__Volunteer_Shift__c
+      count: 1
+      fields:
+        GW_Volunteers__Volunteer_Job__c:
+          reference: job_event_cleanup
+        GW_Volunteers__Start_Date_Time__c:
+          fake.date_time_between:
+            start_date: +30d
+            end_date: +90d
+        GW_Volunteers__Duration__c: 6.0
+        GW_Volunteers__Desired_Number_of_Volunteers__c: 20
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: job_parking
+  fields:
+    Name: Event Parking Support Team
+    GW_Volunteers__Campaign__c:
+      reference: campaign_gala
+    GW_Volunteers__Display_on_Website__c: true
+    GW_Volunteers__Inactive__c: false
+    GW_Volunteers__Ongoing__c: false
+    GW_Volunteers__Skills_Needed__c:
+    GW_Volunteers__Volunteer_Website_Time_Zone__c: America/Chicago
+    GW_Volunteers__Description__c: <p>Direct attendees to parking areas and help with valet coordination at the annual foundation gala.</p>
+    cUnite_Type__c: Organizational Support
+    cUnite_Volunteer_Types__c: Individuals
+    cUnite_Featured__c: false
+    cUnite_Contact_FormQualifiedApiName__c: FlowToolKit__Volunteer_Primary_Contact
+    cUnite_Hours_Group_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Group_Signup
+    cUnite_Job_Page_FormQualifiedApiName__c: FlowToolKit__JobFinder_DetailsComponent_Form
+    cUnite_Waiver_FormQualifiedApiName__c: FlowToolKit__Volunteer_Application_Waiver
+    cUnite_Banner_Image__c: /file-asset-public/FlowToolKit__FlowToolKit_VolunteerParkingSupport
+    cUnite_Accepting_Applications__c: true
+    cUnite_Subtitle__c: "First hello and last goodbye of the night"
+    cUnite_Excerpt__c: "<p>Direct arrivals, manage the valet lane, and keep the lot flowing. Reflective vests and radios provided.</p>"
+    cUnite_Confirmation_Page_Message__c: "<p>Thank you for signing up! Watch your inbox for a confirmation with the address, parking details, and your shift lead's phone number.</p>"
+    cUnite_Offline_Message__c: "<p>Signups for this opportunity are closed right now. Check the finder for open shifts, or contact us and we will let you know when this one reopens.</p>"
+    cUnite_Application_Start__c:
+      fake.date_time_between:
+        start_date: -45d
+        end_date: -10d
+    cUnite_Application_End__c:
+      fake.date_time_between:
+        start_date: +120d
+        end_date: +200d
+    cUnite_Remote__c: false
+    cUnite_Allow_Waitlisting__c: false
+    cUnite_Shift_Signup_Limit__c: 5
+    cUnite_Volunteer_Role__c:
+      reference: role_event_support
+    cUnite_Primary_Contact__c:
+      reference: staff_dana
+    cUnite_Location__c:
+      reference: venue_grand_hall
+    cUnite_Cancellation_Notice_Hours__c: 24
+    cUnite_Onsite_Contact_Phone__c: "(816) 555-0113"
+    cUnite_Related_Job_1__c:
+      reference: job_event_setup
+    cUnite_Related_Job_2__c:
+      reference: job_silent_auction
+    cUnite_Related_Job_3__c:
+      reference: job_event_cleanup
+    cUnite_Location_Name__c: "The Grand Hall at Power and Light"
+    cUnite_Location_Country__c: United States
+    GW_Volunteers__Location_Street__c: "1330 Baltimore Ave"
+    GW_Volunteers__Location_City__c: Kansas City
+    GW_Volunteers__Location__c: MO
+    GW_Volunteers__Location_Zip_Postal_Code__c: "64105"
+  friends:
+    - object: GW_Volunteers__Volunteer_Shift__c
+      count: 1
+      fields:
+        GW_Volunteers__Volunteer_Job__c:
+          reference: job_parking
+        GW_Volunteers__Start_Date_Time__c:
+          fake.date_time_between:
+            start_date: +30d
+            end_date: +90d
+        GW_Volunteers__Duration__c: 4.0
+        GW_Volunteers__Desired_Number_of_Volunteers__c: 10
+
+# ──────────────────────────────────────────────────────────────
+# The Volunteer Application form templates USED to live here. They are
+# product config, not demo data, so a client install needs them without
+# the fake Contacts/Campaigns/Jobs/Shifts above. They now live in
+# datasets/form_templates_recipe.yml and load via the load_form_templates
+# task. Do not add them back here. See issue #26.
+# ──────────────────────────────────────────────────────────────

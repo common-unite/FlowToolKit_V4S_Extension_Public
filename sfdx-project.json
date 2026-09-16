@@ -1,0 +1,40 @@
+{
+    "packageDirectories": [
+        {
+            "path": "force-app",
+            "default": true
+        },
+        {
+            "path": "force-app-unpackaged-objects",
+            "default": false
+        },
+        {
+            "path": "force-app-unpackaged-themes",
+            "default": false
+        },
+        {
+            "path": "force-app-unpackaged-forms",
+            "default": false
+        },
+        {
+            "path": "force-app-unpackaged-contentAssets",
+            "default": false
+        },
+        {
+            "path": "force-app-unpackaged-layouts",
+            "default": false
+        },
+        {
+            "path": "force-app-unpackaged-post",
+            "default": false
+        },
+        {
+            "path": "force-app-unpackaged-datetime-sync",
+            "default": false
+        }
+    ],
+    "name": "cUnite_FlowForm_V4S_Extension",
+    "namespace": "FlowToolKit",
+    "sfdcLoginUrl": "https://login.salesforce.com",
+    "sourceApiVersion": "65.0"
+}

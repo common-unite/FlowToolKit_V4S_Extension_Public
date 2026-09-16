@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Volunteer Application | Volunteer Group</label>
+    <protected>false</protected>
+    <values>
+        <field>FlowToolKit__Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>FlowToolKit__CategoryTag__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>FlowToolKit__Default_Override_Form__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>FlowToolKit__Delete__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>FlowToolKit__DemoRecord__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>FlowToolKit__Description__c</field>
+        <value xsi:type="xsd:string">Use this component to create new volunteer group accounts</value>
+    </values>
+    <values>
+        <field>FlowToolKit__Form_Object__c</field>
+        <value xsi:type="xsd:string">FlowToolKit__Form_Submission</value>
+    </values>
+    <values>
+        <field>FlowToolKit__carouselBackButtonLabel__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>FlowToolKit__carouselFinishButtonLabel__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>FlowToolKit__carouselNextButtonLabel__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>FlowToolKit__config__c</field>
+        <value xsi:type="xsd:string">{
+  &quot;attributes&quot; : {
+    &quot;type&quot; : &quot;FlowToolKit__Form_Component__c&quot;
+  },
+  &quot;FlowToolKit__Active__c&quot; : true,
+  &quot;FlowToolKit__Description__c&quot; : &quot;Use this component to create new volunteer group accounts&quot;,
+  &quot;FlowToolKit__Form_Object__c&quot; : &quot;FlowToolKit__Form_Submission&quot;,
+  &quot;FlowToolKit__prefill__c&quot; : &quot;{\n  \&quot;attributes\&quot; : {\n    \&quot;type\&quot; : \&quot;FlowToolKit__Form_Submission__c\&quot;\n  }\n}&quot;,
+  &quot;FlowToolKit__type__c&quot; : &quot;form&quot;,
+  &quot;FlowToolKit__verticalAlign__c&quot; : &quot;start&quot;,
+  &quot;FlowToolKit__widthLarge__c&quot; : &quot;12&quot;,
+  &quot;FlowToolKit__widthMedium__c&quot; : &quot;12&quot;,
+  &quot;FlowToolKit__widthSmall__c&quot; : &quot;12&quot;
+}</value>
+    </values>
+    <values>
+        <field>FlowToolKit__prefill__c</field>
+        <value xsi:type="xsd:string">{
+  &quot;attributes&quot; : {
+    &quot;type&quot; : &quot;FlowToolKit__Form_Submission__c&quot;
+  }
+}</value>
+    </values>
+    <values>
+        <field>FlowToolKit__type__c</field>
+        <value xsi:type="xsd:string">form</value>
+    </values>
+</CustomMetadata>

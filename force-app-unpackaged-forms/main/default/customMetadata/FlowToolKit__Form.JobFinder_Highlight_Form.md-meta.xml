@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Job Highlight</label>
+    <protected>false</protected>
+    <values>
+        <field>FlowToolKit__Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>FlowToolKit__CategoryTag__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>FlowToolKit__Delete__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>FlowToolKit__DemoRecord__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>FlowToolKit__Description__c</field>
+        <value xsi:type="xsd:string">Use this component with the Job Finder to display selectable Volunteer Jobs.</value>
+    </values>
+    <values>
+        <field>FlowToolKit__Form_Managers__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>FlowToolKit__Form_Object__c</field>
+        <value xsi:type="xsd:string">Volunteer_Job</value>
+    </values>
+    <values>
+        <field>FlowToolKit__Theme__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>FlowToolKit__config__c</field>
+        <value xsi:type="xsd:string">{
+  &quot;attributes&quot; : {
+    &quot;type&quot; : &quot;FlowToolKit__Form_Component__c&quot;
+  },
+  &quot;FlowToolKit__Active__c&quot; : true,
+  &quot;FlowToolKit__Description__c&quot; : &quot;Use this component with the Job Finder to display selectable Volunteer Jobs.&quot;,
+  &quot;FlowToolKit__Form_Object__c&quot; : &quot;FlowToolKit__Volunteer_Job&quot;,
+  &quot;FlowToolKit__prefill__c&quot; : &quot;{\&quot;attributes\&quot;:{\&quot;type\&quot;:\&quot;GW_Volunteers__Volunteer_Job__c\&quot;},\&quot;FlowToolKit__cUnite_Type__c\&quot;:\&quot;Organizational Support\&quot;,\&quot;GW_Volunteers__Number_of_Volunteers_Still_Needed__c\&quot;:null,\&quot;FlowToolKit__cUnite_Banner_Image__c\&quot;:\&quot;/file-asset-public/FlowToolKit__FlowToolKit_VolunteerFosterADog\&quot;,\&quot;cUnite_Banner_Image_URL__c\&quot;:\&quot;https://connect-connect-4520.scratch.my.salesforce.com/file-asset-public/FlowToolKit__FlowToolKit_VolunteerFosterADog\&quot;,\&quot;GW_Volunteers__Campaign__c\&quot;:\&quot;701O900002oy3elIAA\&quot;,\&quot;FlowToolKit__cUnite_Contact_FormQualifiedApiName__c\&quot;:null,\&quot;GW_Volunteers__Description__c\&quot;:null,\&quot;FlowToolKit__cUnite_Excerpt__c\&quot;:null,\&quot;GW_Volunteers__External_Signup_Url__c\&quot;:null,\&quot;GW_Volunteers__First_Shift__c\&quot;:null,\&quot;FlowToolKit__cUnite_Hours_Group_FormQualifiedApiName__c\&quot;:null,\&quot;FlowToolKit__cUnite_Job_Finder_Campaign_Event_Name__c\&quot;:\&quot;Animal Welfare\&quot;,\&quot;FlowToolKit__cUnite_Job_Finder_Campaign_URL__c\&quot;:\&quot;https://connect-connect-4520.scratch.my.salesforce.com//701O900002oy3elIAA\&quot;,\&quot;FlowToolKit__cUnite_Job_Finder_Badge_Open_to_Groups__c\&quot;:\&quot;&lt;span style=\\\&quot;top:10px; left:10px; font-size:0.6rem;\\\&quot; class=\\\&quot;slds-is-absolute slds-badge slds-badge_light\\\&quot;&gt;Open to Groups!&lt;/span&gt;\&quot;,\&quot;FlowToolKit__cUnite_Job_Page_FormQualifiedApiName__c\&quot;:null,\&quot;FlowToolKit__cUnite_Location__c\&quot;:null,\&quot;GW_Volunteers__Location_City__c\&quot;:\&quot;San Francisco\&quot;,\&quot;FlowToolKit__cUnite_Location_Country__c\&quot;:\&quot;United States\&quot;,\&quot;GW_Volunteers__Location_Information__c\&quot;:null,\&quot;FlowToolKit__cUnite_Location_Name__c\&quot;:\&quot;Salesforce Tower Pet Project\&quot;,\&quot;GW_Volunteers__Location__c\&quot;:\&quot;CA\&quot;,\&quot;GW_Volunteers__Location_Street__c\&quot;:null,\&quot;GW_Volunteers__Location_Zip_Postal_Code__c\&quot;:\&quot;94105\&quot;,\&quot;FlowToolKit__cUnite_Next_Volunteer_Shift__c\&quot;:null,\&quot;GW_Volunteers__Number_of_Completed_Hours__c\&quot;:null,\&quot;GW_Volunteers__Number_of_Shifts__c\&quot;:null,\&quot;GW_Volunteers__Number_of_Volunteers__c\&quot;:null,\&quot;FlowToolKit__cUnite_Primary_Contact__c\&quot;:null,\&quot;FlowToolKit__cUnite_Shift_Day_of_the_Week_Badge__c\&quot;:\&quot;&lt;span class=\\\&quot;volunteer-job-badge slds-badge slds-badge_inverse slds-m-vertical_xx-small\\\&quot;&gt;Monday | Wednesday | Saturday&lt;/span&gt;\&quot;,\&quot;FlowToolKit__cUnite_Shift_Range__c\&quot;:\&quot;&lt;span style=\\\&quot;font-size: 11px;\\\&quot; lwc-4nfn2rc40ch=\\\&quot;\\\&quot;&gt;Apr 8, 2026 - Aug 19, 2026&lt;/span&gt;\&quot;,\&quot;FlowToolKit__cUnite_Shift_Signup_Limit__c\&quot;:null,\&quot;FlowToolKit__cUnite_Shift_Start_Time_Badge__c\&quot;:null,\&quot;FlowToolKit__cUnite_Signup_Link__c\&quot;:\&quot;https://connect-connect-4520.scratch.my.site.com/volunteer/\&quot;,\&quot;GW_Volunteers__Skills_Needed__c\&quot;:\&quot;Landscaping;Manual Labor\&quot;,\&quot;Name\&quot;:\&quot;Daily Dog Walking\&quot;,\&quot;FlowToolKit__cUnite_Volunteer_Types__c\&quot;:\&quot;Individuals;Groups\&quot;,\&quot;GW_Volunteers__Volunteer_Website_Time_Zone__c\&quot;:\&quot;America/Chicago\&quot;,\&quot;FlowToolKit__cUnite_Waitlist_Limit__c\&quot;:null,\&quot;FlowToolKit__cUnite_Waiver_FormQualifiedApiName__c\&quot;:null,\&quot;FlowToolKit__cUnite_Allow_Waitlisting__c\&quot;:false,\&quot;GW_Volunteers__Display_on_Website__c\&quot;:true,\&quot;FlowToolKit__cUnite_Featured__c\&quot;:false,\&quot;GW_Volunteers__Ongoing__c\&quot;:false,\&quot;FlowToolKit__cUnite_Remote__c\&quot;:false}&quot;,
+  &quot;FlowToolKit__type__c&quot; : &quot;form&quot;,
+  &quot;FlowToolKit__verticalAlign__c&quot; : &quot;start&quot;,
+  &quot;FlowToolKit__widthLarge__c&quot; : &quot;12&quot;,
+  &quot;FlowToolKit__widthMedium__c&quot; : &quot;12&quot;,
+  &quot;FlowToolKit__widthSmall__c&quot; : &quot;12&quot;
+}</value>
+    </values>
+    <values>
+        <field>FlowToolKit__prefill__c</field>
+        <value xsi:type="xsd:string">{&quot;attributes&quot;:{&quot;type&quot;:&quot;GW_Volunteers__Volunteer_Job__c&quot;},&quot;FlowToolKit__cUnite_Type__c&quot;:&quot;Organizational Support&quot;,&quot;GW_Volunteers__Number_of_Volunteers_Still_Needed__c&quot;:null,&quot;FlowToolKit__cUnite_Banner_Image__c&quot;:&quot;/file-asset-public/FlowToolKit__FlowToolKit_VolunteerFosterADog&quot;,&quot;cUnite_Banner_Image_URL__c&quot;:&quot;https://connect-connect-4520.scratch.my.salesforce.com/file-asset-public/FlowToolKit__FlowToolKit_VolunteerFosterADog&quot;,&quot;GW_Volunteers__Campaign__c&quot;:&quot;701O900002oy3elIAA&quot;,&quot;FlowToolKit__cUnite_Contact_FormQualifiedApiName__c&quot;:null,&quot;GW_Volunteers__Description__c&quot;:null,&quot;FlowToolKit__cUnite_Excerpt__c&quot;:null,&quot;GW_Volunteers__External_Signup_Url__c&quot;:null,&quot;GW_Volunteers__First_Shift__c&quot;:null,&quot;FlowToolKit__cUnite_Hours_Group_FormQualifiedApiName__c&quot;:null,&quot;FlowToolKit__cUnite_Job_Finder_Campaign_Event_Name__c&quot;:&quot;Animal Welfare&quot;,&quot;FlowToolKit__cUnite_Job_Finder_Campaign_URL__c&quot;:&quot;https://connect-connect-4520.scratch.my.salesforce.com//701O900002oy3elIAA&quot;,&quot;FlowToolKit__cUnite_Job_Finder_Badge_Open_to_Groups__c&quot;:&quot;&lt;span style=\&quot;top:10px; left:10px; font-size:0.6rem;\&quot; class=\&quot;slds-is-absolute slds-badge slds-badge_light\&quot;&gt;Open to Groups!&lt;/span&gt;&quot;,&quot;FlowToolKit__cUnite_Job_Page_FormQualifiedApiName__c&quot;:null,&quot;FlowToolKit__cUnite_Location__c&quot;:null,&quot;GW_Volunteers__Location_City__c&quot;:&quot;San Francisco&quot;,&quot;FlowToolKit__cUnite_Location_Country__c&quot;:&quot;United States&quot;,&quot;GW_Volunteers__Location_Information__c&quot;:null,&quot;FlowToolKit__cUnite_Location_Name__c&quot;:&quot;Salesforce Tower Pet Project&quot;,&quot;GW_Volunteers__Location__c&quot;:&quot;CA&quot;,&quot;GW_Volunteers__Location_Street__c&quot;:null,&quot;GW_Volunteers__Location_Zip_Postal_Code__c&quot;:&quot;94105&quot;,&quot;FlowToolKit__cUnite_Next_Volunteer_Shift__c&quot;:null,&quot;GW_Volunteers__Number_of_Completed_Hours__c&quot;:null,&quot;GW_Volunteers__Number_of_Shifts__c&quot;:null,&quot;GW_Volunteers__Number_of_Volunteers__c&quot;:null,&quot;FlowToolKit__cUnite_Primary_Contact__c&quot;:null,&quot;FlowToolKit__cUnite_Shift_Day_of_the_Week_Badge__c&quot;:&quot;&lt;span class=\&quot;volunteer-job-badge slds-badge slds-badge_inverse slds-m-vertical_xx-small\&quot;&gt;Monday | Wednesday | Saturday&lt;/span&gt;&quot;,&quot;FlowToolKit__cUnite_Shift_Range__c&quot;:&quot;&lt;span style=\&quot;font-size: 11px;\&quot; lwc-4nfn2rc40ch=\&quot;\&quot;&gt;Apr 8, 2026 - Aug 19, 2026&lt;/span&gt;&quot;,&quot;FlowToolKit__cUnite_Shift_Signup_Limit__c&quot;:null,&quot;FlowToolKit__cUnite_Shift_Start_Time_Badge__c&quot;:null,&quot;FlowToolKit__cUnite_Signup_Link__c&quot;:&quot;https://connect-connect-4520.scratch.my.site.com/volunteer/&quot;,&quot;GW_Volunteers__Skills_Needed__c&quot;:&quot;Landscaping;Manual Labor&quot;,&quot;Name&quot;:&quot;Daily Dog Walking&quot;,&quot;FlowToolKit__cUnite_Volunteer_Types__c&quot;:&quot;Individuals;Groups&quot;,&quot;GW_Volunteers__Volunteer_Website_Time_Zone__c&quot;:&quot;America/Chicago&quot;,&quot;FlowToolKit__cUnite_Waitlist_Limit__c&quot;:null,&quot;FlowToolKit__cUnite_Waiver_FormQualifiedApiName__c&quot;:null,&quot;FlowToolKit__cUnite_Allow_Waitlisting__c&quot;:false,&quot;GW_Volunteers__Display_on_Website__c&quot;:true,&quot;FlowToolKit__cUnite_Featured__c&quot;:false,&quot;GW_Volunteers__Ongoing__c&quot;:false,&quot;FlowToolKit__cUnite_Remote__c&quot;:false}</value>
+    </values>
+    <values>
+        <field>FlowToolKit__type__c</field>
+        <value xsi:type="xsd:string">form</value>
+    </values>
+</CustomMetadata>

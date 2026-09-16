@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>cUnite_Banner_Image_URL__c</fullName>
+    <externalId>false</externalId>
+    <formula>If( ISBLANK(cUnite_Banner_Image__c),&apos;&apos;,
+
+IF( CONTAINS($Api.Enterprise_Server_URL_100,&apos;/sfsites/c&apos;),
+
+&apos;/sfsites/c&apos;+cUnite_Banner_Image__c,
+
+LEFT($Api.Enterprise_Server_URL_100,FIND(&apos;/services/Soap/&apos;, $Api.Enterprise_Server_URL_100)-1)+cUnite_Banner_Image__c
+
+))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Banner Image URL</label>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Highlight Image</label>
+    <protected>false</protected>
+    <values>
+        <field>FlowToolKit__Default_Table_Form__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>FlowToolKit__Default_Table_Form_bulk__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>FlowToolKit__Delete__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>FlowToolKit__Form__c</field>
+        <value xsi:type="xsd:string">JobFinder_Highlight_Form</value>
+    </values>
+    <values>
+        <field>FlowToolKit__PreventDelete__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>FlowToolKit__Theme__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>FlowToolKit__conditionalLogic__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>FlowToolKit__config__c</field>
+        <value xsi:type="xsd:string">{
+  &quot;attributes&quot; : {
+    &quot;type&quot; : &quot;FlowToolKit__Form_Component_Section__c&quot;
+  },
+  &quot;FlowToolKit__Form__c&quot; : &quot;JobFinder_Highlight_Form&quot;,
+  &quot;FlowToolKit__contentAssetName__c&quot; : &quot;FlowToolKit__FlowToolKit_VolunteerDog3&quot;,
+  &quot;FlowToolKit__horizontalPadding__c&quot; : &quot;slds-p-horizontal_xx-small&quot;,
+  &quot;FlowToolKit__imageOverlayColor__c&quot; : &quot;#000000&quot;,
+  &quot;FlowToolKit__imageOverlayOpacity__c&quot; : 0.1,
+  &quot;FlowToolKit__imageOverrideFieldApiName__c&quot; : &quot;cUnite_Banner_Image_URL__c&quot;,
+  &quot;FlowToolKit__marginTop__c&quot; : &quot;slds-m-top_small&quot;,
+  &quot;FlowToolKit__paddingLeft__c&quot; : &quot;slds-p-left_small&quot;,
+  &quot;FlowToolKit__paddingRight__c&quot; : &quot;slds-p-right_small&quot;,
+  &quot;FlowToolKit__position__c&quot; : 1.0,
+  &quot;FlowToolKit__richText__c&quot; : &quot;&lt;p style=\&quot;text-align: center;\&quot;&gt;&lt;strong style=\&quot;color: rgb(255, 255, 255); font-size: 20px;\&quot;&gt;{{FlowToolKit__cUnite_Type__c}}&lt;/strong&gt;&lt;/p&gt;&quot;,
+  &quot;FlowToolKit__sectionTheme__c&quot; : &quot;visualPicker&quot;,
+  &quot;FlowToolKit__sectionType__c&quot; : &quot;imageSection&quot;,
+  &quot;FlowToolKit__title__c&quot; : &quot;Highlight Image&quot;,
+  &quot;FlowToolKit__viewAsPlainText__c&quot; : false,
+  &quot;FlowToolKit__widthLarge__c&quot; : &quot;12&quot;,
+  &quot;FlowToolKit__widthMedium__c&quot; : &quot;12&quot;,
+  &quot;FlowToolKit__widthSmall__c&quot; : &quot;12&quot;
+}</value>
+    </values>
+    <values>
+        <field>FlowToolKit__contentAssetName__c</field>
+        <value xsi:type="xsd:string">FlowToolKit__FlowToolKit_VolunteerDog3</value>
+    </values>
+    <values>
+        <field>FlowToolKit__formComponent__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>FlowToolKit__position__c</field>
+        <value xsi:type="xsd:double">1.0</value>
+    </values>
+</CustomMetadata>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Job Overview Details</label>
+    <protected>false</protected>
+    <values>
+        <field>FlowToolKit__Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>FlowToolKit__CategoryTag__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>FlowToolKit__Delete__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>FlowToolKit__DemoRecord__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>FlowToolKit__Description__c</field>
+        <value xsi:type="xsd:string">This component contains all the details for the volunteer job. This is primarily used within the Job Details (tabset)</value>
+    </values>
+    <values>
+        <field>FlowToolKit__Form_Managers__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>FlowToolKit__Form_Object__c</field>
+        <value xsi:type="xsd:string">Volunteer_Job</value>
+    </values>
+    <values>
+        <field>FlowToolKit__Theme__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>FlowToolKit__config__c</field>
+        <value xsi:type="xsd:string">{
+  &quot;attributes&quot;: {
+    &quot;type&quot;: &quot;FlowToolKit__Form_Component__c&quot;
+  },
+  &quot;FlowToolKit__Active__c&quot;: true,
+  &quot;FlowToolKit__Description__c&quot;: &quot;This component contains all the details for the volunteer job. This is primarily used within the Job Details (tabset)&quot;,
+  &quot;FlowToolKit__Form_Object__c&quot;: &quot;Volunteer_Job&quot;,
+  &quot;FlowToolKit__horizontalAlign__c&quot;: &quot;start&quot;,
+  &quot;FlowToolKit__prefill__c&quot;: &quot;{\&quot;FlowToolKit__cUnite_Volunteer_Types__c\&quot;:\&quot;Individuals;Youth/Children;Groups\&quot;,\&quot;GW_Volunteers__Skills_Needed__c\&quot;:\&quot;Computer usage;Fundraising\&quot;,\&quot;GW_Volunteers__Location_Street__c\&quot;:null,\&quot;GW_Volunteers__Location_City__c\&quot;:null,\&quot;GW_Volunteers__Location__c\&quot;:null,\&quot;GW_Volunteers__Location_Zip_Postal_Code__c\&quot;:null,\&quot;FlowToolKit__cUnite_Location_Country__c\&quot;:null,\&quot;GW_Volunteers__Description__c\&quot;:\&quot;&lt;p&gt;If you love animals and want to make a difference in their lives, then this volunteer opportunity at the Pet Adoption Center is perfect for you! We are looking for compassionate and dedicated individuals to help us walk dogs, clean kennels, and greet new dog foster families.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=\\\&quot;font-size: 16px;\\\&quot;&gt;As a volunteer at the Pet Adoption Center, you will have the opportunity to:&lt;/strong&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Walk and exercise dogs to keep them healthy and happy&lt;/li&gt;&lt;li&gt;Clean and sanitize kennels to maintain a safe and comfortable environment for the animals&lt;/li&gt;&lt;li&gt;Greet new dog foster families and provide them with information about our adoption process&lt;/li&gt;&lt;li&gt;Assist with events and fundraising activities to help support our mission&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;strong style=\\\&quot;font-size: 16px;\\\&quot;&gt;Check-in and What to Expect:&lt;/strong&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Check-in begins 15 minutes before the start time.&lt;/li&gt;&lt;li&gt;Please arrive on time, dressed appropriately, and ready to work.&lt;/li&gt;&lt;li&gt;You will receive training on how to handle and care for the animals.&lt;/li&gt;&lt;li&gt;You will work as part of a team and be assigned specific tasks and responsibilities.&lt;/li&gt;&lt;li&gt;The volunteer shift lasts approximately 2-3 hours.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;strong style=\\\&quot;font-size: 16px;\\\&quot;&gt;Qualifications and Skills:&lt;/strong&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Must be at least 18 years old.&lt;/li&gt;&lt;li&gt;Must have a love for animals and a desire to make a difference in their lives.&lt;/li&gt;&lt;li&gt;Must be able to follow safety guidelines and handle animals in a responsible manner.&lt;/li&gt;&lt;li&gt;Must be able to work in a team-oriented environment and take direction from staff.&lt;/li&gt;&lt;/ul&gt;&lt;p style=\\\&quot;text-align: justify;\\\&quot;&gt;This is a rewarding opportunity to make a difference in the lives of animals and help them find loving forever homes. Join us and become a part of our Pet Adoption Center volunteer team today!&lt;/p&gt;\&quot;,\&quot;GW_Volunteers__Campaign__c\&quot;:null,\&quot;GW_Volunteers__Location_Information__c\&quot;:null,\&quot;Name\&quot;:\&quot;Volunteer @ Pet Adoption Center\&quot;,\&quot;cUnite_Primary_Contact__c\&quot;:null}&quot;,
+  &quot;FlowToolKit__type__c&quot;: &quot;form&quot;,
+  &quot;FlowToolKit__verticalAlign__c&quot;: &quot;start&quot;,
+  &quot;FlowToolKit__widthLarge__c&quot;: &quot;12&quot;,
+  &quot;FlowToolKit__widthMedium__c&quot;: &quot;12&quot;,
+  &quot;FlowToolKit__widthSmall__c&quot;: &quot;12&quot;
+}</value>
+    </values>
+    <values>
+        <field>FlowToolKit__prefill__c</field>
+        <value xsi:type="xsd:string">{&quot;FlowToolKit__cUnite_Volunteer_Types__c&quot;:&quot;Individuals;Youth/Children;Groups&quot;,&quot;GW_Volunteers__Skills_Needed__c&quot;:&quot;Computer usage;Fundraising&quot;,&quot;GW_Volunteers__Location_Street__c&quot;:null,&quot;GW_Volunteers__Location_City__c&quot;:null,&quot;GW_Volunteers__Location__c&quot;:null,&quot;GW_Volunteers__Location_Zip_Postal_Code__c&quot;:null,&quot;FlowToolKit__cUnite_Location_Country__c&quot;:null,&quot;GW_Volunteers__Description__c&quot;:&quot;&lt;p&gt;If you love animals and want to make a difference in their lives, then this volunteer opportunity at the Pet Adoption Center is perfect for you! We are looking for compassionate and dedicated individuals to help us walk dogs, clean kennels, and greet new dog foster families.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=\&quot;font-size: 16px;\&quot;&gt;As a volunteer at the Pet Adoption Center, you will have the opportunity to:&lt;/strong&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Walk and exercise dogs to keep them healthy and happy&lt;/li&gt;&lt;li&gt;Clean and sanitize kennels to maintain a safe and comfortable environment for the animals&lt;/li&gt;&lt;li&gt;Greet new dog foster families and provide them with information about our adoption process&lt;/li&gt;&lt;li&gt;Assist with events and fundraising activities to help support our mission&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;strong style=\&quot;font-size: 16px;\&quot;&gt;Check-in and What to Expect:&lt;/strong&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Check-in begins 15 minutes before the start time.&lt;/li&gt;&lt;li&gt;Please arrive on time, dressed appropriately, and ready to work.&lt;/li&gt;&lt;li&gt;You will receive training on how to handle and care for the animals.&lt;/li&gt;&lt;li&gt;You will work as part of a team and be assigned specific tasks and responsibilities.&lt;/li&gt;&lt;li&gt;The volunteer shift lasts approximately 2-3 hours.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;strong style=\&quot;font-size: 16px;\&quot;&gt;Qualifications and Skills:&lt;/strong&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Must be at least 18 years old.&lt;/li&gt;&lt;li&gt;Must have a love for animals and a desire to make a difference in their lives.&lt;/li&gt;&lt;li&gt;Must be able to follow safety guidelines and handle animals in a responsible manner.&lt;/li&gt;&lt;li&gt;Must be able to work in a team-oriented environment and take direction from staff.&lt;/li&gt;&lt;/ul&gt;&lt;p style=\&quot;text-align: justify;\&quot;&gt;This is a rewarding opportunity to make a difference in the lives of animals and help them find loving forever homes. Join us and become a part of our Pet Adoption Center volunteer team today!&lt;/p&gt;&quot;,&quot;GW_Volunteers__Campaign__c&quot;:null,&quot;GW_Volunteers__Location_Information__c&quot;:null,&quot;Name&quot;:&quot;Volunteer @ Pet Adoption Center&quot;,&quot;cUnite_Primary_Contact__c&quot;:null}</value>
+    </values>
+    <values>
+        <field>FlowToolKit__type__c</field>
+        <value xsi:type="xsd:string">form</value>
+    </values>
+</CustomMetadata>

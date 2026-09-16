@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Job Upcoming Shift(s)</label>
+    <protected>false</protected>
+    <values>
+        <field>FlowToolKit__Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>FlowToolKit__CategoryTag__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>FlowToolKit__Delete__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>FlowToolKit__DemoRecord__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>FlowToolKit__Description__c</field>
+        <value xsi:type="xsd:string">Use this table for displaying upcoming shift information a Job Detail page.</value>
+    </values>
+    <values>
+        <field>FlowToolKit__Form_Managers__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>FlowToolKit__Form_Object__c</field>
+        <value xsi:type="xsd:string">Volunteer_Shift</value>
+    </values>
+    <values>
+        <field>FlowToolKit__Theme__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>FlowToolKit__config__c</field>
+        <value xsi:type="xsd:string">{
+  &quot;attributes&quot;: {
+    &quot;type&quot;: &quot;FlowToolKit__Form_Component__c&quot;
+  },
+  &quot;FlowToolKit__Active__c&quot;: true,
+  &quot;FlowToolKit__Description__c&quot;: &quot;Use this table for displaying upcoming shift information a Job Detail page.&quot;,
+  &quot;FlowToolKit__Form_Object__c&quot;: &quot;Volunteer_Shift&quot;,
+  &quot;FlowToolKit__horizontalAlign__c&quot;: &quot;start&quot;,
+  &quot;FlowToolKit__prefill__c&quot;: &quot;[]&quot;,
+  &quot;FlowToolKit__type__c&quot;: &quot;table&quot;,
+  &quot;FlowToolKit__verticalAlign__c&quot;: &quot;start&quot;,
+  &quot;FlowToolKit__widthLarge__c&quot;: &quot;12&quot;,
+  &quot;FlowToolKit__widthMedium__c&quot;: &quot;12&quot;,
+  &quot;FlowToolKit__widthSmall__c&quot;: &quot;12&quot;
+}</value>
+    </values>
+    <values>
+        <field>FlowToolKit__prefill__c</field>
+        <value xsi:type="xsd:string">[]</value>
+    </values>
+    <values>
+        <field>FlowToolKit__type__c</field>
+        <value xsi:type="xsd:string">table</value>
+    </values>
+</CustomMetadata>

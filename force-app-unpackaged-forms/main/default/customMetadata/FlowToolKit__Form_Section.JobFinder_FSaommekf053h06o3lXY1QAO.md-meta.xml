@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Location Details</label>
+    <protected>false</protected>
+    <values>
+        <field>FlowToolKit__Default_Table_Form__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>FlowToolKit__Default_Table_Form_bulk__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>FlowToolKit__Delete__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>FlowToolKit__Form__c</field>
+        <value xsi:type="xsd:string">JobFinder_DetailsComponent_Form</value>
+    </values>
+    <values>
+        <field>FlowToolKit__PreventDelete__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>FlowToolKit__Theme__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>FlowToolKit__conditionalLogic__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>FlowToolKit__config__c</field>
+        <value xsi:type="xsd:string">{
+  &quot;attributes&quot; : {
+    &quot;type&quot; : &quot;FlowToolKit__Form_Component_Section__c&quot;
+  },
+  &quot;FlowToolKit__Form__c&quot; : &quot;JobFinder_DetailsComponent_Form&quot;,
+  &quot;FlowToolKit__enableAccordion__c&quot; : true,
+  &quot;FlowToolKit__horizontalPadding__c&quot; : &quot;slds-p-horizontal_xx-small&quot;,
+  &quot;FlowToolKit__marginTop__c&quot; : &quot;slds-m-top_small&quot;,
+  &quot;FlowToolKit__position__c&quot; : 3.0,
+  &quot;FlowToolKit__sectionType__c&quot; : &quot;inputSection&quot;,
+  &quot;FlowToolKit__showHeader__c&quot; : true,
+  &quot;FlowToolKit__title__c&quot; : &quot;Location Details&quot;,
+  &quot;FlowToolKit__widthLarge__c&quot; : &quot;12&quot;,
+  &quot;FlowToolKit__widthMedium__c&quot; : &quot;12&quot;,
+  &quot;FlowToolKit__widthSmall__c&quot; : &quot;12&quot;
+}</value>
+    </values>
+    <values>
+        <field>FlowToolKit__contentAssetName__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>FlowToolKit__formComponent__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>FlowToolKit__position__c</field>
+        <value xsi:type="xsd:double">3.0</value>
+    </values>
+</CustomMetadata>

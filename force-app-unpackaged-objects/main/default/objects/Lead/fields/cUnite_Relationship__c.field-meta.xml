@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>cUnite_Relationship__c</fullName>
+    <description>The relationship field is used with the electronic signature fields. When an applicant is under 18, a parent/guardian must complete the waiver. The relationship is how the signer is related to the applicant.</description>
+    <externalId>false</externalId>
+    <label>Relationship</label>
+    <length>255</length>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

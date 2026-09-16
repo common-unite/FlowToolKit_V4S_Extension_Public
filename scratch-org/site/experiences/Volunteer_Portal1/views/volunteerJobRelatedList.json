@@ -1,0 +1,39 @@
+{
+  "appPageId" : "d7e04c5e-0ae0-4603-8f83-61433ec81f4c",
+  "componentName" : "siteforce:sldsOneColLayout",
+  "dataProviders" : [ ],
+  "id" : "09504e05-df24-4e49-8cb1-156688cd2315",
+  "label" : "Volunteer Job Related List",
+  "regions" : [ {
+    "id" : "f87e9860-1002-4f00-8b2a-0f64ceedd24c",
+    "regionName" : "header",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customTitle" : "",
+        "parentRecordId" : "{!recordId}",
+        "relatedListName" : "{!relationshipApiName}",
+        "showBreadCrumbs" : true,
+        "showCustomTitle" : false,
+        "showManualRefreshButton" : true,
+        "showRowNumbers" : true
+      },
+      "componentName" : "forceCommunity:relatedList",
+      "id" : "7f453db0-e5be-46e8-b4f0-1a5bbe074a96",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "761f03dc-7df8-4dbe-a28e-219c3de34472",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "id" : "cfe1877d-85d5-4c66-bbae-96e0727e1278",
+    "regionName" : "footer",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Inner",
+  "type" : "view",
+  "viewType" : "relatedlist-a03"
+}

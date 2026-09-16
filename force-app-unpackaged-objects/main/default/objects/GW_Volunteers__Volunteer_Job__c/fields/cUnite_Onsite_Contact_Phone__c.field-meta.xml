@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>cUnite_Onsite_Contact_Phone__c</fullName>
+    <description>The shift lead phone number promised in the confirmation email.</description>
+    <externalId>false</externalId>
+    <label>On-site Contact Phone</label>
+    <required>false</required>
+    <type>Phone</type>
+</CustomField>

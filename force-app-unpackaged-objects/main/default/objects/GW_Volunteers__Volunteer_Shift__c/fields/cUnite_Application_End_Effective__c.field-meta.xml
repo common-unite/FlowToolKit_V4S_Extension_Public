@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>cUnite_Application_End_Effective__c</fullName>
+    <description>System field mapped post-install to the Form Template Source End Date override for Shifts. Resolves the Shift's Application End override, then the Job's, then the Shift's own start time so applications close when the shift begins (matches the legacy Status behavior).</description>
+    <externalId>false</externalId>
+    <formula>IF(NOT(ISBLANK(cUnite_Application_End__c)), cUnite_Application_End__c,
+IF(NOT(ISBLANK(GW_Volunteers__Volunteer_Job__r.cUnite_Application_End__c)), GW_Volunteers__Volunteer_Job__r.cUnite_Application_End__c,
+GW_Volunteers__Start_Date_Time__c))</formula>
+    <label>Application End (Effective)</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>DateTime</type>
+</CustomField>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Indoor_Outdoor__c</fullName>
+    <label>Indoor or Outdoor</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Indoor</fullName>
+                <default>false</default>
+                <label>Indoor</label>
+            </value>
+            <value>
+                <fullName>Outdoor</fullName>
+                <default>false</default>
+                <label>Outdoor</label>
+            </value>
+            <value>
+                <fullName>Mixed</fullName>
+                <default>false</default>
+                <label>Mixed</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,233 @@
+# ──────────────────────────────────────────────────────────────
+# Volunteer Application form templates.
+#
+# These are PRODUCT CONFIG, not demo data. They are what an admin points a
+# Volunteer Job at, so every org that installs the extension needs them,
+# including client production orgs. Keep this recipe free of demo Contacts,
+# Campaigns, Jobs and Shifts: datasets/snowfakery_recipe.yml owns those.
+#
+# Load with the load_form_templates task, then run
+# scripts/cleanup-auto-created-template-children.apex immediately after.
+# That cleanup is not optional, see the trigger note below.
+#
+# Issue #26.
+# ──────────────────────────────────────────────────────────────
+# Volunteer Application Form Templates (sprint 4: template assembly)
+#
+# Two templates per the design decision (2026-08-11): individual and
+# group applications are SEPARATE templates rather than one template
+# with a conditional group page. Sections bind the retargeted
+# Form_Submission components (FlowToolKit__Form.Volunteer_* CMT).
+#
+# Trigger interplay: inserting each template auto-creates a default
+# page ("Primary Contact Information") and inserting each page
+# auto-creates a Primary_Contact_Default section. Those are duplicates of
+# what this recipe supplies, so scripts/cleanup-auto-created-template-children.apex
+# deletes them and must run immediately after this load, in every org.
+#
+# Stamping jobs with a template is a SEPARATE, demo-only concern and lives in
+# scripts/stamp-demo-jobs-with-templates.apex. It is unfiltered, so it must
+# never run against a client org.
+#
+# The shift page hides for ongoing jobs: Volunteer_Job_Is_Ongoing__c is a
+# formula on Volunteer_Job__r.GW_Volunteers__Ongoing__c, so it resolves from
+# the stamped source lookup, and the page's Conditional_Logic hides when true.
+# ──────────────────────────────────────────────────────────────
+- object: Form_Template__c
+  nickname: volunteer_application_template
+  fields:
+    Name: 'Volunteer Application'
+    Form_Template_Subtitle__c: 'Tell us about yourself, pick your shifts, and sign the waiver.'
+    IsActive__c: true
+    Stage_Indicator_Type__c: 'vertical'
+    Confirmation_Page_Message__c: '<p><strong style="font-size: 22px;">Thank You for Volunteering!</strong></p><p><br></p><p><span style="font-size: 16px;">Your volunteer application has been successfully submitted.</span></p><p><br></p><p><span style="font-size: 16px;">We are grateful for your interest in giving your time and talents to support our work. Volunteers make an incredible difference, and we appreciate your willingness to get involved.</span></p><p><br></p><p><strong style="font-size: 16px;">What Happens Next?</strong></p><p><br></p><p><span style="font-size: 16px;">Our team will review your application and the information you provided. We will follow up with you soon regarding next steps, which may include confirming your availability, discussing volunteer opportunities, completing any required orientation or training, and answering any questions you may have.</span></p><p><br></p><p><span style="font-size: 16px;">Please check your email for a confirmation and additional information.</span></p><p><br></p><p><span style="font-size: 16px;">Thank you again for your interest in volunteering. We look forward to connecting with you!</span></p>'
+    Offline_Message__c: '<p><strong style="font-size: 22px;">This Volunteer Opportunity Is Currently Closed</strong></p><p><br></p><p><span style="font-size: 16px;">Thank you for your interest in volunteering with us!</span></p><p><br></p><p><span style="font-size: 16px;">We are no longer accepting applications for this specific volunteer opportunity, but we would still love to hear from you. There may be other ways to get involved that better match your interests, skills, and availability.</span></p><p><br></p><p><span style="font-size: 16px;">Please contact us directly, and we will be happy to help you find a volunteer opportunity that works for you.</span></p><p><br></p><p><span style="font-size: 16px;">Thank you for your interest in supporting our work and our community!</span></p>'
+    Conversion_Type__c: 'Volunteer Application'
+    Conversion_Rules__c: 'Contact1;Contact1 👉 Set Mailing Address;Volunteer Application'
+  friends:
+    - object: Form_Template_Page__c
+      nickname: volapp_page_volunteer_information
+      fields:
+        Form_Template__c:
+          reference: volunteer_application_template
+        Page_Label__c: 'Volunteer Information'
+        Position__c: 1
+        Visibility__c: 'Both'
+        Description__c: 'Contact details, availability, and skills so we can match you to the right work.'
+        Estimated_Time__c: 3
+      friends:
+        - object: Form_Template_Page_Section__c
+          fields:
+            Form_Template_Page__c:
+              reference: volapp_page_volunteer_information
+            Position__c: 1
+            Component_Type__c: 'Field Set'
+            FormQualifiedApiName__c: 'FlowToolKit__Volunteer_Contact'
+            Show_Header__c: true
+            Header_Icon_Name__c: 'utility:user'
+            Header_Title__c: 'Your Information'
+            Header_Subtitle__c: 'How we can reach you, when you&#39;re available, and what you&#39;re good at.'
+        - object: Form_Template_Page_Section__c
+          fields:
+            Form_Template_Page__c:
+              reference: volapp_page_volunteer_information
+            Position__c: 2
+            Component_Type__c: 'Field Set'
+            FormQualifiedApiName__c: 'FlowToolKit__Form_bhin419fm_bhin41ba83h06o3l0YtjwzIAB'
+            Show_Header__c: false
+        - object: Form_Template_Page_Section__c
+          fields:
+            Form_Template_Page__c:
+              reference: volapp_page_volunteer_information
+            Position__c: 3
+            Component_Type__c: 'Field Set'
+            FormQualifiedApiName__c: 'FlowToolKit__Form_b76cg7fi8_b76cg7hcj3h06o3l0C7CtdIAF'
+            Show_Header__c: true
+            Header_Icon_Name__c: 'utility:location'
+            Header_Title__c: '<p>Mailing Address</p>'
+    - object: Form_Template_Page__c
+      nickname: volapp_page_select_shifts
+      fields:
+        Form_Template__c:
+          reference: volunteer_application_template
+        Page_Label__c: 'Select Shifts'
+        Position__c: 2
+        Visibility__c: 'Both'
+        Description__c: 'Pick one or more shifts that fit your schedule.'
+        Estimated_Time__c: 1
+        Conditional_Logic__c: '{"ruleMode":"hideWhen","conditionType":"OR","customLogic":null,"conditions":[{"position":1,"fieldApiName":"FlowToolKit__Volunteer_Job_Is_Ongoing__c","fieldType":"Boolean","operator":"TRUE","value":null},{"position":2,"fieldApiName":"FlowToolKit__Volunteer_Shift__c","fieldType":"Reference","operator":"NOTBLANK","value":null}]}'
+      friends:
+        - object: Form_Template_Page_Section__c
+          fields:
+            Form_Template_Page__c:
+              reference: volapp_page_select_shifts
+            Position__c: 1
+            Component_Type__c: 'Lightning Web Component'
+            lwcComponentName__c: 'FlowToolKit:volunteerShiftSelector'
+            Show_Header__c: true
+            Header_Icon_Name__c: 'utility:event'
+            Header_Title__c: 'Select Your Shifts'
+            Header_Subtitle__c: 'Each shift you pick becomes part of this one signup.'
+    - object: Form_Template_Page__c
+      nickname: volapp_page_sign_volunteer_waiver
+      fields:
+        Form_Template__c:
+          reference: volunteer_application_template
+        Page_Label__c: 'Sign Volunteer Waiver'
+        Position__c: 3
+        Visibility__c: 'Both'
+        Description__c: 'Review and sign the liability waiver to finish your signup.'
+        Estimated_Time__c: 1
+      friends:
+        - object: Form_Template_Page_Section__c
+          fields:
+            Form_Template_Page__c:
+              reference: volapp_page_sign_volunteer_waiver
+            Position__c: 1
+            Component_Type__c: 'Field Set'
+            FormQualifiedApiName__c: 'FlowToolKit__Volunteer_Waiver'
+            Show_Header__c: true
+            Header_Icon_Name__c: 'utility:approval'
+            Header_Title__c: 'Liability Waiver'
+            Header_Subtitle__c: 'Sign and date to confirm you agree to the volunteer waiver.'
+
+- object: Form_Template__c
+  nickname: volunteer_group_application_template
+  fields:
+    Name: 'Volunteer Group Application'
+    Form_Template_Subtitle__c: 'Bring your group — tell us who''s coming, pick your shifts, and sign the waiver.'
+    IsActive__c: true
+    Stage_Indicator_Type__c: 'vertical'
+    Confirmation_Page_Message__c: '<p><strong style="font-size: 22px;">Thank you for signing your group up! </strong></p><p><br></p><p><span style="font-size: 16px;">Your group volunteer registration has been successfully submitted.</span></p><p><br></p><p><span style="font-size: 16px;">We are grateful that you and your group have chosen to give your time and talents to support our work. We appreciate your willingness to get involved and make a difference together.</span></p><p><br></p><p><strong style="font-size: 16px;">What Happens Next?</strong></p><p><br></p><p><span style="font-size: 16px;">Our team will review your registration, including your group size, availability, and the information you provided. We will follow up with the group&#39;s primary contact to confirm the opportunity and discuss any additional details, requirements, or next steps.</span></p><p><br></p><p><span style="font-size: 16px;">Please check your email for a confirmation and additional information about your group&#39;s volunteer experience.</span></p><p><br></p><p><span style="font-size: 16px;">Thank you again for volunteering with us. We look forward to welcoming your group!</span></p>'
+    Offline_Message__c: '<p><strong style="font-size: 22px;">This Group Volunteer Opportunity Is Currently Closed</strong></p><p><br></p><p><span style="font-size: 16px;">Thank you for your interest in volunteering with your group!</span></p><p><br></p><p><span style="font-size: 16px;">We are no longer accepting group registrations for this specific volunteer opportunity, but we would still love to help your group get involved. Other opportunities may be available that better match your group size, interests, and availability.</span></p><p><br></p><p><span style="font-size: 16px;">Please contact us directly, and we will be happy to help find a volunteer opportunity that works for your group.</span></p><p><br></p><p><span style="font-size: 16px;">Thank you for your interest in bringing your group together to support our community!</span></p>'
+    Conversion_Type__c: 'Volunteer Application'
+    Conversion_Rules__c: 'Account;Account 👉 Set Billing Address;Contact1;Contact1 👉 Add to Account;Volunteer Application'
+  friends:
+    - object: Form_Template_Page__c
+      nickname: volgrp_page_group_details
+      fields:
+        Form_Template__c:
+          reference: volunteer_group_application_template
+        Page_Label__c: 'Group Details'
+        Position__c: 1
+        Visibility__c: 'Both'
+        Description__c: 'Which group is coming and how many volunteers to expect.'
+        Estimated_Time__c: 2
+      friends:
+        - object: Form_Template_Page_Section__c
+          fields:
+            Form_Template_Page__c:
+              reference: volgrp_page_group_details
+            Position__c: 1
+            Component_Type__c: 'Field Set'
+            FormQualifiedApiName__c: 'FlowToolKit__Volunteer_Group'
+            Show_Header__c: true
+            Header_Icon_Name__c: 'utility:groups'
+            Header_Title__c: '<p>Volunteer Group Details</p>'
+            Header_Subtitle__c: '<p>Tell us about your group/organization</p>'
+        - object: Form_Template_Page_Section__c
+          fields:
+            Form_Template_Page__c:
+              reference: volgrp_page_group_details
+            Position__c: 2
+            Component_Type__c: 'Field Set'
+            FormQualifiedApiName__c: 'FlowToolKit__Form_b76cg7fi8_b76cg7hcj3h06o3l0C7CtdIAF'
+            Show_Header__c: true
+            Header_Icon_Name__c: 'utility:location'
+            Header_Title__c: '<p>Organization Mailing Address</p>'
+            Header_Subtitle__c: '<p>Please provide your organizations primary mailing address</p>'
+        - object: Form_Template_Page_Section__c
+          fields:
+            Form_Template_Page__c:
+              reference: volgrp_page_group_details
+            Position__c: 3
+            Component_Type__c: 'Field Set'
+            FormQualifiedApiName__c: 'FlowToolKit__Volunteer_Contact'
+            Show_Header__c: true
+            Header_Icon_Name__c: 'utility:user'
+            Header_Title__c: '<p>Primary Contact/Volunteer Coordinator</p>'
+            Header_Subtitle__c: '<p>Please provide the contact information for your primary point of contact </p>'
+    - object: Form_Template_Page__c
+      nickname: volgrp_page_select_shifts
+      fields:
+        Form_Template__c:
+          reference: volunteer_group_application_template
+        Page_Label__c: 'Select Shifts'
+        Position__c: 2
+        Visibility__c: 'Both'
+        Description__c: 'Pick the shifts your group will cover.'
+        Estimated_Time__c: 1
+        Conditional_Logic__c: '{"ruleMode":"hideWhen","conditionType":"OR","customLogic":null,"conditions":[{"position":1,"fieldApiName":"FlowToolKit__Volunteer_Job_Is_Ongoing__c","operator":"TRUE","value":null},{"position":2,"fieldApiName":"FlowToolKit__Volunteer_Shift__c","fieldType":"Reference","operator":"NOTBLANK","value":null}]}'
+      friends:
+        - object: Form_Template_Page_Section__c
+          fields:
+            Form_Template_Page__c:
+              reference: volgrp_page_select_shifts
+            Position__c: 1
+            Component_Type__c: 'Lightning Web Component'
+            lwcComponentName__c: 'FlowToolKit:volunteerShiftSelector'
+            Show_Header__c: true
+            Header_Icon_Name__c: 'utility:event'
+            Header_Title__c: 'Select Your Shifts'
+            Header_Subtitle__c: 'Shift capacity is checked against your group&#39;s headcount.'
+    - object: Form_Template_Page__c
+      nickname: volgrp_page_waiver
+      fields:
+        Form_Template__c:
+          reference: volunteer_group_application_template
+        Page_Label__c: 'Waiver'
+        Position__c: 3
+        Visibility__c: 'Both'
+        Description__c: 'Review and sign the liability waiver on behalf of your group.'
+        Estimated_Time__c: 1
+      friends:
+        - object: Form_Template_Page_Section__c
+          fields:
+            Form_Template_Page__c:
+              reference: volgrp_page_waiver
+            Position__c: 1
+            Component_Type__c: 'Field Set'
+            FormQualifiedApiName__c: 'FlowToolKit__Volunteer_Waiver'
+            Show_Header__c: true
+            Header_Icon_Name__c: 'utility:approval'
+            Header_Title__c: 'Liability Waiver'

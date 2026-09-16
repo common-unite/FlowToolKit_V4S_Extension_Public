@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 560" role="img" aria-label="Map placeholder for Riverside Community Kitchen">
+  <rect width="760" height="560" rx="16" fill="#E4EAF0"/>
+  <g stroke="#CBD5E1" stroke-width="14" fill="none">
+    <path d="M-20 150 H780"/>
+    <path d="M-20 330 H780"/>
+    <path d="M170 -20 V580"/>
+    <path d="M470 -20 V580"/>
+    <path d="M470 330 L780 560"/>
+  </g>
+  <g stroke="#B7C4D2" stroke-width="6" fill="none">
+    <path d="M-20 240 H780"/>
+    <path d="M320 -20 V580"/>
+    <path d="M620 -20 V330"/>
+  </g>
+  <rect x="188" y="168" width="114" height="54" rx="6" fill="#D6DEE7"/>
+  <rect x="338" y="248" width="114" height="66" rx="6" fill="#D6DEE7"/>
+  <rect x="488" y="168" width="114" height="54" rx="6" fill="#D6DEE7"/>
+  <g transform="translate(380 250)">
+    <path d="M0 -66 C-36 -66 -60 -42 -60 -12 C-60 24 0 78 0 78 C0 78 60 24 60 -12 C60 -42 36 -66 0 -66 Z" fill="#2E844A"/>
+    <circle cx="0" cy="-12" r="22" fill="#FFFFFF"/>
+  </g>
+  <text x="380" y="420" text-anchor="middle" font-family="system-ui, sans-serif" font-size="26" font-weight="600" fill="#54698D">Riverside Community Kitchen</text>
+  <text x="380" y="456" text-anchor="middle" font-family="system-ui, sans-serif" font-size="20" fill="#8296AF">1420 Riverside Avenue, Portland</text>
+</svg>

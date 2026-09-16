@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>cUnite_Volunteer_Role__c</fullName>
+    <description>Optional reusable role definition. A Job with no Role behaves exactly as before.</description>
+    <externalId>false</externalId>
+    <label>Volunteer Role</label>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <referenceTo>Volunteer_Role__c</referenceTo>
+    <relationshipLabel>Volunteer Roles</relationshipLabel>
+    <relationshipName>Volunteer_Jobs</relationshipName>
+    <required>false</required>
+    <type>Lookup</type>
+</CustomField>

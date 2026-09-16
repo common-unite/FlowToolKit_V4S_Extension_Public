@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>cUnite_Allow_Waitlisting__c</fullName>
+    <defaultValue>false</defaultValue>
+    <inlineHelpText>When enabled Volunteers can signup for this Job and related Shifts even when full.</inlineHelpText>
+    <label>Allow Waitlisting</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

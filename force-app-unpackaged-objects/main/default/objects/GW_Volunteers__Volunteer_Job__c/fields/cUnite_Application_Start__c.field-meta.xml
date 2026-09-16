@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>cUnite_Application_Start__c</fullName>
+    <description>When the volunteer application opens for this Job. Mapped post-install to the Form Template Source Start Date override. Blank means the Form Template&apos;s own start date applies.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Optional: when applications open for this Job. Leave blank to use the Form Template&apos;s start date.</inlineHelpText>
+    <label>Application Start</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>DateTime</type>
+</CustomField>

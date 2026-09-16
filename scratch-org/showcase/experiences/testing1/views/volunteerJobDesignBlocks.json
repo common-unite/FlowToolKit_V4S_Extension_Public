@@ -1,0 +1,282 @@
+{
+  "appPageId": "6e30db20-0ab8-4651-84b1-c8bc310df0bc",
+  "componentName": "siteforce:dynamicLayout",
+  "dataProviders": [],
+  "id": "b18ceaea-e0df-4ecc-b602-1f8cdcaeb21d",
+  "label": "Volunteer Job (Design Blocks)",
+  "regions": [
+    {
+      "components": [
+        {
+          "componentAttributes": {
+            "background": "background: rgba(0,0,0,0)",
+            "backgroundOverlay": "rgba(0,0,0,0.5)",
+            "contentAreaWidth": 100,
+            "sectionConfig": {
+              "UUID": "e0362d40-021b-473f-8883-d402dc6c6ef9",
+              "columns": [
+                {
+                  "UUID": "021d3f1f-61bd-49bd-a2dd-f44a47b56ddb",
+                  "columnKey": "1",
+                  "columnName": "Column 1",
+                  "columnWidth": "12",
+                  "seedComponents": []
+                }
+              ]
+            },
+            "sectionHeight": 300
+          },
+          "componentName": "forceCommunity:section",
+          "id": "e0362d40-021b-473f-8883-d402dc6c6ef9",
+          "regions": [
+            {
+              "components": [
+                {
+                  "componentAttributes": {
+                    "properties": "{\"sectionType\": \"hero\", \"width\": \"full\", \"background\": \"#032D60\", \"backgroundAccentColor\": \"#155091\", \"backgroundGradient\": \"horizontal\", \"brandColor\": \"#53B95B\", \"imageFloat\": true, \"badgePosition\": \"top\", \"badgeAlign\": \"left\", \"badges\": \"[{\\\"title\\\": \\\"Part of {{GW_Volunteers__Campaign__r.Name}}\\\", \\\"style\\\": \\\"accent\\\"}, {\\\"title\\\": \\\"{{FlowToolKit__cUnite_Volunteer_Role__r.FlowToolKit__Category__c}}\\\", \\\"style\\\": \\\"neutral\\\"}, {\\\"title\\\": \\\"{{GW_Volunteers__Number_of_Volunteers_Still_Needed__c}} spots left\\\", \\\"style\\\": \\\"outline\\\", \\\"pulse\\\": true}]\", \"heading\": \"{{Name}}\", \"subheading\": \"{{GW_Volunteers__Description__c}}\", \"buttons\": \"[{\\\"label\\\": \\\"Sign up for this shift\\\", \\\"url\\\": \\\"#\\\", \\\"style\\\": \\\"accent\\\"}, {\\\"label\\\": \\\"Sign up a group\\\", \\\"url\\\": \\\"#\\\", \\\"style\\\": \\\"outline\\\"}]\", \"footnote\": \"Free \\u00b7 Ages {{FlowToolKit__cUnite_Volunteer_Role__r.FlowToolKit__Minimum_Age__c}} and up \\u00b7 Service hours letter provided on request\", \"footnoteAlign\": \"left\", \"imageSource\": \"url\", \"imageUrl\": \"resource:VolunteerOpportunityArt/m-delight-check-clean.png\", \"imageAlt\": \"Volunteer mascot with a completed signup sheet\", \"imageStyle\": \"mascot\", \"imageBleed\": \"bottom\", \"splitRatio\": \"left\"}",
+                    "recordId": "{!recordId}"
+                  },
+                  "componentName": "FlowToolKit:siteDesignBlock",
+                  "id": "0026e18a-c045-4b26-a1e3-3699b1ed59f5",
+                  "renderPriority": "NEUTRAL",
+                  "renditionMap": {},
+                  "type": "component"
+                },
+                {
+                  "componentAttributes": {
+                    "properties": "{\"sectionType\": \"statsBar\", \"width\": \"full\", \"background\": \"#032D60\", \"backgroundGradient\": \"off\", \"accentColor\": \"#8EE39A\", \"overlapTop\": true, \"overlapMargin\": 24, \"borderTop\": true, \"borderWidth\": 1, \"borderColor\": \"#FFFFFF\", \"borderColorOpacity\": 14, \"statCards\": false, \"statOrder\": \"label\", \"statLayout\": \"inline\", \"iconStyle\": \"tile\", \"statDistribution\": \"spread\", \"paddingTop\": \"x-small\", \"paddingBottom\": \"x-small\", \"bodyAlign\": \"left\", \"items\": \"[{\\\"title\\\": \\\"Setting\\\", \\\"value\\\": \\\"{{FlowToolKit__cUnite_Volunteer_Role__r.FlowToolKit__Indoor_Outdoor__c}} work\\\", \\\"iconType\\\": \\\"image\\\", \\\"iconImage\\\": \\\"resource:VolunteerOpportunityArt/icon-waitlist-timer.png\\\"}, {\\\"title\\\": \\\"Commitment\\\", \\\"value\\\": \\\"{{FlowToolKit__cUnite_Volunteer_Role__r.FlowToolKit__Typical_Time_Commitment__c}}\\\", \\\"iconType\\\": \\\"image\\\", \\\"iconImage\\\": \\\"resource:VolunteerOpportunityArt/icon-settings-sliders.png\\\"}, {\\\"title\\\": \\\"Location\\\", \\\"value\\\": \\\"{{FlowToolKit__cUnite_Location_Name__c}}\\\", \\\"iconType\\\": \\\"image\\\", \\\"iconImage\\\": \\\"resource:VolunteerOpportunityArt/icon-search-data.png\\\"}, {\\\"title\\\": \\\"Spots open\\\", \\\"value\\\": \\\"{{GW_Volunteers__Number_of_Volunteers_Still_Needed__c}} across {{GW_Volunteers__Number_of_Shifts__c}} shifts\\\", \\\"iconType\\\": \\\"image\\\", \\\"iconImage\\\": \\\"resource:VolunteerOpportunityArt/icon-user-admin.png\\\"}]\"}",
+                    "recordId": "{!recordId}"
+                  },
+                  "componentName": "FlowToolKit:siteDesignBlock",
+                  "id": "27251ca9-20fd-4f07-a566-770ef52deaae",
+                  "renderPriority": "NEUTRAL",
+                  "renditionMap": {},
+                  "type": "component"
+                },
+                {
+                  "componentAttributes": {
+                    "properties": "{\"sectionType\": \"cards\", \"width\": \"full\", \"brandColor\": \"#2E844A\", \"sectionLabel\": \"Your Role\", \"heading\": \"{{FlowToolKit__cUnite_Volunteer_Role__r.Name}}\", \"subheading\": \"{{FlowToolKit__cUnite_Volunteer_Role__r.FlowToolKit__Physical_Requirements__c}}\", \"headingAlign\": \"left\", \"bodyAlign\": \"left\", \"columns\": \"3\", \"cardStyle\": \"outlined\", \"iconStyle\": \"plain\", \"items\": \"[{\\\"title\\\": \\\"What to wear\\\", \\\"description\\\": \\\"{{FlowToolKit__cUnite_Volunteer_Role__r.FlowToolKit__What_to_Wear__c}}\\\", \\\"iconType\\\": \\\"image\\\", \\\"iconImage\\\": \\\"resource:VolunteerOpportunityArt/icon-user.png\\\"}, {\\\"title\\\": \\\"What we provide\\\", \\\"description\\\": \\\"{{FlowToolKit__cUnite_Volunteer_Role__r.FlowToolKit__What_We_Provide__c}}\\\", \\\"iconType\\\": \\\"image\\\", \\\"iconImage\\\": \\\"resource:VolunteerOpportunityArt/icon-form-completion.png\\\"}, {\\\"title\\\": \\\"Accommodations\\\", \\\"description\\\": \\\"{{FlowToolKit__cUnite_Volunteer_Role__r.FlowToolKit__Accommodations_Available__c}}\\\", \\\"iconType\\\": \\\"image\\\", \\\"iconImage\\\": \\\"resource:VolunteerOpportunityArt/icon-scale-rocket.png\\\", \\\"backgroundColor\\\": \\\"#F3FAF4\\\"}]\"}",
+                    "recordId": "{!recordId}"
+                  },
+                  "componentName": "FlowToolKit:siteDesignBlock",
+                  "id": "b42c181b-ce1e-4dc8-bc42-29da8df904db",
+                  "renderPriority": "NEUTRAL",
+                  "renditionMap": {},
+                  "type": "component"
+                },
+                {
+                  "componentAttributes": {
+                    "properties": "{\"sectionType\": \"cards\", \"width\": \"full\", \"background\": \"#EEF1F4\", \"brandColor\": \"#2E844A\", \"arrangement\": \"split\", \"sectionLabel\": \"Good To Know\", \"heading\": \"The fine print, minus the fine print.\", \"subheading\": \"{{FlowToolKit__cUnite_Volunteer_Role__r.FlowToolKit__Cancellation_Policy__c}}\", \"headingAlign\": \"left\", \"bodyAlign\": \"left\", \"columns\": \"4\", \"cardStyle\": \"joined\", \"items\": \"[{\\\"eyebrow\\\": \\\"Ages\\\", \\\"title\\\": \\\"{{FlowToolKit__cUnite_Volunteer_Role__r.FlowToolKit__Minimum_Age__c}}+\\\", \\\"description\\\": \\\"Volunteers under {{FlowToolKit__cUnite_Volunteer_Role__r.FlowToolKit__Adult_Supervision_Age__c}} need an adult on the same shift.\\\"}, {\\\"eyebrow\\\": \\\"Cancel\\\", \\\"title\\\": \\\"{{FlowToolKit__cUnite_Cancellation_Notice_Hours__c}} hours\\\", \\\"description\\\": \\\"Notice that helps us fill your spot from the waitlist.\\\"}, {\\\"eyebrow\\\": \\\"Shifts\\\", \\\"title\\\": \\\"Up to {{FlowToolKit__cUnite_Shift_Signup_Limit__c}}\\\", \\\"description\\\": \\\"Per signup. Pick what fits your schedule.\\\"}, {\\\"eyebrow\\\": \\\"Hours\\\", \\\"title\\\": \\\"Tracked\\\", \\\"description\\\": \\\"Service hours post automatically; request a signed letter any time.\\\", \\\"backgroundColor\\\": \\\"#F3FAF4\\\"}]\"}",
+                    "recordId": "{!recordId}"
+                  },
+                  "componentName": "FlowToolKit:siteDesignBlock",
+                  "id": "035afb28-bfa2-44ed-83d0-8b05cddc72e7",
+                  "renderPriority": "NEUTRAL",
+                  "renditionMap": {},
+                  "type": "component"
+                }
+              ],
+              "id": "021d3f1f-61bd-49bd-a2dd-f44a47b56ddb",
+              "regionLabel": "Column 1",
+              "regionName": "1",
+              "renditionMap": {},
+              "type": "region"
+            }
+          ],
+          "renderPriority": "NEUTRAL",
+          "renditionMap": {},
+          "type": "component"
+        },
+        {
+          "componentAttributes": {
+            "background": "background: rgba(0,0,0,0)",
+            "backgroundOverlay": "rgba(0,0,0,0.5)",
+            "contentAreaWidth": 100,
+            "sectionConfig": {
+              "UUID": "9d795172-4bb5-44cc-b393-fa8b19756bc7",
+              "columns": [
+                {
+                  "UUID": "126696b3-71e3-4414-8c19-6c3394af7b9c",
+                  "columnKey": "1",
+                  "columnName": "Column 1",
+                  "columnWidth": "6",
+                  "seedComponents": []
+                },
+                {
+                  "UUID": "c6211087-94c6-4a77-a4b1-72c02dc3abbb",
+                  "columnKey": "2",
+                  "columnName": "Column 2",
+                  "columnWidth": "6",
+                  "seedComponents": []
+                }
+              ]
+            },
+            "sectionHeight": 300
+          },
+          "componentName": "forceCommunity:section",
+          "id": "9d795172-4bb5-44cc-b393-fa8b19756bc7",
+          "regions": [
+            {
+              "components": [
+                {
+                  "componentAttributes": {
+                    "properties": "{\"sectionType\": \"pills\", \"brandColor\": \"#53B95B\", \"sectionLabel\": \"Skills and Requirements\", \"heading\": \"No experience required. Bring what you have.\", \"subheading\": \"{{FlowToolKit__cUnite_Volunteer_Role__r.FlowToolKit__Requirements__c}}\", \"headingAlign\": \"left\", \"bodyAlign\": \"left\", \"items\": \"[{\\\"title\\\": \\\"Needed: {{FlowToolKit__cUnite_Volunteer_Role__r.FlowToolKit__Skills_Needed__c}}\\\", \\\"style\\\": \\\"neutral\\\"}, {\\\"title\\\": \\\"A plus: {{FlowToolKit__cUnite_Volunteer_Role__r.FlowToolKit__Preferred_Skills__c}}\\\", \\\"style\\\": \\\"neutral\\\"}, {\\\"title\\\": \\\"{{FlowToolKit__cUnite_Volunteer_Role__r.FlowToolKit__Indoor_Outdoor__c}} work\\\", \\\"style\\\": \\\"neutral\\\"}, {\\\"title\\\": \\\"{{FlowToolKit__cUnite_Volunteer_Role__r.FlowToolKit__Typical_Time_Commitment__c}}\\\", \\\"style\\\": \\\"neutral\\\"}]\"}",
+                    "recordId": "{!recordId}"
+                  },
+                  "componentName": "FlowToolKit:siteDesignBlock",
+                  "id": "3e4b5aca-0f37-4f6a-a503-0dc55b0e140d",
+                  "renderPriority": "NEUTRAL",
+                  "renditionMap": {},
+                  "type": "component"
+                }
+              ],
+              "id": "126696b3-71e3-4414-8c19-6c3394af7b9c",
+              "regionLabel": "Column 1",
+              "regionName": "1",
+              "renditionMap": {},
+              "type": "region"
+            },
+            {
+              "components": [
+                {
+                  "componentAttributes": {
+                    "properties": "{\"sectionType\": \"cards\", \"brandColor\": \"#2E844A\", \"bodyAlign\": \"left\", \"columns\": \"2\", \"cardStyle\": \"outlined\", \"items\": \"[{\\\"title\\\": \\\"Physical demands\\\", \\\"description\\\": \\\"{{FlowToolKit__cUnite_Volunteer_Role__r.FlowToolKit__Physical_Requirements__c}}\\\"}, {\\\"title\\\": \\\"Waiver\\\", \\\"description\\\": \\\"{{FlowToolKit__cUnite_Volunteer_Role__r.FlowToolKit__Waiver_Language__c}}\\\"}, {\\\"title\\\": \\\"Accommodations\\\", \\\"description\\\": \\\"{{FlowToolKit__cUnite_Volunteer_Role__r.FlowToolKit__Accommodations_Available__c}}\\\"}, {\\\"title\\\": \\\"Questions\\\", \\\"description\\\": \\\"{{FlowToolKit__cUnite_Volunteer_Role__r.FlowToolKit__FAQ__c}}\\\", \\\"backgroundColor\\\": \\\"#F3FAF4\\\"}]\"}",
+                    "recordId": "{!recordId}"
+                  },
+                  "componentName": "FlowToolKit:siteDesignBlock",
+                  "id": "8d8832a7-dcd0-4bd3-bc6f-af634149792d",
+                  "renderPriority": "NEUTRAL",
+                  "renditionMap": {},
+                  "type": "component"
+                }
+              ],
+              "id": "c6211087-94c6-4a77-a4b1-72c02dc3abbb",
+              "regionLabel": "Column 2",
+              "regionName": "2",
+              "renditionMap": {},
+              "type": "region"
+            }
+          ],
+          "renderPriority": "NEUTRAL",
+          "renditionMap": {},
+          "type": "component"
+        },
+        {
+          "componentAttributes": {
+            "background": "background: rgba(0,0,0,0)",
+            "backgroundOverlay": "rgba(0,0,0,0.5)",
+            "contentAreaWidth": 100,
+            "sectionConfig": {
+              "UUID": "c2318866-8d98-4841-bcee-bfda654783f1",
+              "columns": [
+                {
+                  "UUID": "d351f37f-e9f6-4c96-89e7-38278603de7a",
+                  "columnKey": "1",
+                  "columnName": "Column 1",
+                  "columnWidth": "12",
+                  "seedComponents": []
+                }
+              ]
+            },
+            "sectionHeight": 300
+          },
+          "componentName": "forceCommunity:section",
+          "id": "c2318866-8d98-4841-bcee-bfda654783f1",
+          "regions": [
+            {
+              "components": [
+                {
+                  "componentAttributes": {
+                    "properties": "{\"sectionType\": \"showcase\", \"width\": \"full\", \"background\": \"#EEF1F4\", \"brandColor\": \"#032D60\", \"sectionLabel\": \"Where To Go\", \"headingAlign\": \"left\", \"bodyAlign\": \"left\", \"buttonAlign\": \"left\", \"blockTitle\": \"{{FlowToolKit__cUnite_Location_Name__c}}\", \"description\": \"{{GW_Volunteers__Location_Street__c}}<br>{{FlowToolKit__cUnite_Location__r.FlowToolKit__cUnite_Entrance_Instructions__c}}<br>{{GW_Volunteers__Location_City__c}}, {{GW_Volunteers__Location__c}} {{GW_Volunteers__Location_Zip_Postal_Code__c}}\", \"showcaseItems\": \"cards\", \"items\": \"[{\\\"title\\\": \\\"Parking\\\", \\\"description\\\": \\\"{{FlowToolKit__cUnite_Location__r.FlowToolKit__cUnite_Parking_Instructions__c}}\\\"}, {\\\"title\\\": \\\"Transit\\\", \\\"description\\\": \\\"{{FlowToolKit__cUnite_Location__r.FlowToolKit__cUnite_Transit_Instructions__c}}\\\"}, {\\\"title\\\": \\\"Accessibility\\\", \\\"description\\\": \\\"{{FlowToolKit__cUnite_Location__r.FlowToolKit__cUnite_Accessibility_Info__c}}\\\"}]\", \"buttons\": \"[{\\\"label\\\": \\\"Get directions\\\", \\\"url\\\": \\\"#\\\", \\\"style\\\": \\\"brand\\\"}, {\\\"label\\\": \\\"Add to calendar\\\", \\\"url\\\": \\\"#\\\", \\\"style\\\": \\\"outline\\\"}]\", \"reversed\": true, \"imageSource\": \"url\", \"imageUrl\": \"resource:VolunteerOpportunityArt/location-placeholder.svg\", \"imageAlt\": \"Map of the volunteer location entrance\", \"imageStyle\": \"clean\"}",
+                    "recordId": "{!recordId}"
+                  },
+                  "componentName": "FlowToolKit:siteDesignBlock",
+                  "id": "b437964e-6010-49d0-855f-91cae3f4e003",
+                  "renderPriority": "NEUTRAL",
+                  "renditionMap": {},
+                  "type": "component"
+                },
+                {
+                  "componentAttributes": {
+                    "properties": "{\"sectionType\": \"showcase\", \"width\": \"full\", \"background\": \"#032D60\", \"backgroundAccentColor\": \"#155091\", \"backgroundGradient\": \"horizontal\", \"brandColor\": \"#53B95B\", \"overlapTop\": true, \"overlapMargin\": 24, \"sectionLabel\": \"This Shift Is Part Of\", \"headingAlign\": \"left\", \"bodyAlign\": \"left\", \"buttonAlign\": \"left\", \"blockTitle\": \"{{GW_Volunteers__Campaign__r.Name}}\", \"description\": \"{{GW_Volunteers__Campaign__r.FlowToolKit__cUnite_Excerpt__c}}\", \"stats\": \"[{\\\"value\\\": \\\"3,180\\\", \\\"title\\\": \\\"{{GW_Volunteers__Campaign__r.FlowToolKit__cUnite_Impact_Metric_1_Label__c}}\\\"}, {\\\"value\\\": \\\"742\\\", \\\"title\\\": \\\"{{GW_Volunteers__Campaign__r.FlowToolKit__cUnite_Impact_Metric_2_Label__c}}\\\"}, {\\\"value\\\": \\\"6\\\", \\\"title\\\": \\\"{{GW_Volunteers__Campaign__r.FlowToolKit__cUnite_Impact_Metric_3_Label__c}}\\\"}]\", \"buttons\": \"[{\\\"label\\\": \\\"See all opportunities\\\", \\\"url\\\": \\\"#\\\", \\\"style\\\": \\\"accent\\\"}, {\\\"label\\\": \\\"Follow the campaign\\\", \\\"url\\\": \\\"#\\\", \\\"style\\\": \\\"outline\\\"}]\", \"reversed\": true, \"imageSource\": \"url\", \"imageUrl\": \"resource:VolunteerOpportunityArt/m-roadmap-clean.png\", \"imageAlt\": \"Mascot presenting the campaign roadmap\", \"imageStyle\": \"mascot\", \"imageBleed\": \"bottom\"}",
+                    "recordId": "{!recordId}"
+                  },
+                  "componentName": "FlowToolKit:siteDesignBlock",
+                  "id": "75870e7e-c621-4668-a1ab-7d9dd2e8ede3",
+                  "renderPriority": "NEUTRAL",
+                  "renditionMap": {},
+                  "type": "component"
+                },
+                {
+                  "componentAttributes": {
+                    "properties": "{\"sectionType\": \"callout\", \"width\": \"full\", \"background\": \"#EEF1F4\", \"brandColor\": \"#2E844A\", \"overlapTop\": true, \"overlapMargin\": 24, \"borderTop\": true, \"borderWidth\": 4, \"borderColor\": \"#F4BE45\", \"subheading\": \"{{FlowToolKit__cUnite_Volunteer_Role__r.FlowToolKit__Testimonial_Quote__c}}\", \"footnote\": \"{{FlowToolKit__cUnite_Volunteer_Role__r.FlowToolKit__Testimonial_Attribution__c}}\"}",
+                    "recordId": "{!recordId}"
+                  },
+                  "componentName": "FlowToolKit:siteDesignBlock",
+                  "id": "7db9f540-7998-48b7-b332-4321f62f2d85",
+                  "renderPriority": "NEUTRAL",
+                  "renditionMap": {},
+                  "type": "component"
+                },
+                {
+                  "componentAttributes": {
+                    "properties": "{\"sectionType\": \"cta\", \"width\": \"full\", \"background\": \"#1D305E\", \"backgroundMidColor\": \"#2B525C\", \"backgroundAccentColor\": \"#57BA59\", \"backgroundGradient\": \"horizontal\", \"brandColor\": \"#032D60\", \"overlapTop\": true, \"overlapMargin\": 24, \"arrangement\": \"split\", \"headingAlign\": \"left\", \"bodyAlign\": \"left\", \"heading\": \"{{GW_Volunteers__Number_of_Volunteers_Still_Needed__c}} spots left for {{Name}}.\", \"subheading\": \"{{FlowToolKit__cUnite_Subtitle__c}}\", \"buttons\": \"[{\\\"label\\\": \\\"Sign up for this shift\\\", \\\"url\\\": \\\"#\\\", \\\"style\\\": \\\"brand\\\"}, {\\\"label\\\": \\\"Sign up a group\\\", \\\"url\\\": \\\"#\\\", \\\"style\\\": \\\"outline\\\"}]\"}",
+                    "recordId": "{!recordId}"
+                  },
+                  "componentName": "FlowToolKit:siteDesignBlock",
+                  "id": "da49740f-420b-4fc8-8769-3a8af628dcc2",
+                  "renderPriority": "NEUTRAL",
+                  "renditionMap": {},
+                  "type": "component"
+                },
+                {
+                  "componentAttributes": {
+                    "properties": "{\"sectionType\": \"cards\", \"width\": \"full\", \"brandColor\": \"#2E844A\", \"sectionLabel\": \"You Might Also Like\", \"headingAlign\": \"left\", \"bodyAlign\": \"left\", \"columns\": \"3\", \"cardStyle\": \"clean\", \"items\": \"[{\\\"title\\\": \\\"{{FlowToolKit__cUnite_Related_Job_1__r.Name}}\\\", \\\"description\\\": \\\"{{FlowToolKit__cUnite_Related_Job_1__r.FlowToolKit__cUnite_Subtitle__c}}\\\"}, {\\\"title\\\": \\\"{{FlowToolKit__cUnite_Related_Job_2__r.Name}}\\\", \\\"description\\\": \\\"{{FlowToolKit__cUnite_Related_Job_2__r.FlowToolKit__cUnite_Subtitle__c}}\\\"}, {\\\"title\\\": \\\"{{FlowToolKit__cUnite_Related_Job_3__r.Name}}\\\", \\\"description\\\": \\\"{{FlowToolKit__cUnite_Related_Job_3__r.FlowToolKit__cUnite_Subtitle__c}}\\\"}]\"}",
+                    "recordId": "{!recordId}"
+                  },
+                  "componentName": "FlowToolKit:siteDesignBlock",
+                  "id": "a81becb9-d985-4dcc-a262-b29b05497f9c",
+                  "renderPriority": "NEUTRAL",
+                  "renditionMap": {},
+                  "type": "component"
+                }
+              ],
+              "id": "d351f37f-e9f6-4c96-89e7-38278603de7a",
+              "regionLabel": "Column 1",
+              "regionName": "1",
+              "renditionMap": {},
+              "type": "region"
+            }
+          ],
+          "renderPriority": "NEUTRAL",
+          "renditionMap": {},
+          "type": "component"
+        }
+      ],
+      "id": "030f54b2-aba3-461e-b537-31f9feb75f14",
+      "regionName": "content",
+      "type": "region"
+    },
+    {
+      "components": [
+        {
+          "componentAttributes": {
+            "customHeadTags": "",
+            "description": "",
+            "title": "{!Record._Object}: {!Record._Title}"
+          },
+          "componentName": "forceCommunity:seoAssistant",
+          "id": "fb25ee80-fffa-4f01-82a5-319e82f0e938",
+          "renditionMap": {},
+          "type": "component"
+        }
+      ],
+      "id": "db8ea416-3284-4434-8da4-7172b3973edb",
+      "regionName": "sfdcHiddenRegion",
+      "type": "region"
+    }
+  ],
+  "themeLayoutType": "Inner",
+  "type": "view",
+  "viewType": "detail-a03"
+}

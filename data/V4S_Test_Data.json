@@ -1,0 +1,26 @@
+[
+    {
+        "sobject": "Campaign",
+        "saveRefs": true,
+        "resolveRefs": false,
+        "files": [
+            "Campaigns.json"
+        ]
+    },
+    {
+        "sobject": "GW_Volunteers__Volunteer_Job__c",
+        "saveRefs": true,
+        "resolveRefs": true,
+        "files": [
+            "GW_Volunteers__Volunteer_Job__cs.json"
+        ]
+    },
+    {
+        "sobject": "GW_Volunteers__Job_Recurrence_Schedule__c",
+        "saveRefs": false,
+        "resolveRefs": true,
+        "files": [
+            "GW_Volunteers__Job_Recurrence_Schedule__cs.json"
+        ]
+    }
+]

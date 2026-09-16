@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>cUnite_Portal_Shift_Selector_Label__c</fullName>
+    <description>Rich label for the portal shift calendar: the Volunteer Job name above the start time inside each tile, with capacity and hours badges, the Full / Waitlisting overlay or the Closed banner from cUnite_Status__c. The Shift Selector uses it automatically when it exists.</description>
+    <externalId>false</externalId>
+    <formula>&apos;&lt;div class=&quot;slds-is-relative slds-container_fluid slds-p-vertical_medium slds-align_absolute-center&quot; style=&quot;min-height: 60px;&quot;&gt;&apos; +
+Case(cUnite_Status__c,
+
+&apos;Closed&apos;,&apos;&lt;div style=&quot;position: absolute;z-index: 2;&quot;&gt;&lt;div class=&quot;slds-m-bottom_xx-small&quot;&gt;&lt;strong&gt;&apos; + GW_Volunteers__Volunteer_Job__r.Name + &apos;&lt;/strong&gt;&lt;/div&gt;Closed&lt;/div&gt;&apos;,
+
+&apos;Full/Waitlisting&apos;,&apos;&lt;div class=&quot;slds-container_fluid&quot; style=&quot;font-weight: 900;z-index: 1;color: #e68b3f;position: absolute;font-size: 2rem;&quot;&gt;Full / Waitlisting&lt;/div&gt;&lt;div style=&quot;position: absolute;z-index: 2;color: white;&quot;&gt;&lt;div class=&quot;slds-m-bottom_xx-small&quot;&gt;&lt;strong&gt;&apos; + GW_Volunteers__Volunteer_Job__r.Name + &apos;&lt;/strong&gt;&lt;/div&gt;{{datetimeformatted}}&lt;/div&gt;&apos;,
+
+&apos;&lt;div class=&quot;slds-is-absolute&quot; style=&quot;bottom:2px; left:2px; font-size:0.75rem;&quot;&gt;Capacity: &apos; + Text(GW_Volunteers__Number_of_Volunteers_Still_Needed__c) + &apos;&lt;/div&gt;&lt;div class=&quot;slds-is-absolute&quot; style=&quot;bottom:2px; right:2px; font-size:0.75rem;&quot;&gt;&apos; + Text(GW_Volunteers__Duration__c) + &apos; hrs&lt;/div&gt;&lt;div style=&quot;position: absolute;z-index: 2;&quot;&gt;&lt;div class=&quot;slds-m-bottom_xx-small&quot;&gt;&lt;strong&gt;&apos; + GW_Volunteers__Volunteer_Job__r.Name + &apos;&lt;/strong&gt;&lt;/div&gt;{{datetimeformatted}}&lt;/div&gt;&apos;
+
+) + &apos;&lt;/div&gt;&apos;</formula>
+    <label>Portal Shift Selector Label</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

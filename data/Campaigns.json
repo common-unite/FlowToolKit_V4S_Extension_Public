@@ -1,0 +1,18 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "Campaign",
+                "referenceId": "CampaignRef1"
+            },
+            "Description": null,
+            "EndDate": "2023-07-31",
+            "GW_Volunteers__Volunteer_Website_Time_Zone__c": null,
+            "IsActive": true,
+            "Name": "General Volunteer Opportunities",
+            "StartDate": "2022-12-01",
+            "Status": "In Progress",
+            "Type": "Other"
+        }
+    ]
+}

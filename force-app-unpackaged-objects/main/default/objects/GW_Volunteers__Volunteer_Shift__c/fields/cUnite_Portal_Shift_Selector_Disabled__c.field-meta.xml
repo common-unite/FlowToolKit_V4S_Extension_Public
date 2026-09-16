@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>cUnite_Portal_Shift_Selector_Disabled__c</fullName>
+    <formula>OR(
+        cUnite_Status__c == &apos;Full&apos;,
+        cUnite_Status__c == &apos;Closed&apos;,
+        cUnite_Hold__c
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Portal Shift Selector Disabled</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>cUnite_Application_End__c</fullName>
+    <description>When the volunteer application closes for this Job. Mapped post-install to the Form Template Source End Date override. Blank means the Form Template&apos;s own close date applies.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Optional: when applications close for this Job. Leave blank to use the Form Template&apos;s close date.</inlineHelpText>
+    <label>Application End</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>DateTime</type>
+</CustomField>

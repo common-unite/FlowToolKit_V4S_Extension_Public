@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>cUnite_Application_Start__c</fullName>
+    <description>Shift-level override of when the volunteer application opens. Blank inherits the Job's Application Start via the Application Start (Effective) formula.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Optional: when applications open for this Shift only. Leave blank to inherit from the Job.</inlineHelpText>
+    <label>Application Start</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>DateTime</type>
+</CustomField>

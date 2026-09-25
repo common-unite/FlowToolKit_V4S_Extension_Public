@@ -6,7 +6,7 @@
 //
 // In a real org that is destructive: it would overwrite Form_Template__c and
 // blank cUnite_Form_Prefill_Mapping__c on jobs the client set up by hand.
-// CultivateKC had 21 such jobs when this was split out. See issue #26.
+// One client org had 21 such jobs when this was split out. See issue #26.
 
 Map<String, Id> templateIdByNameMap = new Map<String, Id>();
 for(FlowToolKit__Form_Template__c formTemplate : [SELECT Id, Name FROM FlowToolKit__Form_Template__c WHERE Name IN ('Volunteer Application', 'Volunteer Group Application')])

@@ -7,14 +7,156 @@ project:
         api_version: '65.0'
     dependencies:
         - github: 'https://github.com/SalesforceFoundation/Volunteers-for-Salesforce'
-        - github: 'https://github.com/common-unite/cUnite_FormBuilder'
-        - github: 'https://github.com/common-unite/cUnite_Date_Time_Sync'
+        # The public companion, not the private source repo: the chain from the private repo
+        # carries an unmanaged unpackaged/post/config step that the MetaDeploy worker cannot
+        # fetch (its GitHub App reaches only the public repos). Same package versions, same
+        # release tags, and that step deploys nothing anyway (a wildcard manifest, no metadata).
+        - github: 'https://github.com/common-unite/Flow_Tool_Kit_Public'
+        - github: 'https://github.com/common-unite/Date_Time_Sync_Public'
     git:
     source_format: sfdx
 
 sources:
     source_date_time_sync:
         github: 'https://github.com/common-unite/Date_Time_Sync_Public'
+
+plans:
+    # MetaDeploy plans. Frozen steps carry options, checks and ui_options only, so
+    # ignore_failure never reaches the worker: every step must succeed on its own.
+    # The post-install configuration lives in the post_install_config flow so the
+    # exact steps a subscriber gets can be run locally against a non-namespaced org.
+    install:
+        slug: install
+        title: Install the V4S Extension
+        tier: primary
+        checks:
+            - when: "'Network' not in tasks.check_sobjects_available()['sobjects']"
+              action: error
+              message: "Digital Experiences must be enabled. Go to Setup > Digital Experiences > Settings, enable Digital Experiences, then run this installer again. The package will not install without it."
+            - when: "not tasks.check_lws_enabled()['is_enabled']"
+              action: error
+              message: "Lightning Web Security (LWS) must be enabled. Go to Setup > Session Settings and enable 'Use Lightning Web Security for Lightning web components'. Without LWS the volunteer job finder and forms degrade badly on large datasets."
+            - when: "tasks.check_extension_installed()['is_installed']"
+              action: warn
+              message: "The V4S Extension is already installed in this org. This plan re-applies the post-install configuration, which overwrites any changes you made to the shipped forms, page layouts, record pages and permission sets. To move to a newer version and keep those changes, use the Upgrade plan instead."
+        steps:
+            1:
+                flow: dependencies
+                ui_options:
+                    description: "Installs Volunteers for Salesforce, Flow Tool Kit and Date Time Sync at the versions this release was built against. Packages the org already has at that version are skipped."
+            2:
+                task: install_managed
+                ui_options:
+                    description: "Installs the V4S Extension managed package: the volunteer job finder, the shift selector, the sign-up flows and the conversion flows. Skipped automatically if this exact version is already installed."
+            3:
+                task: update_admin_profile
+                ui_options:
+                    description: "Grants the System Administrator profile access to the extension's objects, fields, Apex classes and pages. The package ships with permissions closed. Safe to re-run."
+            4:
+                flow: post_install_config
+
+    upgrade:
+        slug: upgrade
+        title: Upgrade the V4S Extension
+        tier: additional
+        preflight_message: "Upgrades the V4S Extension and its dependencies to the latest version. Your forms, page layouts, record pages, form templates and permission sets are not touched."
+        checks:
+            - when: "not tasks.check_extension_installed()['is_installed']"
+              action: error
+              message: "The V4S Extension is not installed in this org yet. Run the Install plan instead."
+            - when: "not tasks.check_lws_enabled()['is_enabled']"
+              action: error
+              message: "Lightning Web Security (LWS) must be enabled. Go to Setup > Session Settings and enable 'Use Lightning Web Security for Lightning web components'. Without LWS the volunteer job finder and forms degrade badly on large datasets."
+        steps:
+            1:
+                task: update_dependencies
+                ui_options:
+                    description: "Upgrades Volunteers for Salesforce, Flow Tool Kit and Date Time Sync to the versions this release was built against, where the org is behind."
+            2:
+                task: install_managed
+                ui_options:
+                    description: "Upgrades the V4S Extension managed package. Skipped automatically if this exact version is already installed."
+            3:
+                task: update_admin_profile
+                ui_options:
+                    description: "Grants the System Administrator profile access to anything new in this version. Safe to re-run."
+
+    demo_portal:
+        slug: demo-portal
+        title: Add the Demo Volunteer Portal
+        tier: additional
+        preflight_message: "Creates a public Volunteer Portal site at /volunteers with sample volunteers, jobs and shifts, so you can try the job finder and sign-up flows as a guest. For sandboxes, scratch orgs and demo orgs only: it loads sample records and points every Volunteer Job in the org at a Volunteer Application template. Before running it, go to Setup > Digital Experiences > Settings and enable 'ExperienceBundle Metadata API'."
+        checks:
+            - when: "not tasks.check_extension_installed()['is_installed']"
+              action: error
+              message: "The V4S Extension is not installed in this org yet. Run the Install plan first."
+            - when: "'Network' not in tasks.check_sobjects_available()['sobjects']"
+              action: error
+              message: "Digital Experiences must be enabled. Go to Setup > Digital Experiences > Settings and enable Digital Experiences, then run this plan again."
+        steps:
+            1:
+                task: load_volunteer_data
+                ui_options:
+                    name: "Load Sample Volunteers, Jobs and Shifts"
+                    description: "Creates sample Contacts, Campaigns, Volunteer Jobs, Shifts and Volunteer Roles for the portal to show. Sample data only; nothing in your existing records is changed."
+            2:
+                task: stamp_demo_jobs_with_templates
+                ui_options:
+                    name: "Point Every Job at a Volunteer Application Template"
+                    description: "Sets the Volunteer Application template on every Volunteer Job in the org so each one can be applied to from the portal. Demo orgs only: this overwrites a template already chosen on a job."
+            3:
+                task: create_community
+                options:
+                    template: Build Your Own
+                    name: Volunteer Portal
+                    url_path_prefix: volunteers
+                    skip_existing: True
+                ui_options:
+                    name: "Create the Volunteer Portal Site"
+                    description: "Creates an Experience Cloud site named Volunteer Portal at /volunteers from the Build Your Own template. Skipped if a site with that name already exists."
+            4:
+                task: publish_community
+                options:
+                    name: Volunteer Portal
+                ui_options:
+                    name: "Publish the Site"
+                    description: "Publishes the new site so it has a guest user to configure."
+            5:
+                task: execute_anon
+                options:
+                    path: scripts/setup-volunteer-portal-site.apex
+                ui_options:
+                    name: "Grant the Guest User Access"
+                    description: "Assigns the Form (Flow User) and Form (Flow V4S User) permission sets to the site's guest user, and removes Campaign Members from Volunteer Campaigns so no volunteer details reach guests through the Campaign sharing rule."
+            6:
+                task: activate_volunteer_portal
+                ui_options:
+                    name: "Activate the Site"
+                    description: "Sets the site's status to Live. A new site starts Under Construction, which sends guests to the login page."
+            7:
+                task: open_volunteer_portal_to_guests
+                ui_options:
+                    name: "Open the Site to Guests"
+                    description: "Turns on public access for the site. Without it every page redirects guests to login, even on a live site."
+            8:
+                task: deploy
+                options:
+                    path: scratch-org/site
+                ui_options:
+                    name: "Deploy the Portal Pages and Guest Sharing"
+                    description: "Deploys the portal's pages, navigation, branding, page assignments and the guest sharing rule on Campaign."
+            9:
+                task: publish_community
+                options:
+                    name: Volunteer Portal
+                ui_options:
+                    name: "Republish the Site"
+                    description: "Publishes again so the deployed pages are what guests see."
+            10:
+                task: assert_site_usable
+                ui_options:
+                    name: "Verify the Site Works for Guests"
+                    description: "Confirms the site is live and its guest user carries the permission sets. Fails the plan if a guest would see a login page or an empty job finder."
 
 orgs:
     scratch:
@@ -26,6 +168,12 @@ orgs:
             config_file: orgs/dev.json
             days: 30
             namespaced: True
+        preflight_test:
+            # Bare org WITHOUT Digital Experiences, only to prove the install plan's
+            # preflight checks fire on an org that lacks them. One day.
+            config_file: orgs/beta.json
+            days: 1
+            namespaced: False
         install_test:
             # Install-testing a released managed package requires a NON-namespaced org:
             # a scratch org linked to the same namespace cannot install that namespace's package.
@@ -54,6 +202,22 @@ tasks:
                        "force-app-unpackaged-layouts/","force-app-unpackaged-post/",
                        "force-app-unpackaged-datetime-sync/",
                        "scripts/","tasks/","datasets/","data/","scratch-org/" ]
+
+    # Preflight checks for the MetaDeploy plans. Vendored from the base package into tasks/
+    # because the worker runs stock CumulusCI and imports only from this repo.
+    check_lws_enabled:
+        class_path: tasks.check_lws_enabled.CheckLWSEnabled
+        description: Preflight - is Lightning Web Security enabled?
+
+    check_sobjects_available:
+        class_path: tasks.check_sobjects_available.CheckSObjectsAvailable
+        description: Preflight - list the sobject API names available in the org (Network is present only once Digital Experiences is enabled).
+
+    check_extension_installed:
+        class_path: tasks.check_package_installed.CheckPackageInstalled
+        description: Preflight - is the V4S Extension already installed? Queried by package name because the extension shares the FlowToolKit namespace with the base.
+        options:
+            package_name: "Flow Tool Kit: V4S Extension"
 
     assert_site_payload:
         description: >
@@ -175,7 +339,7 @@ tasks:
                   label: Volunteer Application
 
     inject_conversion_rule_dependency:
-        class_path: cci_flowtoolkit_tasks.picklist_dependency.AddPicklistDependencies
+        class_path: tasks.picklist_dependency.AddPicklistDependencies
         description: Make the volunteer conversion rules selectable under the Volunteer Application conversion type. Conversion Rules is a dependent picklist, so adding a value is only half the job - unmapped, the option is hidden in the UI and any attempt to save it is rejected. Maps the Volunteer Application rule plus the Contact1/Contact2/Account rule families. Run after inject_conversion_rule_value.
         options:
             object_api_name: FlowToolKit__Form_Template__c
@@ -268,6 +432,117 @@ tasks:
             required_org_code_coverage_percent: 75
 
 flows:
+    # The post-install configuration a subscriber org needs, in subscriber shape: the
+    # unpackaged directories deployed as-is (they carry literal FlowToolKit__ prefixes, #24)
+    # and the picklist injections with their prefixed defaults. config_dev applies the same
+    # steps to namespaced dev orgs, where it must override the picklist names to bare ones,
+    # which is why the two cannot share one definition. Runs inside the install plan and
+    # stands alone for testing: cci flow run post_install_config --org install_test
+    post_install_config:
+        description: Post-install configuration for an org with the package installed. Deployed as-is in subscriber shape; see the install plan.
+        steps:
+            1:
+                task: deploy
+                options:
+                    path: force-app-unpackaged-objects
+                ui_options:
+                    name: "Deploy Volunteer Role and Volunteer Fields"
+                    description: "Adds the Volunteer Role object, the extension's fields on Volunteer Job, Shift, Hours, Campaign, Account and Lead, and the Form Object definitions the volunteer forms are built on."
+            2:
+                task: deploy
+                options:
+                    path: force-app-unpackaged-themes
+                ui_options:
+                    name: "Deploy Form Themes"
+                    description: "Two Form Theme records that style the volunteer forms."
+            3:
+                task: deploy
+                options:
+                    path: force-app-unpackaged-contentAssets
+                ui_options:
+                    name: "Deploy Site Images"
+                    description: "The banner and illustration images the volunteer forms and portal pages display."
+            4:
+                task: deploy
+                options:
+                    path: force-app-unpackaged-forms
+                ui_options:
+                    name: "Deploy Volunteer Forms"
+                    description: "The form definitions: job details, shift tables, registration, waiver and group sign-up."
+            5:
+                task: deploy
+                options:
+                    path: force-app-unpackaged-datetime-sync
+                ui_options:
+                    name: "Deploy Shift Date and Time Sync"
+                    description: "Keeps each Volunteer Shift's start and end Date/Time in step with its separate date and time fields, through Date Time Sync configuration and a trigger."
+            6:
+                task: deploy
+                options:
+                    path: force-app-unpackaged-layouts
+                ui_options:
+                    name: "Deploy Page Layouts"
+                    description: "Page layouts for Volunteer Job, Shift, Hours and Volunteer Role with the extension's fields placed."
+            7:
+                task: deploy
+                options:
+                    path: force-app-unpackaged-post
+                ui_options:
+                    name: "Deploy the Volunteers App and Record Pages"
+                    description: "The Volunteers Lightning app, record pages for Job, Shift and Hours, the Form Template Sources that let a form template read a Volunteer Job or Shift, and the two V4S permission sets."
+            8:
+                task: update_admin_profile
+                ui_options:
+                    name: "Grant Admin Access to the New Fields"
+                    description: "Re-grants the System Administrator profile access to everything deployed in the previous steps. Without it the Form Template Sources drop out of queries and the form templates loaded next come up incomplete."
+            9:
+                task: inject_conversion_type_value
+                ui_options:
+                    name: "Add the Volunteer Application Conversion Type"
+                    description: "Adds Volunteer Application to Flow Tool Kit's Conversion Type picklist on Form Template. The volunteer conversion rule hangs off this value."
+            10:
+                task: inject_conversion_rule_value
+                ui_options:
+                    name: "Add the Volunteer Application Conversion Rule"
+                    description: "Adds Volunteer Application to the Conversion Rules picklist. All four volunteer conversion flows check for this value before they run."
+            11:
+                task: inject_conversion_rule_dependency
+                ui_options:
+                    name: "Map the Conversion Rule to Its Type"
+                    description: "Conversion Rules is a dependent picklist, so the new value is hidden until it is mapped under the Volunteer Application type. Also maps the Contact and Account rule families."
+            12:
+                task: inject_controller_map_flow_value
+                ui_options:
+                    name: "Register the Volunteer Controller Flow"
+                    description: "Makes the volunteer conversion controller selectable on a Form Template."
+            13:
+                task: inject_contact1_map_flow_value
+                ui_options:
+                    name: "Register the Volunteer Contact Mapping Flow"
+                    description: "Makes the volunteer Contact mapping selectable on a Form Template."
+            14:
+                task: inject_account_map_flow_value
+                ui_options:
+                    name: "Register the Volunteer Group Account Mapping Flow"
+                    description: "Makes the volunteer group Account mapping selectable on a Form Template."
+            15:
+                task: load_form_templates
+                ui_options:
+                    name: "Load the Volunteer Application Form Templates"
+                    description: "Creates the two Volunteer Application form templates an admin points a Volunteer Job at. Product configuration, not sample data."
+            16:
+                task: cleanup_auto_created_template_children
+                ui_options:
+                    name: "Remove Auto-Created Template Pages"
+                    description: "Removes the empty page and section Flow Tool Kit adds to every new template, which would otherwise render as a blank Primary Contact Information page."
+            17:
+                task: assign_permission_sets
+                options:
+                    api_names: Form_Builder_Admin,Form_Flow_User,Form_Flow_V4S_Admin,Form_Flow_V4S_User
+                ui_options:
+                    name: "Assign Permission Sets to You"
+                    description: "Assigns Form (Builder Admin), Form (Flow User), Form (Flow V4S Admin) and Form (Flow V4S User) to the user running this installer, so you can configure forms and run the sign-up flows right away. Other users are assigned in Setup."
+
     release_2gp_beta:
         steps:
             90:

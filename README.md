@@ -8,15 +8,16 @@ conversion flows an admin can override.
 
 ## Documentation
 
-Release notes, with install links for every version, are on the
-[Releases](https://github.com/common-unite/FlowToolKit_V4S_Extension_Public/releases) page. Guides
-land in `documents/` as they are written.
+The guides are in [`documents/`](documents/README.md): installation, a quickstart, each feature,
+configuration, and the Experience Cloud site. Release notes, with install links for every version,
+are on the [Releases](https://github.com/common-unite/FlowToolKit_V4S_Extension_Public/releases) page.
 
 ## What it does
 
-- **Volunteer Jobs Finder** (Flow screen component): list, calendar and map views over Volunteer
-  Jobs and Shifts, with keyword, date, day-of-week and location filters. The selected job and
-  shifts flow out to the next screen.
+- **Volunteer Jobs Finder** (Flow screen component): upcoming Volunteer Jobs grouped into Featured,
+  Today, This Week, Ongoing and Upcoming, with search and event, location, job, date, time-of-day
+  and day-of-week filters. Picking a job shows its overview and a calendar of its shifts; the
+  selected job and shifts flow out to the next screen.
 - **Volunteer Job Finder page** (Experience Cloud component): the same finder as a drop-in site
   page with a property editor. Records come from the packaged query or from a Flow you supply;
   job selectability, blocks per row, and search toasts are settings.
@@ -25,14 +26,15 @@ land in `documents/` as they are written.
   the Shift drive tile labels and disabled states, and a navigation target decides whether a
   picked shift opens in this window, a new tab, or not at all.
 - **Registration and sign-up flows**: screen flows for job and shift sign-up, and overridable
-  conversion flows that turn a Form Submission into a volunteer Contact, an Account, a Case, and
+  conversion flows that turn a Form Submission into a volunteer Contact, a group Account and
   Volunteer Hours.
 - **Volunteer Hours conversion** with duplicate prevention and multi-shift sign-up.
 - **Invocable actions**: Retrieve Volunteer Jobs (the finder's query, callable from any Flow) and
   Prevent Duplicate Volunteer Hours, each with its own property editor.
 - **Record automation**: shift end time calculation and confirmation message sync from Job to
   Shift.
-- **Translatable**: 58 custom labels cover the volunteer-facing text.
+- **Translatable**: 68 custom labels cover the volunteer-facing text, and a Spanish translation of
+  the labels, fields, picklist values and sign-up flow ships in the package.
 
 ## Requirements
 
@@ -54,12 +56,12 @@ Settings, which every Flow Tool Kit component expects.
    - Always current: [latest release](https://github.com/common-unite/FlowToolKit_V4S_Extension_Public/releases/latest)
 2. **Post-install configuration**: the `force-app-unpackaged-*` directories hold what a managed
    package cannot carry, authored in the shape an org with the package installed needs. Deploy
-   them in this order, with the Salesforce CLI or CumulusCI. A MetaDeploy installer that runs
-   these steps for you is in progress.
+   them in this order with the Salesforce CLI, or run `cci flow run post_install_config` with
+   CumulusCI. See [Installation](documents/getting-started/installation.md).
 
    | Directory | Contents |
    |---|---|
-   | `force-app-unpackaged-objects` | The Volunteer Role object, `cUnite_` fields on Volunteer Job, Shift, Hours, Campaign, Account and Lead, and the Volunteer Application conversion picklist values on Form Template |
+   | `force-app-unpackaged-objects` | The Volunteer Role object, `cUnite_` fields on Volunteer Job, Shift, Hours, Campaign, Account and Lead, and the Form Object definitions the forms are built on |
    | `force-app-unpackaged-themes` | Two Form Themes for the volunteer forms |
    | `force-app-unpackaged-contentAssets` | Images for the Volunteer Portal site |
    | `force-app-unpackaged-forms` | The Form definitions: job details, shift tables, registration, waiver, group sign-up |

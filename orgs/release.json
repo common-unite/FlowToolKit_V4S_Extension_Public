@@ -1,7 +1,9 @@
 {
   "orgName": "FlowToolKit_V4S_Ext - Release Test Org",
   "edition": "Enterprise",
-  "features": ["Communities"],
+  "features": [
+    "Communities"
+  ],
   "settings": {
     "communitiesSettings": {
       "enableNetworksEnabled": true
@@ -20,6 +22,9 @@
       "sessionSettings": {
         "forceRelogin": false
       }
+    },
+    "languageSettings": {
+      "enableTranslationWorkbench": true
     }
   }
 }

@@ -46,4 +46,4 @@ The forms, themes, Form Templates and the conversion framework come from the Flo
 
 ## Release notes
 
-Every release, with its install links, is on the [Releases](https://github.com/common-unite/FlowToolKit_V4S_Extension_Public/releases) page.
+Every release, with its install links, is on the [Releases](https://github.com/common-unite/FlowToolKit_V4S_Extension_Public/releases) page. Notes by version: [0.45](release-notes/release-0.45.md).

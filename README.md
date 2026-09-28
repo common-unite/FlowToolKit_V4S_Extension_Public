@@ -41,7 +41,7 @@ are on the [Releases](https://github.com/common-unite/FlowToolKit_V4S_Extension_
 | Package | Version the current release was built against |
 |---|---|
 | Volunteers for Salesforce | 3.127 |
-| Flow Tool Kit: Form and Table Builder | 4.31.0.1 |
+| Flow Tool Kit: Form and Table Builder | 4.42.0.3 |
 | Date Time Sync | 0.12.0.1 |
 
 Newer versions of each dependency are fine. The org also needs **Digital Experiences enabled**
@@ -50,9 +50,9 @@ Settings, which every Flow Tool Kit component expects.
 
 ## Install
 
-1. **Managed package**: install the current release (**0.44.0.1**):
-   - Sandbox and scratch orgs: <https://test.salesforce.com/packaging/installPackage.apexp?p0=04tRQ000000AZAzYAO>
-   - Production and Developer Edition: <https://login.salesforce.com/packaging/installPackage.apexp?p0=04tRQ000000AZAzYAO>
+1. **Managed package**: install the current release (**0.45.0.2**):
+   - Sandbox and scratch orgs: <https://test.salesforce.com/packaging/installPackage.apexp?p0=04tRQ000000B5VpYAK>
+   - Production and Developer Edition: <https://login.salesforce.com/packaging/installPackage.apexp?p0=04tRQ000000B5VpYAK>
    - Always current: [latest release](https://github.com/common-unite/FlowToolKit_V4S_Extension_Public/releases/latest)
 2. **Post-install configuration**: the `force-app-unpackaged-*` directories hold what a managed
    package cannot carry, authored in the shape an org with the package installed needs. Deploy

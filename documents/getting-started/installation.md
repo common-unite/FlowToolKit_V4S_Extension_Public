@@ -7,7 +7,7 @@ The V4S Extension is a managed package plus a set of post-install configuration 
 | Package | Minimum version |
 |---|---|
 | Volunteers for Salesforce | 3.127 |
-| Flow Tool Kit: Form and Table Builder | 4.31.0.1 |
+| Flow Tool Kit: Form and Table Builder | 4.42.0.3 |
 | Date Time Sync | 0.12.0.1 |
 
 Newer versions of each are fine. The org also needs:

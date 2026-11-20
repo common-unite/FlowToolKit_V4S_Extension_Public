@@ -19,7 +19,7 @@ It comes in two forms:
    - **Location**: a location Account, then State, City and Postal Code from the job's V4S location fields.
    - **Volunteer Job**: a specific job, its Type, Volunteer Types and Skills Needed.
    - **Date and Time**: a date range, Time of Day, Weekday or Weekend, and Day of the Week.
-3. **Results in sections**: **Featured** jobs in a carousel, then **Today's Opportunities**, **This Week's Opportunities**, **Ongoing Opportunities** (jobs with no fixed schedule) and **Upcoming Opportunities**.
+3. **Results in sections**: **Featured** jobs in a carousel, then **Today's Opportunities**, **This Week's Opportunities**, **Ongoing Opportunities** (jobs with no fixed schedule) and **Upcoming Opportunities**. Each job sits in Today, This Week or Upcoming by its soonest upcoming shift, and each of those sections lists its jobs by that shift, earliest first. After a visitor filters (for example to Monday shifts only), the finder looks only at the shifts that still show, so a job moves to the section and place its soonest matching shift gives it. Ongoing jobs are listed by name.
 4. **Badges** on each job summarize its shifts: the days they fall on ("Monday | Wednesday", "Monday thru Friday", "Daily" or "Ongoing") and their start times.
 5. **Picking a job** opens its **Overview** and a **Dates and Shifts** tab with a calendar of its upcoming shifts.
 

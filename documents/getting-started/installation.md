@@ -7,13 +7,14 @@ The V4S Extension is a managed package plus a set of post-install configuration 
 | Package | Minimum version |
 |---|---|
 | Volunteers for Salesforce | 3.127 |
-| Flow Tool Kit: Form and Table Builder | 4.42.0.3 |
+| Flow Tool Kit: Form and Table Builder | 5.4.0.2 |
 | Date Time Sync | 0.12.0.1 |
 
 Newer versions of each are fine. The org also needs:
 
 - **Digital Experiences enabled** (Setup > Digital Experiences > Settings). The package will not install without it, even if you never build a site.
 - **Lightning Web Security** turned on (Setup > Session Settings > "Use Lightning Web Security for Lightning web components"). Every Flow Tool Kit component expects it, and the Job Finder slows down badly on large data sets without it.
+- **Enhanced Email** turned on (Setup > Enhanced Email). Flow Tool Kit 5.4 does not install with it off.
 
 See the Flow Tool Kit [installation guide](https://github.com/common-unite/Flow_Tool_Kit_Public/blob/main/documents/getting-started/installation.md) for the base package.
 

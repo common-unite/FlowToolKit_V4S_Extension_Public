@@ -1,0 +1,12 @@
+{
+  "type": "sfdc_cms__route",
+  "title": "Volunteer Job List",
+  "urlName": "volunteer-job-list",
+  "contentBody": {
+    "activeViewId": "volunteerJobList",
+    "configurationTags": [],
+    "pageAccess": "UseParent",
+    "routeType": "list-a03",
+    "urlPrefix": "volunteer-job"
+  }
+}

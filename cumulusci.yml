@@ -164,7 +164,7 @@ orgs:
             config_file: orgs/dev.json
             days: 30
             namespaced: True
-        sprint_2026-08-25:
+        dev:
             config_file: orgs/dev.json
             days: 30
             namespaced: True
@@ -230,6 +230,17 @@ tasks:
             path: scratch-org/site
             require_types: ExperienceBundle,SharingRules
 
+    assert_site_fields_tokenized:
+        description: >
+            Fails the flow when scratch-org/site names an unpackaged field any way
+            but %%%NAMESPACED_ORG%%%Field. The site's blocks read fields through the
+            UI API, which never fills in the org's namespace, so a literal FlowToolKit__
+            renders empty in subscriber orgs and a bare name renders empty in dev orgs.
+            A re-capture from a dev org reintroduces the prefix. See issue #39.
+        class_path: tasks.namespace_guard.AssertUnpackagedFieldsTokenized
+        options:
+            path: scratch-org/site
+
     assert_site_usable:
         description: >
             Fails the flow when the demo site finished config_dev but would not
@@ -251,6 +262,30 @@ tasks:
         class_path: cumulusci.tasks.command.SalesforceCommand
         options:
             command: bash scripts/open-volunteer-portal-to-guests.sh
+
+    # Dev org guest sites (#50). config_dev only: never add these to the demo_portal plan or a client path.
+    activate_lwr_volunteer_portal:
+        description: Activates the LWR Volunteer Portal dev site and turns on guest API access, without which an LWR guest's ui-api calls return 401.
+        class_path: cumulusci.tasks.command.SalesforceCommand
+        options:
+            command: bash scripts/activate-volunteer-portal.sh "LWR Volunteer Portal" guest-api
+
+    activate_guest_save_override:
+        description: Activates the base installer's Guest Save Override flow (Form_Submission_Upsert_Guest), which it installs inactive. Dev orgs only; a client admin reviews and activates their own.
+        class_path: cumulusci.tasks.command.SalesforceCommand
+        options:
+            command: bash scripts/activate-guest-save-override.sh
+
+    assert_lws_enabled:
+        description: Fails the flow when Lightning Web Security is off (orgs/dev.json turns it on). No ignore_failure, on purpose.
+        class_path: tasks.check_lws_enabled.AssertLWSEnabled
+
+    assert_site_lwr_payload:
+        description: Fails the flow when scratch-org/site-lwr would deploy less than it holds. No ignore_failure, on purpose - see #30.
+        class_path: tasks.metadata_guard.AssertMetadataPayload
+        options:
+            path: scratch-org/site-lwr
+            require_types: DigitalExperienceBundle
 
     deploy_unpackaged_objects:
         description: Deploys Form Object CMDT and custom fields
@@ -702,6 +737,22 @@ flows:
                 # Demo only. Stamps EVERY Volunteer Job in the org, so it belongs
                 # in config_dev and must never reach a client install path.
                 task: stamp_demo_jobs_with_templates
+            46:
+                # Scratch orgs only. A namespaced dev org owns the FlowToolKit namespace, so the
+                # free Provider cache never lands and FormComponents stays at 0 MB: every form
+                # loads cold. This gives it 3 MB of the org's cache. Never add scratch-org/
+                # platform-cache to a MetaDeploy plan or post_install_config. See #48.
+                task: deploy
+                description: Allocate 3 MB of org cache to the FormComponents partition (#48)
+                options:
+                    path: scratch-org/platform-cache
+            47:
+                # Scratch orgs only. The Volunteer Job Detail page's hero, detail icons, location and
+                # campaign photos all read resource:VolunteerOpportunityArt; without it every one 404s.
+                task: deploy
+                description: Deploy the VolunteerOpportunityArt static resource the demo Volunteer Job Detail page reads
+                options:
+                    path: scratch-org/showcase/staticresources
             # Demo Experience Cloud site. Guest-facing rendering is a core part of
             # the product, so every dev org gets a site to test in.
             50:
@@ -729,14 +780,54 @@ flows:
             53.1:
                 task: open_volunteer_portal_to_guests
                 ignore_failure: True
+            # LWR guest site (#50): the LWR host for the Job Finder and the six-host check. It must exist
+            # before step 54, whose guest sharing rules name its guest user.
+            53.2:
+                task: create_community
+                options:
+                    template: Build Your Own (LWR)
+                    name: LWR Volunteer Portal
+                    description: Dev org LWR host for the Volunteer Job Finder and LWR guest checks (issue 50). Scratch orgs only.
+                    url_path_prefix: volunteerslwr
+                    skip_existing: True
+                ignore_failure: True
+            53.3:
+                task: activate_lwr_volunteer_portal
+                ignore_failure: True
+            53.4:
+                task: assert_site_lwr_payload
+            53.5:
+                task: deploy
+                description: LWR site pages (Job Finder home, Volunteer Job page with its form, FlowToolKit LWR Support in the Theme Footer), public to guests. See scratch-org/site-lwr/README.md
+                options:
+                    path: scratch-org/site-lwr
+                ignore_failure: True
             53.9:
                 task: assert_site_payload
                 description: Guards that the captured site is actually declared in package.xml. No ignore_failure, on purpose - see #30.
+            53.95:
+                task: assert_site_fields_tokenized
+                description: Guards that every unpackaged field the site reads carries %%%NAMESPACED_ORG%%%, so the page renders in dev and subscriber orgs alike. No ignore_failure, on purpose - see #39.
             54:
                 task: deploy
                 description: Built Volunteer Portal site (guest sharing rules, page assignments). No-ops until the site has been captured once, see scratch-org/site/README.md
                 options:
                     path: scratch-org/site
+                ignore_failure: True
+            54.1:
+                task: execute_anon
+                description: Gives both dev site guests every permission set a guest form needs, including the Guest Save Override grant (#50)
+                options:
+                    path: scripts/setup-dev-guest-sites.apex
+                ignore_failure: True
+            54.2:
+                task: activate_guest_save_override
+                ignore_failure: True
+            54.3:
+                task: publish_community
+                description: Publish the LWR site; an LWR site serves only what its last publish bundled
+                options:
+                    name: LWR Volunteer Portal
                 ignore_failure: True
             55:
                 task: publish_community
@@ -747,3 +838,23 @@ flows:
             55.1:
                 task: assert_site_usable
                 description: Guards that the demo site is genuinely usable by a guest. No ignore_failure, on purpose - see #30.
+                options:
+                    guest_permission_sets: Form_Flow_User,Form_Flow_V4S_User,Form_Flow_Guest_User
+                    guest_shared_records: "Campaign:IsActive = true AND Id IN (SELECT GW_Volunteers__Campaign__c FROM GW_Volunteers__Volunteer_Job__c);FlowToolKit__Form_Template__c:FlowToolKit__IsActive__c = true;FlowToolKit__Form_Submission__c:FlowToolKit__IsPrefillTemplate__c = true"
+                    active_flows: Form_Submission_Upsert_Guest
+            55.2:
+                task: assert_site_usable
+                description: The same guard for the LWR site, plus guest API access (#50). No ignore_failure, on purpose.
+                options:
+                    network_name: LWR Volunteer Portal
+                    guest_permission_sets: Form_Flow_User,Form_Flow_V4S_User,Form_Flow_Guest_User
+                    guest_shared_records: "Campaign:IsActive = true AND Id IN (SELECT GW_Volunteers__Campaign__c FROM GW_Volunteers__Volunteer_Job__c);FlowToolKit__Form_Template__c:FlowToolKit__IsActive__c = true;FlowToolKit__Form_Submission__c:FlowToolKit__IsPrefillTemplate__c = true"
+                    active_flows: Form_Submission_Upsert_Guest
+                    guest_api: True
+            55.3:
+                task: assert_lws_enabled
+            55.4:
+                task: execute_anon
+                description: Fails the flow when the org cannot send email (#50); no org definition setting controls deliverability
+                options:
+                    path: scripts/assert-dev-org-sends-email.apex

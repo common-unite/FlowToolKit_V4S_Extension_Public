@@ -1,6 +1,10 @@
 {
   "orgName": "FlowToolKit_V4S_Ext - Beta Test Org",
   "edition": "Developer",
+  "features": [
+    "PlatformCache",
+    "ProviderFreePlatformCache"
+  ],
   "settings": {
     "lightningExperienceSettings": {
       "enableS1DesktopEnabled": true
@@ -16,6 +20,12 @@
       "sessionSettings": {
         "forceRelogin": false
       }
+    },
+    "experienceBundleSettings": {
+      "enableExperienceBundleMetadata": true
+    },
+    "emailAdministrationSettings": {
+      "enableEnhancedEmailEnabled": true
     }
   }
 }

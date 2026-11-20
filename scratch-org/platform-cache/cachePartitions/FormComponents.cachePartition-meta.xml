@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PlatformCachePartition xmlns="http://soap.sforce.com/2006/04/metadata">
+    <!-- Must stay "FormComponents": the partition belongs to the FlowToolKit base package,
+         and a deploy that changes its description fails "Cannot modify managed object". -->
+    <description>FormComponents</description>
+    <isDefaultPartition>false</isDefaultPartition>
+    <masterLabel>FormComponents</masterLabel>
+    <platformCachePartitionTypes>
+        <allocatedCapacity>3</allocatedCapacity>
+        <allocatedPartnerCapacity>0</allocatedPartnerCapacity>
+        <allocatedPurchasedCapacity>0</allocatedPurchasedCapacity>
+        <allocatedTrialCapacity>0</allocatedTrialCapacity>
+        <cacheType>Organization</cacheType>
+    </platformCachePartitionTypes>
+    <platformCachePartitionTypes>
+        <allocatedCapacity>0</allocatedCapacity>
+        <allocatedPartnerCapacity>0</allocatedPartnerCapacity>
+        <allocatedPurchasedCapacity>0</allocatedPurchasedCapacity>
+        <allocatedTrialCapacity>0</allocatedTrialCapacity>
+        <cacheType>Session</cacheType>
+    </platformCachePartitionTypes>
+</PlatformCachePartition>

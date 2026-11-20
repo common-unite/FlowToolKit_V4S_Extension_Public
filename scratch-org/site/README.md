@@ -8,15 +8,29 @@ where the site already exists or the bundle below has not been captured yet.
 
 Scratch-org scaffolding only. Never packaged. It sits outside `force-app`.
 
+The LWR twin, **LWR Volunteer Portal** (`/volunteerslwr`), is built by steps 53.2 to 54.3 from
+`scratch-org/site-lwr`; see its README. Its guest sharing rules live here, beside this site's.
+
 ## What is automated vs. captured
 
 | Automated by `config_dev` | Manual once, then captured into this folder |
 | --- | --- |
 | Site creation and publish | Making pages public ("Public can access the site") |
 | **Activation** (`Network.Status = Live`, step 53) | Page assignments (which packaged page serves which route) |
-| Guest permission sets (`Form_Flow_User`, `Form_Flow_V4S_User`) | Theme, branding, navigation menu |
-| Guest sharing rule on Campaign (`sharingRules/Campaign.sharingRules`) | |
+| Guest permission sets (`Form_Flow_User`, `Form_Flow_V4S_User`; dev orgs also `Form_Flow_Guest_User`, step 54.1) | Theme, branding, navigation menu |
+| Guest sharing rules for both dev sites: Campaign, active Form Templates, prefill Form Submissions (`sharingRules/`, #50) | **Home** holds the Volunteer Job Finder (#50) |
+| Guest Save Override flow activated (dev orgs, step 54.2) | **Form Template** object pages at `/s/form-template/<Id>`: a guest opens a job's form there (#50) |
 | Campaign Member cleanup (guest PII, see `documents/security/`) | |
+
+Steps 55.1 and 55.2 assert the outcome for both sites (Live, guest permission sets, every
+active Form Template, prefill template and volunteer Campaign shared to the guest, the
+override flow active, guest API access on the LWR site); 55.3 and 55.4 assert Lightning
+Web Security is on and the org can send email. None of these carry `ignore_failure`.
+
+The Form Template route type carries the key prefix `a0M` (the base package's installed
+Form Template, the same in every org that installs it). Do not recapture
+`views/volunteerJobDetail.json`: it is generated with `%%%NAMESPACED_ORG%%%` tokens (#39),
+and a retrieve returns literal `FlowToolKit__` names.
 
 ### Activation: use the sObject REST endpoint, nothing else works
 
@@ -60,6 +74,17 @@ which is exactly what a fresh org does.
        --target-org <alias> --target-metadata-dir scratch-org/site --unzip
    ```
 4. Add `ExperienceBundle` to `package.xml` and commit `scratch-org/site/experiences/**`.
+5. **Put the namespace token back on unpackaged fields.** A capture from a dev org writes
+   every field in a `{{token}}` as `FlowToolKit__Field__c`. That is right for packaged
+   fields (`force-app`) but wrong for unpackaged ones (`force-app-unpackaged-objects`, all of
+   `Volunteer_Role__c`), which are bare in an org with the package installed. Write those
+   as `%%%NAMESPACED_ORG%%%Field__c`: the CumulusCI `deploy` task turns the token into
+   `FlowToolKit__` in a namespaced dev org and into nothing in a subscriber org. A bare name
+   does not work either, because Site Design Blocks read fields through the UI API, which
+   never fills in the org's namespace. `assert_site_fields_tokenized` (config_dev step
+   53.95) fails the build and lists every reference to fix. Deploy this folder with
+   `cci task run deploy --path scratch-org/site`, never `sf project deploy`, which would
+   ship the token literally.
 
 `.forceignore` blanket-ignores `**/networks/**` and `**/sites/**`, and an ignored path is
 skipped silently by every sf CLI operation, not just source tracking. The

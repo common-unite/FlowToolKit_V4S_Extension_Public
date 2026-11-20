@@ -6,6 +6,8 @@
     </types>
     <types>
         <members>Campaign</members>
+        <members>FlowToolKit__Form_Submission__c</members>
+        <members>FlowToolKit__Form_Template__c</members>
         <name>SharingRules</name>
     </types>
     <version>65.0</version>

@@ -1,0 +1,46 @@
+{
+  "appPageId" : "d7e04c5e-0ae0-4603-8f83-61433ec81f4c",
+  "componentName" : "siteforce:sldsOneColLayout",
+  "dataProviders" : [ ],
+  "id" : "db8ac7f5-af3c-411b-b005-590e8a85c18a",
+  "label" : "Volunteer Job List",
+  "regions" : [ {
+    "id" : "aa24f5a5-b8cb-4d05-8947-a56c2b9c3578",
+    "regionName" : "header",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "enableInlineEdit" : true,
+        "filterName" : "{!filterId}",
+        "layout" : "FULL",
+        "pageSize" : 25,
+        "scope" : "{!objectName}",
+        "showActionBar" : true,
+        "showChartsPanel" : true,
+        "showDisplay" : "showall",
+        "showFilterPanel" : true,
+        "showImageIcon" : true,
+        "showManualRefreshButton" : true,
+        "showObjectName" : true,
+        "showPinnedList" : true,
+        "showSearchBar" : true
+      },
+      "componentName" : "forceCommunity:objectHome",
+      "id" : "114c728f-61f7-4ec5-89bc-d6270336c7e3",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "57a5fbbc-14b3-4f78-abcb-15f9000a9bb2",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "id" : "bf760bfd-580b-4dee-9188-04aa47350320",
+    "regionName" : "footer",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Inner",
+  "type" : "view",
+  "viewType" : "list-a03"
+}

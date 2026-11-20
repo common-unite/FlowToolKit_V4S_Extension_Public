@@ -1,0 +1,12 @@
+{
+  "activeViewId": "5a0f50aa-0050-4a50-9050-000000000016",
+  "appPageId": "d7e04c5e-0ae0-4603-8f83-61433ec81f4c",
+  "configurationTags": [],
+  "devName": "Form_Template_Related_List__c",
+  "id": "5a0f50aa-0050-4a50-9050-000000000021",
+  "label": "Form Template Related List",
+  "objectApiName": "FlowToolKit__Form_Template__c",
+  "routeType": "relatedlist-a0M",
+  "type": "route",
+  "urlPrefix": "form-template"
+}

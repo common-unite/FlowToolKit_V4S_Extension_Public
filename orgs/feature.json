@@ -1,6 +1,10 @@
 {
   "orgName": "FlowToolKit_V4S_Ext - Feature Test Org",
   "edition": "Developer",
+  "features": [
+    "PlatformCache",
+    "ProviderFreePlatformCache"
+  ],
   "settings": {
     "lightningExperienceSettings": {
       "enableS1DesktopEnabled": true
@@ -19,6 +23,12 @@
     },
     "languageSettings": {
       "enableTranslationWorkbench": true
+    },
+    "experienceBundleSettings": {
+      "enableExperienceBundleMetadata": true
+    },
+    "emailAdministrationSettings": {
+      "enableEnhancedEmailEnabled": true
     }
   }
 }

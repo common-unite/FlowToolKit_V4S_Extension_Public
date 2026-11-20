@@ -2,7 +2,9 @@
   "orgName": "FlowToolKit_V4S_Ext - Dev Org",
   "edition": "Enterprise",
   "features": [
-    "Communities"
+    "Communities",
+    "PlatformCache",
+    "ProviderFreePlatformCache"
   ],
   "settings": {
     "communitiesSettings": {
@@ -20,7 +22,8 @@
     "securitySettings": {
       "enableAdminLoginAsAnyUser": true,
       "sessionSettings": {
-        "forceRelogin": false
+        "forceRelogin": false,
+        "lockerServiceNext": true
       }
     },
     "languageSettings": {
@@ -28,6 +31,9 @@
     },
     "experienceBundleSettings": {
       "enableExperienceBundleMetadata": true
+    },
+    "emailAdministrationSettings": {
+      "enableEnhancedEmailEnabled": true
     }
   }
 }

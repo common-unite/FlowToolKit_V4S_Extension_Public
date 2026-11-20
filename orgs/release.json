@@ -2,7 +2,9 @@
   "orgName": "FlowToolKit_V4S_Ext - Release Test Org",
   "edition": "Enterprise",
   "features": [
-    "Communities"
+    "Communities",
+    "PlatformCache",
+    "ProviderFreePlatformCache"
   ],
   "settings": {
     "communitiesSettings": {
@@ -25,6 +27,12 @@
     },
     "languageSettings": {
       "enableTranslationWorkbench": true
+    },
+    "experienceBundleSettings": {
+      "enableExperienceBundleMetadata": true
+    },
+    "emailAdministrationSettings": {
+      "enableEnhancedEmailEnabled": true
     }
   }
 }

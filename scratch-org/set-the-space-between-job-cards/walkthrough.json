@@ -1,0 +1,60 @@
+{
+  "issue": 46,
+  "repo": "common-unite/FormBuilder_V4SF",
+  "org": "FlowToolKit_V4S_Ext__dev",
+  "home": "/lightning/page/home",
+  "reset": "reset.apex",
+  "vimeo_folder": "Walkthroughs",
+  "vimeo_privacy": "public",
+  "slug": "set-the-space-between-job-cards",
+  "preview": "set-the-space-between-job-cards.gif",
+  "title": "Set the space between job cards in the Volunteer Job Finder",
+  "description": "How to tighten or widen the space between job cards in the Volunteer Job Finder on an Experience Cloud site, with the Card Spacing settings in Experience Builder, and how to publish the change to the live site.",
+  "docs": "documents/features/job-finder.md#experience-cloud-component",
+  "release_notes": "_release-notes/46-finder-record-spacing.md",
+  "clips": [
+    {
+      "name": "card-spacing",
+      "scenario": "card-spacing.cjs",
+      "lines": [
+        [
+          "intro",
+          "In this tutorial, you'll set the space between job cards in the Volunteer Job Finder. In Experience Builder, the finder shows three cards to a row, with a wide gap between the columns."
+        ],
+        [
+          "select",
+          "Click the Volunteer Job Finder to select it. Its settings open in the panel on the right."
+        ],
+        [
+          "layout",
+          "Scroll to Layout. Under Card Spacing are Above, Below and Beside. Each one starts at Default, which keeps the spacing the page has today."
+        ],
+        [
+          "beside",
+          "Set Beside to x-small. Beside is the space on each side of a card, so the gap between columns is twice the size you pick."
+        ],
+        [
+          "below",
+          "Set Below to small, to add a matching space under each card."
+        ],
+        [
+          "publish",
+          "Click Publish, then confirm with Publish in the window, so the change reaches the live site for every visitor."
+        ],
+        [
+          "live",
+          "Publishing takes a few seconds. Then open the live site the way a volunteer sees it, without signing in, and wait for the jobs to load."
+        ],
+        [
+          "result",
+          "Scroll down to the jobs. The columns now sit close together, and every section of the finder uses the same spacing."
+        ],
+        [
+          "close",
+          "To go back, set each one to Default and publish. In a flow, set the same spacing in the Configure Form Repeater action, under Record Spacing."
+        ]
+      ]
+    }
+  ],
+  "vimeo": "https://vimeo.com/1245191505"
+}

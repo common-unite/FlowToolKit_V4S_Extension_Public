@@ -1,0 +1,80 @@
+{
+  "type": "sfdc_cms__view",
+  "title": "Home",
+  "contentBody": {
+    "component": {
+      "children": [
+        {
+          "children": [
+            {
+              "attributes": {
+                "backgroundImageConfig": "",
+                "backgroundImageOverlay": "rgba(0,0,0,0)",
+                "componentSpacerSize": "",
+                "layoutDirectionDesktop": "row",
+                "layoutDirectionMobile": "column",
+                "layoutDirectionTablet": "column",
+                "maxContentWidth": "",
+                "sectionColumnGutterWidth": "",
+                "sectionConfig": "{\"UUID\":\"367ca400-7fa5-4a79-b388-ae07f1165d06\",\"columns\":[{\"UUID\":\"62e7c5cd-9ffd-4968-9770-ff5c12510414\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":null}]}",
+                "sectionMinHeight": "",
+                "sectionVerticalAlign": "flex-start"
+              },
+              "children": [
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "properties": "{\"jobListFormQualifiedApiName\": \"JobFinder_Highlight_Form\", \"blocksPerRow\": 3, \"recordsPerCategory\": 6}"
+                      },
+                      "definition": "FlowToolKit:volunteerJobsFinderPage",
+                      "id": "5a0f50aa-0050-4c50-8050-000000000002",
+                      "type": "component"
+                    }
+                  ],
+                  "id": "62e7c5cd-9ffd-4968-9770-ff5c12510414",
+                  "name": "col1",
+                  "title": "Column 1",
+                  "type": "region"
+                }
+              ],
+              "definition": "community_layout:section",
+              "id": "367ca400-7fa5-4a79-b388-ae07f1165d06",
+              "type": "component"
+            }
+          ],
+          "id": "e13abacb-5a1b-4c5f-beb9-d75911ed5c66",
+          "name": "content",
+          "title": "Content",
+          "type": "region"
+        },
+        {
+          "children": [
+            {
+              "attributes": {
+                "customHeadTags": "",
+                "description": "",
+                "pageTitle": "Volunteer Job Finder",
+                "recordId": "{!recordId}"
+              },
+              "definition": "community_builder:seoAssistant",
+              "id": "cc00278a-7c2d-4436-af85-49d932d5065f",
+              "type": "component"
+            }
+          ],
+          "id": "eb330dbc-508f-493e-acc5-4d4e6597596e",
+          "name": "sfdcHiddenRegion",
+          "title": "sfdcHiddenRegion",
+          "type": "region"
+        }
+      ],
+      "definition": "community_layout:sldsFlexibleLayout",
+      "id": "a8289179-c3d3-4f80-adf8-21c6255b94bf",
+      "type": "component"
+    },
+    "dataProviders": [],
+    "themeLayoutType": "Inner",
+    "viewType": "home"
+  },
+  "urlName": "home"
+}

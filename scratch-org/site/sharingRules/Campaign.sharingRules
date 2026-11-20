@@ -14,4 +14,18 @@
             <value>true</value>
         </criteriaItems>
     </sharingGuestRules>
+    <sharingGuestRules>
+        <fullName>Guest_Volunteer_Campaigns_LWR_Portal</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>The same rule for the LWR Volunteer Portal guest (issue #50): without it the LWR Job Finder shows a guest nothing. Demo scaffolding only. Read documents/security/campaign-sharing-guest-pii-summary.md before widening it.</description>
+        <label>Guest Volunteer Campaigns LWR Portal</label>
+        <sharedTo>
+            <guestUser>LWR_Volunteer_Portal</guestUser>
+        </sharedTo>
+        <criteriaItems>
+            <field>IsActive</field>
+            <operation>equals</operation>
+            <value>true</value>
+        </criteriaItems>
+    </sharingGuestRules>
 </SharingRules>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingGuestRules>
+        <fullName>Guest_Active_Templates_Volunteer_Portal</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Lets the Volunteer Portal guest open active Form Templates, so a guest can open the form on a Volunteer Job. Dev org scaffolding only (issue #50), never package source.</description>
+        <label>Guest Active Templates Volunteer Portal</label>
+        <sharedTo>
+            <guestUser>Volunteer_Portal</guestUser>
+        </sharedTo>
+        <criteriaItems>
+            <field>FlowToolKit__IsActive__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <includeHVUOwnedRecords>false</includeHVUOwnedRecords>
+    </sharingGuestRules>
+    <sharingGuestRules>
+        <fullName>Guest_Active_Templates_LWR_Portal</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Lets the LWR Volunteer Portal guest open active Form Templates, so a guest can open the form on a Volunteer Job. Dev org scaffolding only (issue #50), never package source.</description>
+        <label>Guest Active Templates LWR Portal</label>
+        <sharedTo>
+            <guestUser>LWR_Volunteer_Portal</guestUser>
+        </sharedTo>
+        <criteriaItems>
+            <field>FlowToolKit__IsActive__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <includeHVUOwnedRecords>false</includeHVUOwnedRecords>
+    </sharingGuestRules>
+</SharingRules>

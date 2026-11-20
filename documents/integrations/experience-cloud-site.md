@@ -14,7 +14,7 @@ A public site lets volunteers find and sign up for opportunities without a Sales
 
 1. **Create the site**: Setup > Digital Experiences > All Sites > New, using the **Build Your Own (Aura)** template.
 2. **Add the pages**: in Experience Builder, create pages from the packaged page templates, or add the **Volunteer Job Finder** component to your own page. Point the Volunteer Job and Volunteer Shift record detail routes at the Job Detail and Shift Detail pages.
-3. **Configure the Job Finder**: select it on the page and set its properties, for example Blocks per Row and When Clicked.
+3. **Configure the Job Finder**: select it on the page and set its properties, for example Blocks per Row, Card Spacing and When Clicked.
 4. **Make the pages public**: in Settings > General, allow guest users to access the site, and set each page's visibility to Public.
 5. **Give guests access**: assign the permission sets to the site's guest user and share your volunteer Campaigns with a guest sharing rule. Follow [Permissions and guest access](../configuration/permissions-and-guest-access.md), including the step that keeps volunteer details private.
 6. **Publish and activate** the site, then open it in a private browser window to test as a guest.

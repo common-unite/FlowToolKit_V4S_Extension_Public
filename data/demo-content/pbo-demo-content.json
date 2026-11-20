@@ -1,0 +1,631 @@
+{
+  "_about": "Demo content for the cUnite_PBO Volunteer Campaigns, Jobs, Shifts and Volunteer Location Accounts. Authored 2026-10-08 from the demo data audit. Applied by data/demo-content/apply_pbo_demo_content.py after review in the decision form. Keys in jobs[].location point at locations[].key.",
+  "locations": [
+    {
+      "key": "riverside-shelter",
+      "Name": "Riverside Pet Adoption Center",
+      "ShippingStreet": "4100 Blue Parkway",
+      "ShippingCity": "Kansas City",
+      "ShippingState": "MO",
+      "ShippingPostalCode": "64130",
+      "ShippingCountry": "United States",
+      "timeZone": "America/Chicago",
+      "Description": "Open-admission animal shelter and adoption center on the east side of Kansas City. Houses up to 180 dogs and cats and runs the foster, transport and adoption event programs.",
+      "Type": "Demo Volunteer Organization",
+      "recordType": "Organization"
+    },
+    {
+      "key": "northland-senior-pets",
+      "Name": "Northland Senior Pet Project",
+      "ShippingStreet": "6400 N Oak Trafficway",
+      "ShippingCity": "Kansas City",
+      "ShippingState": "MO",
+      "ShippingPostalCode": "64118",
+      "ShippingCountry": "United States",
+      "timeZone": "America/Chicago",
+      "Description": "Small senior-dog rescue in the Northland. Daily walking and enrichment for dogs aged eight and up while they wait for placement.",
+      "Type": "Demo Volunteer Organization",
+      "recordType": "Organization"
+    },
+    {
+      "key": "white-mountain",
+      "Name": "White Mountain National Forest",
+      "ShippingStreet": "Kancamagus Highway, Lincoln Woods Trailhead",
+      "ShippingCity": "Lincoln",
+      "ShippingState": "NH",
+      "ShippingPostalCode": "03251",
+      "ShippingCountry": "United States",
+      "timeZone": "America/New_York",
+      "Description": "Trail stewardship partner site in the White Mountains. Work days meet at the Lincoln Woods Trailhead on the Kancamagus Highway.",
+      "Type": "Demo Volunteer Organization",
+      "recordType": "Organization"
+    },
+    {
+      "key": "union-station",
+      "Name": "Grand Hall at Union Station",
+      "ShippingStreet": "30 W Pershing Rd",
+      "ShippingCity": "Kansas City",
+      "ShippingState": "MO",
+      "ShippingPostalCode": "64108",
+      "ShippingCountry": "United States",
+      "timeZone": "America/Chicago",
+      "Description": "Event venue for the Annual Foundation Gala. The Grand Hall seats 600 for dinner, with the silent auction in the adjoining Haverty Hall.",
+      "Type": "Demo Volunteer Organization",
+      "recordType": "Organization"
+    },
+    {
+      "key": "kc-parks",
+      "Name": "Kansas City Parks and Recreation",
+      "ShippingStreet": "4600 E 63rd St",
+      "ShippingCity": "Kansas City",
+      "ShippingState": "MO",
+      "ShippingPostalCode": "64130",
+      "ShippingCountry": "United States",
+      "timeZone": "America/Chicago",
+      "Description": "City parks department and partner for the Adopt a Park program. Adopted parks are spread across the city; the department office is the check-in point for new adopters.",
+      "Type": "Demo Volunteer Organization",
+      "recordType": "Organization"
+    },
+    {
+      "key": "macomb-park",
+      "Name": "Macomb Park",
+      "ShippingStreet": "1500 Macomb Ave",
+      "ShippingCity": "Kansas City",
+      "ShippingState": "KS",
+      "ShippingPostalCode": "66102",
+      "ShippingCountry": "United States",
+      "timeZone": "America/Chicago",
+      "Description": "Twelve-acre neighborhood park with a shelter house, playground and creek frontage. Host site for the spring cleanup and BBQ.",
+      "Type": "Demo Volunteer Organization",
+      "recordType": "Organization"
+    },
+    {
+      "key": "sunshine-beach",
+      "Name": "Sunshine Beach Surf Life Saving Club",
+      "ShippingStreet": "Duke St",
+      "ShippingCity": "Sunshine Beach",
+      "ShippingState": "QLD",
+      "ShippingPostalCode": "4567",
+      "ShippingCountry": "Australia",
+      "timeZone": "Australia/Brisbane",
+      "Description": "Partner site on the Sunshine Coast, Queensland. The monthly beach cleanup meets at the surf club and works north toward the national park boundary.",
+      "Type": "Demo Volunteer Organization",
+      "recordType": "Organization"
+    },
+    {
+      "key": "swope-park",
+      "Name": "Swope Park Pavilion",
+      "ShippingStreet": "3999 Swope Pkwy",
+      "ShippingCity": "Kansas City",
+      "ShippingState": "MO",
+      "ShippingPostalCode": "64132",
+      "ShippingCountry": "United States",
+      "timeZone": "America/Chicago",
+      "Description": "Historic stone pavilion in Swope Park, the meeting point for the monthly park cleanup. Parking is in the pavilion lot off Swope Parkway.",
+      "Type": "Demo Volunteer Organization",
+      "recordType": "Organization"
+    },
+    {
+      "key": "moscone-center",
+      "Name": "Moscone Center",
+      "ShippingStreet": "747 Howard St",
+      "ShippingCity": "San Francisco",
+      "ShippingState": "CA",
+      "ShippingPostalCode": "94103",
+      "ShippingCountry": "United States",
+      "timeZone": "America/Los_Angeles",
+      "Description": "Convention center and Dreamforce venue. The Solarize program table sits in the Moscone West lobby during conference hours.",
+      "Type": "Demo Volunteer Organization",
+      "recordType": "Organization"
+    },
+    {
+      "key": "metro-recycling",
+      "Name": "Metro Recycling Center",
+      "ShippingStreet": "4707 Deramus Ave",
+      "ShippingCity": "Kansas City",
+      "ShippingState": "MO",
+      "ShippingPostalCode": "64120",
+      "ShippingCountry": "United States",
+      "timeZone": "America/Chicago",
+      "Description": "Regional drop-off recycling center in the East Bottoms. Volunteers staff the sorting line and the public drop-off lanes on Saturdays.",
+      "Type": "Demo Volunteer Organization",
+      "recordType": "Organization"
+    },
+    {
+      "key": "blue-river-bike-park",
+      "Name": "Blue River Mountain Bike Park",
+      "ShippingStreet": "5450 Blue River Rd",
+      "ShippingCity": "Kansas City",
+      "ShippingState": "MO",
+      "ShippingPostalCode": "64130",
+      "ShippingCountry": "United States",
+      "timeZone": "America/Chicago",
+      "Description": "Eleven miles of volunteer-built single track along the Blue River. Trail work days meet at the main trailhead lot.",
+      "Type": "Demo Volunteer Organization",
+      "recordType": "Organization"
+    },
+    {
+      "key": "prairie-hills-ranch",
+      "Name": "Prairie Hills Equine Therapy Ranch",
+      "ShippingStreet": "18500 W 183rd St",
+      "ShippingCity": "Olathe",
+      "ShippingState": "KS",
+      "ShippingPostalCode": "66062",
+      "ShippingCountry": "United States",
+      "timeZone": "America/Chicago",
+      "Description": "Therapeutic riding center on 40 acres south of Olathe with a covered arena, 14 therapy horses and after-school and weekend lesson programs.",
+      "Type": "Demo Volunteer Organization",
+      "recordType": "Organization"
+    },
+    {
+      "key": "westside-kitchen",
+      "Name": "Westside Community Kitchen",
+      "ShippingStreet": "1200 Southwest Blvd",
+      "ShippingCity": "Kansas City",
+      "ShippingState": "MO",
+      "ShippingPostalCode": "64108",
+      "ShippingCountry": "United States",
+      "timeZone": "America/Chicago",
+      "Description": "Community kitchen serving 300 hot meals a day on the Westside. Volunteer crews prep, cook, serve and clean alongside two staff cooks.",
+      "Type": "Demo Volunteer Organization",
+      "recordType": "Organization"
+    },
+    {
+      "key": "harvest-food-bank",
+      "Name": "Harvest Regional Food Bank",
+      "ShippingStreet": "3801 Topping Ave",
+      "ShippingCity": "Kansas City",
+      "ShippingState": "MO",
+      "ShippingPostalCode": "64129",
+      "ShippingCountry": "United States",
+      "timeZone": "America/Chicago",
+      "Description": "Regional food bank warehouse supplying 400 partner pantries. Volunteers sort and pack donated food in the volunteer center and deliver boxes to homebound seniors.",
+      "Type": "Demo Volunteer Organization",
+      "recordType": "Organization"
+    }
+  ],
+  "campaigns": [
+    {
+      "Name": "Animal Welfare",
+      "Subtitle__c": "Shelter, foster and transport programs for dogs and cats waiting on a home",
+      "Description": "Our Animal Welfare program supports the Riverside Pet Adoption Center and the Northland Senior Pet Project. Volunteers keep the kennels clean, walk and socialize the dogs, foster animals at home and drive pets to vet appointments and adoption events.",
+      "Rich_Text__c": "<p>Every dog and cat in our care needs people as much as it needs food and a warm kennel. The <strong>Animal Welfare</strong> program is how our volunteers supply that: a clean place to sleep, a daily walk, a foster home, and a ride to the appointment that gets them adopted.</p><p><strong style=\"font-size: 16px;\">Ways to help:</strong></p><ul><li><strong>At the shelter:</strong> kennel cleaning and adoption center support, several shifts every week.</li><li><strong>On the leash:</strong> daily walks for senior dogs in the Northland.</li><li><strong>At home:</strong> foster a dog for two to eight weeks while they wait for a family.</li><li><strong>On the road:</strong> one-off transport runs to the vet or to a new home.</li></ul><p>No experience required for most roles. Volunteers under 16 are welcome with a parent or guardian.</p>",
+      "GW_Volunteers__Volunteer_Website_Time_Zone__c": "America/Chicago",
+      "cUnite_Form_Heading_Title__c": "Volunteer with Animal Welfare",
+      "cUnite_Form_Heading_Subtitle__c": "Tell us a little about yourself and pick the shifts that work for you",
+      "FlowToolKit__Confirmation_Page_Message__c": "<p><strong style=\"font-size: 16px;\">Thank you for signing up!</strong></p><p>A confirmation email with your shift details and directions is on its way. The shelter team will reach out the day before your first shift with parking and check-in instructions.</p>",
+      "FlowToolKit__Offline_Message__c": "<p>Animal Welfare sign-ups are paused while we onboard a new group of volunteers. Check back in a couple of weeks, or email <strong>volunteer@common-unite.com</strong> to join the waitlist.</p>"
+    },
+    {
+      "Name": "Annual Foundation Gala",
+      "Subtitle__c": "One night, 600 guests, and the volunteers who make it run",
+      "Description": "The Annual Foundation Gala at Union Station is our largest fundraiser of the year. Volunteers set up the Grand Hall, run the silent auction, guide parking and traffic, and reset the venue after the last guest leaves.",
+      "Rich_Text__c": "<p>The <strong>Annual Foundation Gala</strong> raises a third of our program budget in a single evening, and it takes about 80 volunteers to pull off. Shifts run from the afternoon setup through the late-night teardown, so there is a role whether you have two hours or ten.</p><p><strong style=\"font-size: 16px;\">Volunteer teams:</strong></p><ul><li><strong>Setup:</strong> tables, linens, signage and the auction display, early afternoon.</li><li><strong>Silent Auction:</strong> greet guests, explain bidding, close out winning bids.</li><li><strong>Parking and Traffic:</strong> direct arrivals at the Pershing Road entrance.</li><li><strong>Cleanup:</strong> strike the room and load the trucks after the program.</li></ul><p>Dress is black and white for guest-facing roles. Dinner is provided for every volunteer shift.</p>",
+      "GW_Volunteers__Volunteer_Website_Time_Zone__c": "America/Chicago",
+      "Location_Name__c": "Grand Hall at Union Station",
+      "Street__c": "30 W Pershing Rd",
+      "City__c": "Kansas City",
+      "State__c": "MO",
+      "PostalCode__c": "64108",
+      "Country__c": "United States",
+      "cUnite_Form_Heading_Title__c": "Volunteer at the Gala",
+      "cUnite_Form_Heading_Subtitle__c": "Choose a team and a shift, and we will see you at Union Station",
+      "FlowToolKit__Confirmation_Page_Message__c": "<p><strong style=\"font-size: 16px;\">You are on the Gala team!</strong></p><p>Watch for a confirmation email with your team lead's name, the volunteer entrance and the dress code for your shift. A reminder goes out three days before the event.</p>",
+      "FlowToolKit__Offline_Message__c": "<p>Gala volunteer sign-ups open in March. Leave your email with <strong>events@common-unite.com</strong> and we will let you know the moment shifts are posted.</p>",
+      "cUnite_Form_Banner_Image__c": "/file-asset-public/FlowToolKit__VolunteerBanner"
+    },
+    {
+      "Name": "Environmental Impact",
+      "Subtitle__c": "Parks, trails, beaches and the recycling line",
+      "Description": "Environmental Impact brings volunteers outdoors: monthly park and beach cleanups, trail maintenance at the bike park, the Adopt a Park program, and the sorting line at the Metro Recycling Center.",
+      "Rich_Text__c": "<p>Most of our <strong>Environmental Impact</strong> work happens on Saturday mornings, outdoors, in groups. It is the easiest program to bring friends, a company team or a scout troop to, and the one where you can see the result before you leave.</p><p><strong style=\"font-size: 16px;\">Current projects:</strong></p><ul><li><strong>Monthly cleanups</strong> at Swope Park and Sunshine Beach.</li><li><strong>Trail maintenance</strong> at Blue River Mountain Bike Park each spring.</li><li><strong>Adopt a Park:</strong> a group commits to one park for a year.</li><li><strong>Recycling Center Support:</strong> Saturday shifts on the public drop-off lanes.</li></ul><p>Gloves, bags and tools are provided. Wear closed-toe shoes and bring water.</p>",
+      "GW_Volunteers__Volunteer_Website_Time_Zone__c": "America/Chicago",
+      "cUnite_Form_Heading_Title__c": "Volunteer Outdoors",
+      "cUnite_Form_Heading_Subtitle__c": "Pick a project and a Saturday",
+      "FlowToolKit__Confirmation_Page_Message__c": "<p><strong style=\"font-size: 16px;\">See you outside!</strong></p><p>Your shift is confirmed. The email on its way has the meeting point, what to wear and the rain plan. Groups of six or more: reply to that email with your head count so we bring enough tools.</p>",
+      "FlowToolKit__Offline_Message__c": "<p>Outdoor projects pause from mid-December through February. Spring shifts are posted the first week of March.</p>"
+    },
+    {
+      "Name": "Equine Therapy",
+      "Subtitle__c": "Side-walkers, horse handlers and barn help at Prairie Hills Ranch",
+      "Description": "Equine Therapy volunteers support therapeutic riding lessons at Prairie Hills Equine Therapy Ranch in Olathe. Side-walkers and horse leaders work directly with riders during after-school and weekend lessons; barn volunteers care for the therapy horses.",
+      "Rich_Text__c": "<p>A therapeutic riding lesson needs three people for every rider: an instructor, a horse leader and a side-walker. Our <strong>Equine Therapy</strong> volunteers fill the last two roles, lesson after lesson, so riders with physical and developmental disabilities get consistent, safe time in the saddle.</p><p><strong style=\"font-size: 16px;\">How you can help:</strong></p><ul><li><strong>Ride support:</strong> walk beside a rider during after-school or weekend lessons.</li><li><strong>Adopt a Therapy Horse:</strong> sponsor and help care for one of our 14 horses.</li></ul><p>Horse experience is helpful but not required. All volunteers complete a two-hour orientation at the ranch before their first lesson.</p>",
+      "GW_Volunteers__Volunteer_Website_Time_Zone__c": "America/Chicago",
+      "Location_Name__c": "Prairie Hills Equine Therapy Ranch",
+      "Street__c": "18500 W 183rd St",
+      "City__c": "Olathe",
+      "State__c": "KS",
+      "PostalCode__c": "66062",
+      "Country__c": "United States",
+      "cUnite_Form_Heading_Title__c": "Volunteer at the Ranch",
+      "cUnite_Form_Heading_Subtitle__c": "Lesson support and horse care at Prairie Hills",
+      "FlowToolKit__Confirmation_Page_Message__c": "<p><strong style=\"font-size: 16px;\">Thank you for joining the ranch team!</strong></p><p>Your shift is confirmed. If this is your first lesson, the ranch will email you an orientation date; please complete it before your shift. Wear long pants and closed-toe shoes with a heel.</p>",
+      "FlowToolKit__Offline_Message__c": "<p>Lesson support shifts are full for this session. The next session's shifts post two weeks before it starts.</p>"
+    },
+    {
+      "Name": "Food Distribution and Nutrition",
+      "Subtitle__c": "Sorting, packing, cooking and delivering meals across the metro",
+      "Description": "Food Distribution and Nutrition volunteers sort and pack donated food at Harvest Regional Food Bank, cook and serve at the Westside Community Kitchen, and deliver weekly grocery boxes to homebound seniors.",
+      "Rich_Text__c": "<p>One in eight households in our region does not know where the next meal is coming from. The <strong>Food Distribution and Nutrition</strong> program moves donated food from the warehouse to the table, and almost every step of that is done by volunteers.</p><p><strong style=\"font-size: 16px;\">Where the work happens:</strong></p><ul><li><strong>Harvest Regional Food Bank:</strong> weekday, evening and weekend sorting shifts in the volunteer center.</li><li><strong>Westside Community Kitchen:</strong> prep, cook and serve 300 hot meals a day.</li><li><strong>Senior Home Delivery:</strong> drive a weekly route of grocery boxes to homebound seniors.</li></ul><p>Sorting shifts welcome groups and volunteers aged 10 and up with an adult. Kitchen and delivery roles are 18 and up.</p>",
+      "GW_Volunteers__Volunteer_Website_Time_Zone__c": "America/Chicago",
+      "cUnite_Form_Heading_Title__c": "Volunteer with Food Programs",
+      "cUnite_Form_Heading_Subtitle__c": "Sort, cook or deliver. Pick the shifts that fit your week.",
+      "FlowToolKit__Confirmation_Page_Message__c": "<p><strong style=\"font-size: 16px;\">You are signed up!</strong></p><p>Your confirmation email has the address, where to park and what to wear. Food bank shifts check in at the volunteer center entrance on Topping Avenue; please arrive ten minutes early for the safety briefing.</p>",
+      "FlowToolKit__Offline_Message__c": "<p>Food program sign-ups are paused for the holiday rush while we work through the waitlist. Shifts reopen the first week of January.</p>"
+    }
+  ],
+  "campaignStrays": [
+    {
+      "Name": "2024 | Common-Unite Volunteers",
+      "finding": "No Type, no content, one hidden empty job (ALDS Royals Rally) with no shifts. Nothing on the site references it.",
+      "proposed": "Delete the ALDS Royals Rally job, then delete the campaign. Alternative: set IsActive false and leave it.",
+      "needsConfirmation": true
+    }
+  ],
+  "jobDefaults": {
+    "FlowToolKit__cUnite_Accepting_Applications__c": true,
+    "note": "Accepting Applications is false on all 29 jobs today. The shift-level Effective formula falls back to the job, so true here is the correct default for every job that is live on the site."
+  },
+  "jobs": [
+    {
+      "Name": "Clean Kennels at Shelter",
+      "location": "riverside-shelter",
+      "Remote__c": false,
+      "GW_Volunteers__Ongoing__c": false,
+      "FlowToolKit__cUnite_Subtitle__c": "Morning kennel care for up to 180 shelter dogs",
+      "GW_Volunteers__Location_Information__c": "<p><strong style=\"font-size: 16px;\">Getting there</strong></p><p>Riverside Pet Adoption Center is at 4100 Blue Parkway, just east of the Swope Park entrance. Park in the volunteer lot on the north side of the building and enter through the door marked <strong>Volunteers and Deliveries</strong>.</p><p><strong style=\"font-size: 16px;\">What to bring</strong></p><ul><li>Closed-toe shoes you do not mind getting wet.</li><li>A water bottle. Gloves, aprons and cleaning supplies are provided.</li><li>Your signed waiver if this is your first shift.</li></ul>",
+      "FlowToolKit__cUnite_Confirmation_Page_Message__c": "<p><strong style=\"font-size: 16px;\">Thank you for keeping the kennels clean!</strong></p><p>Your shift is confirmed. Check in at the volunteer desk ten minutes before your start time and the kennel lead will get you set up.</p>"
+    },
+    {
+      "Name": "Daily Dog Walking",
+      "location": "northland-senior-pets",
+      "Remote__c": false,
+      "GW_Volunteers__Ongoing__c": false,
+      "GW_Volunteers__Skills_Needed__c": "Manual Labor",
+      "FlowToolKit__cUnite_Subtitle__c": "A daily walk for senior dogs waiting on a home",
+      "GW_Volunteers__Description__c": "<p>The Northland Senior Pet Project houses dogs aged eight and older, and the single best thing we can do for them while they wait for placement is get them outside every day. Daily Dog Walkers take two to four dogs on a 20-minute loop each, in the morning or late afternoon, and log a quick note on how each dog did.</p><p><br></p><p><strong style=\"font-size: 16px;\">Volunteers will:</strong></p><ul><li>Walk two to four senior dogs per shift on the marked neighborhood loop.</li><li>Follow each dog's walk card for pace, distance and any mobility notes.</li><li>Refill water and wipe down paws on return.</li><li>Log a short behavior note for the adoption team.</li></ul><p><strong style=\"font-size: 16px;\">Qualifications and Skills:</strong></p><ul><li>Comfortable handling dogs up to 70 lbs on a leash.</li><li>Able to walk for about 90 minutes with short breaks.</li><li>Patient with slow walkers; most of our dogs are.</li><li>Ages 16 and up, or 12 and up with an adult.</li></ul><p>Walkers who commit to a regular weekly slot get matched with the same dogs, which is where the real difference gets made.</p>",
+      "Excerpt__c": "<p>Walk two to four senior dogs on a 20-minute neighborhood loop, morning or late afternoon, and log a short note for the adoption team. No experience needed beyond comfort on a leash; regular weekly walkers are matched with the same dogs.</p>",
+      "GW_Volunteers__Location_Information__c": "<p><strong style=\"font-size: 16px;\">Getting there</strong></p><p>The Northland Senior Pet Project is at 6400 N Oak Trafficway, in the strip center behind the pharmacy. Street parking is free; please leave the four spaces in front of the door for adopters.</p><p><strong style=\"font-size: 16px;\">What to bring</strong></p><ul><li>Weather-appropriate layers. We walk in light rain and cold; we cancel for ice and lightning.</li><li>Comfortable walking shoes.</li><li>Leashes, bags and treats are provided.</li></ul>",
+      "FlowToolKit__cUnite_Confirmation_Page_Message__c": "<p><strong style=\"font-size: 16px;\">The dogs thank you!</strong></p><p>Your walking shift is confirmed. Check in with the front desk and grab the walk cards for your dogs. Weather cancellations are texted two hours before the shift.</p>"
+    },
+    {
+      "Name": "Drive Ruby to her new Home!",
+      "location": "riverside-shelter",
+      "Remote__c": false,
+      "GW_Volunteers__Ongoing__c": false,
+      "FlowToolKit__cUnite_Subtitle__c": "One-time transport run, Kansas City to Columbia, MO",
+      "GW_Volunteers__Location_Information__c": "<p><strong style=\"font-size: 16px;\">Pickup</strong></p><p>Collect Ruby and her paperwork from the Riverside Pet Adoption Center, 4100 Blue Parkway, at the volunteer entrance on the north side of the building. The adoption team will have her crated and ready.</p><p><strong style=\"font-size: 16px;\">Drop-off</strong></p><p>Her new family is in Columbia, MO, about two hours east on I-70. Their address and phone number are on the transport sheet. Mileage is reimbursed at the federal rate.</p>",
+      "FlowToolKit__cUnite_Confirmation_Page_Message__c": "<p><strong style=\"font-size: 16px;\">Thank you for driving Ruby home!</strong></p><p>The transport coordinator will call you within one business day to confirm the pickup time and send the transport sheet.</p>",
+      "skillsIfOptionB": null,
+      "skillsIfOptionA": "Driving"
+    },
+    {
+      "Name": "Foster a Dog",
+      "location": "riverside-shelter",
+      "Remote__c": true,
+      "GW_Volunteers__Ongoing__c": true,
+      "FlowToolKit__cUnite_Subtitle__c": "Open your home for two to eight weeks",
+      "GW_Volunteers__Location_Information__c": "<p><strong style=\"font-size: 16px;\">Where fostering happens</strong></p><p>In your home. The shelter supplies the crate, food, bedding and any medication, and covers all vet care. You supply the couch.</p><p><strong style=\"font-size: 16px;\">Pickup and returns</strong></p><p>Foster dogs are picked up from and returned to the Riverside Pet Adoption Center, 4100 Blue Parkway. Adoption events are held in the center's front lot on the second Saturday of each month.</p>",
+      "FlowToolKit__cUnite_Confirmation_Page_Message__c": "<p><strong style=\"font-size: 16px;\">Thank you for opening your home!</strong></p><p>Our foster coordinator will email you within two business days to schedule a short home visit and match you with a dog.</p>",
+      "skillsIfOptionB": null,
+      "skillsIfOptionA": "Animal Care"
+    },
+    {
+      "Name": "Transport Gus to Annual Checkup",
+      "location": "riverside-shelter",
+      "Remote__c": false,
+      "GW_Volunteers__Ongoing__c": false,
+      "FlowToolKit__cUnite_Subtitle__c": "Round trip to the vet, about three hours",
+      "GW_Volunteers__Location_Information__c": "<p><strong style=\"font-size: 16px;\">Pickup</strong></p><p>Gus will be crated and waiting at the Riverside Pet Adoption Center volunteer entrance, 4100 Blue Parkway, 30 minutes before his appointment.</p><p><strong style=\"font-size: 16px;\">The appointment</strong></p><p>His checkup is at the partner clinic on Prospect Avenue, about 15 minutes away. Plan on an hour at the clinic; the vet tech will walk him out to you when he is done. Mileage is reimbursed.</p>",
+      "FlowToolKit__cUnite_Confirmation_Page_Message__c": "<p><strong style=\"font-size: 16px;\">Thank you for taking Gus to the vet!</strong></p><p>The transport coordinator will confirm the appointment time with you by phone and send the clinic address.</p>",
+      "skillsIfOptionB": null,
+      "skillsIfOptionA": "Driving"
+    },
+    {
+      "Name": "Volunteer @ Pet Adoption Center",
+      "location": "riverside-shelter",
+      "Remote__c": false,
+      "GW_Volunteers__Ongoing__c": false,
+      "FlowToolKit__cUnite_Subtitle__c": "Adoption floor support, seven days a week",
+      "GW_Volunteers__Location_Information__c": "<p><strong style=\"font-size: 16px;\">Getting there</strong></p><p>Riverside Pet Adoption Center, 4100 Blue Parkway. Volunteer parking is on the north side of the building; enter at the door marked <strong>Volunteers and Deliveries</strong> and check in at the desk.</p><p><strong style=\"font-size: 16px;\">What to expect</strong></p><ul><li>Adoption floor shifts are on your feet and public-facing.</li><li>Wear the volunteer shirt if you have one; we will lend you one if not.</li><li>Lunch is on your own; there is a break room with a fridge and microwave.</li></ul>",
+      "FlowToolKit__cUnite_Confirmation_Page_Message__c": "<p><strong style=\"font-size: 16px;\">Welcome to the adoption center team!</strong></p><p>Your shift is confirmed. New volunteers get a 20-minute floor orientation at the start of their first shift, so please arrive on time.</p>"
+    },
+    {
+      "Name": "White Mountain Trail Stewards",
+      "location": "white-mountain",
+      "Remote__c": false,
+      "GW_Volunteers__Ongoing__c": false,
+      "FlowToolKit__cUnite_Subtitle__c": "Trail work days in the White Mountains of New Hampshire",
+      "GW_Volunteers__Description__c": "<p>The Lincoln Woods trail network takes a beating from 300,000 hikers a year, and the Forest Service crew cannot keep up alone. White Mountain Trail Stewards spend a full day on one section of trail: clearing drainage, rebuilding steps and water bars, and brushing back the corridor so the trail stays where it belongs.</p><p><br></p><p><strong style=\"font-size: 16px;\">Volunteers will:</strong></p><ul><li>Hike one to three miles to the work site carrying hand tools.</li><li>Clear water bars and drainage dips, and rebuild rock steps under crew leader direction.</li><li>Cut back brush and remove blowdowns from the trail corridor.</li><li>Pack out everything we carry in.</li></ul><p><strong style=\"font-size: 16px;\">Qualifications and Skills:</strong></p><ul><li>Able to hike with a 20 lb pack and work outdoors for six to seven hours.</li><li>Comfortable with hand tools; no chainsaw work for volunteers.</li><li>Ages 16 and up. Youth 14 and 15 welcome with a parent.</li><li>Previous trail work is a plus, not a requirement; every day starts with a tool and safety briefing.</li></ul><p>Work days run May through October. Bring lunch, two liters of water and rain gear; tools, gloves and hard hats are provided.</p>",
+      "GW_Volunteers__Location_Information__c": "<p><strong style=\"font-size: 16px;\">Meeting point</strong></p><p>Lincoln Woods Trailhead on the Kancamagus Highway (NH-112), five miles east of Lincoln. A White Mountain National Forest parking pass or $5 day fee is required at the lot. Meet the crew leader at the information kiosk at 8:30 AM.</p><p><strong style=\"font-size: 16px;\">What to bring</strong></p><ul><li>Sturdy boots, long pants and layers. Mountain weather changes fast.</li><li>Lunch and at least two liters of water.</li><li>Rain gear and bug spray. Tools, gloves and hard hats are provided.</li></ul>",
+      "FlowToolKit__cUnite_Confirmation_Page_Message__c": "<p><strong style=\"font-size: 16px;\">See you at the trailhead!</strong></p><p>Your work day is confirmed. The crew leader will email the specific trail section and the weather call by 6 PM the evening before.</p>",
+      "skillsIfOptionB": "Landscaping",
+      "skillsIfOptionA": "Manual Labor"
+    },
+    {
+      "Name": "Event Cleanup",
+      "location": "union-station",
+      "Remote__c": false,
+      "GW_Volunteers__Ongoing__c": false,
+      "FlowToolKit__cUnite_Subtitle__c": "Strike the Grand Hall after the Gala, 10 PM to 1 AM",
+      "GW_Volunteers__Location_Information__c": "<p><strong style=\"font-size: 16px;\">Getting there</strong></p><p>Grand Hall at Union Station, 30 W Pershing Rd. Use the west garage; volunteer parking is validated at the check-in table. Enter through the Grand Hall doors on the Pershing Road side.</p><p><strong style=\"font-size: 16px;\">What to wear and bring</strong></p><ul><li>Comfortable clothes and closed-toe shoes. Cleanup is after the guests leave, so no dress code.</li><li>Gloves are provided.</li><li>Late-night snacks and coffee are set out for the cleanup crew.</li></ul>",
+      "FlowToolKit__cUnite_Confirmation_Page_Message__c": "<p><strong style=\"font-size: 16px;\">Thank you for closing out the Gala!</strong></p><p>Your cleanup shift is confirmed. Report to the volunteer check-in table inside the Grand Hall doors at 10 PM.</p>"
+    },
+    {
+      "Name": "Event Parking Support Team",
+      "location": "union-station",
+      "Remote__c": false,
+      "GW_Volunteers__Ongoing__c": false,
+      "FlowToolKit__cUnite_Subtitle__c": "Direct guest arrivals at the Pershing Road entrance",
+      "Excerpt__c": "<p>Guide 600 arriving guests from Pershing Road into the west garage and up to the Grand Hall doors. Outdoor role in pairs with radios and reflective vests, from 4:30 PM until the program starts. Good for volunteers who like a fast pace and talking to people.</p>",
+      "GW_Volunteers__Location_Information__c": "<p><strong style=\"font-size: 16px;\">Getting there</strong></p><p>Grand Hall at Union Station, 30 W Pershing Rd. Park in the west garage and check in at the volunteer table inside the Grand Hall doors by 4:15 PM; the parking lead will walk the team out to the posts.</p><p><strong style=\"font-size: 16px;\">What to wear and bring</strong></p><ul><li>Black pants and a black top. Reflective vests and radios are provided.</li><li>Comfortable shoes and a layer for the evening; posts are outdoors.</li><li>Dinner is served to the parking team after the last arrival.</li></ul>",
+      "FlowToolKit__cUnite_Confirmation_Page_Message__c": "<p><strong style=\"font-size: 16px;\">You are on the parking team!</strong></p><p>Your shift is confirmed. Check in at 4:15 PM inside the Grand Hall doors for your vest, radio and post assignment.</p>"
+    },
+    {
+      "Name": "Event Setup",
+      "location": "union-station",
+      "Remote__c": false,
+      "GW_Volunteers__Ongoing__c": false,
+      "FlowToolKit__cUnite_Subtitle__c": "Tables, linens, signage and the auction display, early afternoon",
+      "GW_Volunteers__Location_Information__c": "<p><strong style=\"font-size: 16px;\">Getting there</strong></p><p>Grand Hall at Union Station, 30 W Pershing Rd. Park in the west garage; setup volunteers are validated at the check-in table. Enter through the loading dock door on the east side, where the trucks unload.</p><p><strong style=\"font-size: 16px;\">What to wear and bring</strong></p><ul><li>Comfortable clothes and closed-toe shoes; this shift is lifting and walking.</li><li>Gloves and box cutters are provided.</li><li>Lunch is served at 1 PM for the setup crew.</li></ul>",
+      "FlowToolKit__cUnite_Confirmation_Page_Message__c": "<p><strong style=\"font-size: 16px;\">Thank you for setting the stage!</strong></p><p>Your setup shift is confirmed. Report to the loading dock on the east side of Union Station at your start time.</p>"
+    },
+    {
+      "Name": "Event Silent Auction Support",
+      "location": "union-station",
+      "Remote__c": false,
+      "GW_Volunteers__Ongoing__c": false,
+      "FlowToolKit__cUnite_Subtitle__c": "Greet guests, explain bidding, close out winning bids",
+      "GW_Volunteers__Location_Information__c": "<p><strong style=\"font-size: 16px;\">Getting there</strong></p><p>Grand Hall at Union Station, 30 W Pershing Rd. The silent auction is in Haverty Hall, through the doors to the left of the main stage. Park in the west garage and check in at the volunteer table.</p><p><strong style=\"font-size: 16px;\">What to wear and bring</strong></p><ul><li>Black and white dress for guest-facing roles.</li><li>Your phone, charged; bidding runs on a mobile app and you will help guests with it.</li><li>Dinner is served to auction volunteers in shifts.</li></ul>",
+      "FlowToolKit__cUnite_Confirmation_Page_Message__c": "<p><strong style=\"font-size: 16px;\">Welcome to the auction team!</strong></p><p>Your shift is confirmed. The auction lead will send a 15-minute app walkthrough video the week before the Gala.</p>",
+      "skillsIfOptionB": "Event Planning",
+      "skillsIfOptionA": "Customer Service"
+    },
+    {
+      "Name": "Adopt a City Park",
+      "location": "kc-parks",
+      "Remote__c": false,
+      "GW_Volunteers__Ongoing__c": true,
+      "FlowToolKit__cUnite_Subtitle__c": "Your group, one park, one year",
+      "GW_Volunteers__Location_Information__c": "<p><strong style=\"font-size: 16px;\">Where</strong></p><p>At the park you adopt. Kansas City Parks and Recreation maintains a list of parks looking for adopters across every district; you pick one close to your group.</p><p><strong style=\"font-size: 16px;\">Getting started</strong></p><p>New adopter groups meet the parks liaison at the department office, 4600 E 63rd St, for a one-hour orientation and tool pickup. After that, you set your own schedule and report your hours here.</p>",
+      "FlowToolKit__cUnite_Confirmation_Page_Message__c": "<p><strong style=\"font-size: 16px;\">Thank you for adopting a park!</strong></p><p>The parks liaison will email you within a week with the list of available parks and orientation dates.</p>"
+    },
+    {
+      "Name": "Adopt a Park \"Eastwood Hills\"",
+      "location": "kc-parks",
+      "Remote__c": false,
+      "GW_Volunteers__Ongoing__c": true,
+      "GW_Volunteers__Display_on_Website__c": true,
+      "FlowToolKit__cUnite_Subtitle__c": "Eastwood Hills Park is looking for its adopter group",
+      "GW_Volunteers__Location_Information__c": "<p><strong style=\"font-size: 16px;\">Where</strong></p><p>Eastwood Hills Park, at E 51st St and Eastwood Trafficway in the Eastwood Hills neighborhood. Street parking along 51st.</p><p><strong style=\"font-size: 16px;\">Getting started</strong></p><p>The adopter group meets the parks liaison at the department office, 4600 E 63rd St, for a one-hour orientation and tool pickup, then sets its own schedule at the park.</p>",
+      "FlowToolKit__cUnite_Confirmation_Page_Message__c": "<p><strong style=\"font-size: 16px;\">Thank you for stepping up for Eastwood Hills!</strong></p><p>The parks liaison will email you within a week to schedule orientation.</p>",
+      "finding": "Currently hidden from the website and filed under City of Chicago. Proposed: show it, and move it to Kansas City Parks and Recreation."
+    },
+    {
+      "Name": "Macomb Park Cleanup and BBQ!",
+      "location": "macomb-park",
+      "Remote__c": false,
+      "GW_Volunteers__Ongoing__c": false,
+      "FlowToolKit__cUnite_Subtitle__c": "Spring cleanup in the morning, lunch on the grill after",
+      "GW_Volunteers__Location_Information__c": "<p><strong style=\"font-size: 16px;\">Meeting point</strong></p><p>Macomb Park shelter house, 1500 Macomb Ave, Kansas City, KS. Park in the lot by the playground; the shelter house is the stone building at the top of the hill.</p><p><strong style=\"font-size: 16px;\">What to bring</strong></p><ul><li>Work gloves if you have them; we have extras, plus bags, rakes and pickers.</li><li>Closed-toe shoes and sunscreen.</li><li>Nothing for lunch. The BBQ is on us, starting at noon.</li></ul>",
+      "FlowToolKit__cUnite_Confirmation_Page_Message__c": "<p><strong style=\"font-size: 16px;\">See you at Macomb Park!</strong></p><p>Your shift is confirmed. Meet at the shelter house at 9 AM. Rain date is the following Saturday.</p>"
+    },
+    {
+      "Name": "Monthly Cleanup @ Sunshine Beach",
+      "location": "sunshine-beach",
+      "Remote__c": false,
+      "GW_Volunteers__Ongoing__c": false,
+      "FlowToolKit__cUnite_Subtitle__c": "First Saturday of the month, Sunshine Coast, Queensland",
+      "GW_Volunteers__Location_Information__c": "<p><strong style=\"font-size: 16px;\">Meeting point</strong></p><p>Sunshine Beach Surf Life Saving Club on Duke St, Sunshine Beach QLD. Meet on the grass in front of the club at 7 AM; the cleanup works north along the beach toward the national park.</p><p><strong style=\"font-size: 16px;\">What to bring</strong></p><ul><li>Hat, sunscreen and water. Bags, gloves and pickers are provided.</li><li>Shoes you can get wet.</li><li>Coffee at the club kiosk afterwards is on the program.</li></ul>",
+      "FlowToolKit__cUnite_Confirmation_Page_Message__c": "<p><strong style=\"font-size: 16px;\">Thank you for keeping the beach clean!</strong></p><p>Your shift is confirmed. Meet in front of the surf club at 7 AM. High surf cancellations are posted on the club's board by 6 AM.</p>"
+    },
+    {
+      "Name": "Monthly Cleanup @ Swope Park",
+      "location": "swope-park",
+      "Remote__c": false,
+      "GW_Volunteers__Ongoing__c": false,
+      "FlowToolKit__cUnite_Subtitle__c": "Second Saturday of the month, meet at the pavilion",
+      "GW_Volunteers__Location_Information__c": "<p><strong style=\"font-size: 16px;\">Meeting point</strong></p><p>Swope Park Pavilion, 3999 Swope Pkwy. Park in the pavilion lot and meet at the stone steps at 8:30 AM. The route covers the lagoon trail and the picnic areas along Oldham Road.</p><p><strong style=\"font-size: 16px;\">What to bring</strong></p><ul><li>Closed-toe shoes, long pants and a water bottle.</li><li>Gloves, bags and pickers are provided.</li><li>Groups of six or more: let us know your head count so we bring enough tools.</li></ul>",
+      "FlowToolKit__cUnite_Confirmation_Page_Message__c": "<p><strong style=\"font-size: 16px;\">See you at the pavilion!</strong></p><p>Your shift is confirmed. Meet at the pavilion steps at 8:30 AM. We work in light rain; lightning cancels, texted by 7:30 AM.</p>"
+    },
+    {
+      "Name": "Promote Solarize Program @ Dreamforce",
+      "location": "moscone-center",
+      "Remote__c": false,
+      "GW_Volunteers__Ongoing__c": false,
+      "FlowToolKit__cUnite_Subtitle__c": "Staff the Solarize table in the Moscone West lobby",
+      "GW_Volunteers__Location_Information__c": "<p><strong style=\"font-size: 16px;\">Getting there</strong></p><p>Moscone Center, 747 Howard St, San Francisco. The Solarize table is in the Moscone West lobby, ground floor, near the Howard Street doors. Take BART or Muni to Powell; there is no volunteer parking downtown.</p><p><strong style=\"font-size: 16px;\">What to bring</strong></p><ul><li>Your conference badge; volunteer badges are issued at the Solarize table on arrival.</li><li>Comfortable shoes; the shift is standing.</li><li>Talking points and handouts are at the table.</li></ul>",
+      "FlowToolKit__cUnite_Confirmation_Page_Message__c": "<p><strong style=\"font-size: 16px;\">Thank you for representing Solarize!</strong></p><p>Your table shift is confirmed. The program lead will send the talking points and your badge pickup instructions a week before the conference.</p>"
+    },
+    {
+      "Name": "Recycling Center Support Team",
+      "location": "metro-recycling",
+      "Remote__c": false,
+      "GW_Volunteers__Ongoing__c": false,
+      "GW_Volunteers__Skills_Needed__c": "Manual Labor",
+      "FlowToolKit__cUnite_Subtitle__c": "Saturday shifts on the public drop-off lanes",
+      "GW_Volunteers__Location_Information__c": "<p><strong style=\"font-size: 16px;\">Getting there</strong></p><p>Metro Recycling Center, 4707 Deramus Ave, in the East Bottoms. Turn in at the <strong>Volunteers</strong> sign before the public drop-off lanes and park along the fence.</p><p><strong style=\"font-size: 16px;\">What to wear and bring</strong></p><ul><li>Closed-toe shoes, long pants and clothes that can get dirty.</li><li>Safety vests and gloves are provided; wear them the whole shift.</li><li>Water and snacks are in the break trailer.</li></ul>",
+      "FlowToolKit__cUnite_Confirmation_Page_Message__c": "<p><strong style=\"font-size: 16px;\">Thank you for joining the recycling team!</strong></p><p>Your shift is confirmed. Check in at the break trailer for your vest and lane assignment.</p>"
+    },
+    {
+      "Name": "Spring Maintenance @ Bike Park",
+      "location": "blue-river-bike-park",
+      "Remote__c": false,
+      "GW_Volunteers__Ongoing__c": false,
+      "FlowToolKit__cUnite_Subtitle__c": "Trail work days before the season opens",
+      "GW_Volunteers__Location_Information__c": "<p><strong style=\"font-size: 16px;\">Meeting point</strong></p><p>Blue River Mountain Bike Park main trailhead, 5450 Blue River Rd. Park in the trailhead lot and meet at the kiosk at 8 AM for the tool and safety briefing.</p><p><strong style=\"font-size: 16px;\">What to bring</strong></p><ul><li>Boots or sturdy shoes, long pants and gloves.</li><li>Water and a snack; work sites are up to two miles from the lot.</li><li>Tools and helmets are provided. Bikes welcome for the ride out.</li></ul>",
+      "FlowToolKit__cUnite_Confirmation_Page_Message__c": "<p><strong style=\"font-size: 16px;\">See you on the trail!</strong></p><p>Your work day is confirmed. Meet at the trailhead kiosk at 8 AM. Wet-trail cancellations are posted by 6:30 AM.</p>",
+      "skillsIfOptionB": "Landscaping",
+      "skillsIfOptionA": "Manual Labor"
+    },
+    {
+      "Name": "Adopt a Therapy Horse",
+      "location": "prairie-hills-ranch",
+      "Remote__c": false,
+      "GW_Volunteers__Ongoing__c": true,
+      "FlowToolKit__cUnite_Subtitle__c": "Sponsor and help care for one of our 14 therapy horses",
+      "GW_Volunteers__Location_Information__c": "<p><strong style=\"font-size: 16px;\">Getting there</strong></p><p>Prairie Hills Equine Therapy Ranch, 18500 W 183rd St, Olathe, KS, about 20 minutes south of I-35. The drive is gravel; park by the barn, not the arena.</p><p><strong style=\"font-size: 16px;\">What to expect</strong></p><ul><li>Adopters visit their horse on a regular schedule agreed with the barn manager.</li><li>Long pants and closed-toe shoes with a heel in the barn, every time.</li><li>Grooming kits and feed are provided.</li></ul>",
+      "FlowToolKit__cUnite_Confirmation_Page_Message__c": "<p><strong style=\"font-size: 16px;\">Thank you for adopting a therapy horse!</strong></p><p>The barn manager will email you within a week to schedule your orientation and introduce you to your horse.</p>"
+    },
+    {
+      "Name": "After School Ride Support",
+      "location": "prairie-hills-ranch",
+      "Remote__c": false,
+      "GW_Volunteers__Ongoing__c": false,
+      "FlowToolKit__cUnite_Subtitle__c": "Side-walk and lead horses for weekday afternoon lessons",
+      "GW_Volunteers__Location_Information__c": "<p><strong style=\"font-size: 16px;\">Getting there</strong></p><p>Prairie Hills Equine Therapy Ranch, 18500 W 183rd St, Olathe, KS. Park by the barn and check in with the lesson coordinator in the covered arena 15 minutes before the first lesson.</p><p><strong style=\"font-size: 16px;\">What to wear and bring</strong></p><ul><li>Long pants and closed-toe shoes with a heel. No sandals in the barn or arena.</li><li>Layers; the arena is covered but not heated.</li><li>Helmets are provided for horse leaders.</li></ul>",
+      "FlowToolKit__cUnite_Confirmation_Page_Message__c": "<p><strong style=\"font-size: 16px;\">Thank you for supporting our riders!</strong></p><p>Your shift is confirmed. First-time volunteers must complete the two-hour ranch orientation before their shift; the coordinator will email you dates.</p>",
+      "skillsIfOptionB": null,
+      "skillsIfOptionA": "Working with Children"
+    },
+    {
+      "Name": "Weekend Ride Support",
+      "location": "prairie-hills-ranch",
+      "Remote__c": false,
+      "GW_Volunteers__Ongoing__c": false,
+      "FlowToolKit__cUnite_Subtitle__c": "Side-walk and lead horses for Saturday lessons",
+      "GW_Volunteers__Description__c": "<p>Saturday is the busiest day at Prairie Hills, with lessons running from 9 AM to 2 PM for riders who cannot make the after-school program. Weekend Ride Support volunteers work as side-walkers and horse leaders, giving each rider the steady hands they need to work on balance, core strength and confidence from the saddle.</p><p><br></p><p><strong style=\"font-size: 16px;\">Volunteers will:</strong></p><ul><li>Lead a therapy horse through the lesson at the instructor's direction.</li><li>Walk beside a rider, providing physical support and encouragement.</li><li>Help riders mount and dismount at the ramp.</li><li>Groom and tack horses before lessons and untack after.</li></ul><p><strong style=\"font-size: 16px;\">Qualifications and Skills:</strong></p><ul><li>Able to walk for 45 minutes at a time on arena footing.</li><li>Comfortable around large animals; horse experience is a plus but not required.</li><li>Patient and encouraging with children and adults with disabilities.</li><li>Ages 14 and up. All volunteers complete the two-hour ranch orientation first.</li></ul><p>Volunteers who commit to the same Saturday slot each week are paired with the same riders, which is what makes the program work.</p>",
+      "GW_Volunteers__Location_Information__c": "<p><strong style=\"font-size: 16px;\">Getting there</strong></p><p>Prairie Hills Equine Therapy Ranch, 18500 W 183rd St, Olathe, KS. Park by the barn and check in with the lesson coordinator in the covered arena 15 minutes before the first lesson.</p><p><strong style=\"font-size: 16px;\">What to wear and bring</strong></p><ul><li>Long pants and closed-toe shoes with a heel. No sandals in the barn or arena.</li><li>Water and a snack; lessons run back to back.</li><li>Helmets are provided for horse leaders.</li></ul>",
+      "FlowToolKit__cUnite_Confirmation_Page_Message__c": "<p><strong style=\"font-size: 16px;\">Thank you for supporting our riders!</strong></p><p>Your Saturday shift is confirmed. First-time volunteers must complete the two-hour ranch orientation before their shift; the coordinator will email you dates.</p>",
+      "skillsIfOptionB": null,
+      "skillsIfOptionA": "Working with Children"
+    },
+    {
+      "Name": "Community Kitchen Crew",
+      "location": "westside-kitchen",
+      "Remote__c": false,
+      "GW_Volunteers__Ongoing__c": false,
+      "FlowToolKit__cUnite_Subtitle__c": "Prep, cook, serve and clean for 300 hot meals a day",
+      "GW_Volunteers__Location_Information__c": "<p><strong style=\"font-size: 16px;\">Getting there</strong></p><p>Westside Community Kitchen, 1200 Southwest Blvd. Park in the lot behind the building off Summit St and enter through the kitchen door; the front dining room door is for guests.</p><p><strong style=\"font-size: 16px;\">What to wear and bring</strong></p><ul><li>Closed-toe non-slip shoes and clothes you can cook in.</li><li>Hair tied back; hairnets, aprons and gloves are provided.</li><li>Ages 18 and up. Food handler training is given on your first shift.</li></ul>",
+      "FlowToolKit__cUnite_Confirmation_Page_Message__c": "<p><strong style=\"font-size: 16px;\">Welcome to the kitchen crew!</strong></p><p>Your shift is confirmed. Come to the kitchen door off the back lot and check in with the head cook.</p>",
+      "finding": "Currently flagged Remote with a full Chicago street address. Proposed: Remote off, at the Westside Community Kitchen.",
+      "skillsIfOptionB": null,
+      "skillsIfOptionA": "Cooking"
+    },
+    {
+      "Name": "Evening Food Sorting @ Food Bank",
+      "location": "harvest-food-bank",
+      "Remote__c": false,
+      "GW_Volunteers__Ongoing__c": false,
+      "FlowToolKit__cUnite_Subtitle__c": "Weeknight sorting shifts, 6 to 8:30 PM",
+      "GW_Volunteers__Location_Information__c": "<p><strong style=\"font-size: 16px;\">Getting there</strong></p><p>Harvest Regional Food Bank, 3801 Topping Ave. Park in the volunteer lot on the south side and enter at the <strong>Volunteer Center</strong> door. Arrive ten minutes early for the safety briefing.</p><p><strong style=\"font-size: 16px;\">What to wear and bring</strong></p><ul><li>Closed-toe shoes and comfortable clothes. The warehouse is cool year round.</li><li>A water bottle. Gloves and aprons are provided.</li><li>Ages 10 and up with an adult; groups up to 25 welcome.</li></ul>",
+      "FlowToolKit__cUnite_Confirmation_Page_Message__c": "<p><strong style=\"font-size: 16px;\">Thank you for sorting with us!</strong></p><p>Your evening shift is confirmed. Check in at the Volunteer Center door on Topping Avenue ten minutes before your start time.</p>",
+      "finding": "Time zone America/Denver while every sibling shift uses America/Chicago. Proposed: America/Chicago."
+    },
+    {
+      "Name": "Neighborhood Cleanup",
+      "location": "westside-kitchen",
+      "campaign": "Environmental Impact",
+      "Remote__c": false,
+      "GW_Volunteers__Ongoing__c": false,
+      "GW_Volunteers__Display_on_Website__c": true,
+      "GW_Volunteers__Skills_Needed__c": "Manual Labor",
+      "FlowToolKit__cUnite_Volunteer_Types__c": "Groups;Individuals",
+      "FlowToolKit__cUnite_Subtitle__c": "Westside block cleanup, last Saturday of the month",
+      "GW_Volunteers__Location_Information__c": "<p><strong style=\"font-size: 16px;\">Meeting point</strong></p><p>Westside Community Kitchen back lot, 1200 Southwest Blvd, off Summit St. The cleanup covers the blocks between Southwest Boulevard and 17th Street.</p><p><strong style=\"font-size: 16px;\">What to bring</strong></p><ul><li>Closed-toe shoes and a water bottle.</li><li>Gloves, bags and pickers are provided.</li><li>Coffee and breakfast tacos at the kitchen afterwards.</li></ul>",
+      "FlowToolKit__cUnite_Confirmation_Page_Message__c": "<p><strong style=\"font-size: 16px;\">See you on the Westside!</strong></p><p>Your shift is confirmed. Meet in the kitchen back lot at 9 AM.</p>",
+      "finding": "Hidden, no address, under Food Distribution with type Cleanup. Proposed: move to Environmental Impact, base it at the Westside kitchen, show it, and add a monthly Saturday shift. Alternative: delete it."
+    },
+    {
+      "Name": "Senior Home Delivery",
+      "location": "harvest-food-bank",
+      "Remote__c": false,
+      "GW_Volunteers__Ongoing__c": false,
+      "FlowToolKit__cUnite_Subtitle__c": "Drive a weekly route of grocery boxes to homebound seniors",
+      "GW_Volunteers__Location_Information__c": "<p><strong style=\"font-size: 16px;\">Getting there</strong></p><p>Routes start and end at Harvest Regional Food Bank, 3801 Topping Ave. Pull up to the <strong>Delivery Pickup</strong> bay on the east side; the boxes for your route will be staged and labeled.</p><p><strong style=\"font-size: 16px;\">What you need</strong></p><ul><li>Your own vehicle, a valid license and insurance. Mileage is reimbursed.</li><li>A phone with the route app installed; the link comes in your confirmation email.</li><li>Routes are eight to twelve stops and take about two hours.</li></ul>",
+      "FlowToolKit__cUnite_Confirmation_Page_Message__c": "<p><strong style=\"font-size: 16px;\">Thank you for driving for our seniors!</strong></p><p>Your route is confirmed. The delivery coordinator will email your route sheet and the app link the day before.</p>",
+      "skillsIfOptionB": null,
+      "skillsIfOptionA": "Driving"
+    },
+    {
+      "Name": "Weekday Food Sorting @ Food Bank",
+      "location": "harvest-food-bank",
+      "Remote__c": false,
+      "GW_Volunteers__Ongoing__c": false,
+      "FlowToolKit__cUnite_Subtitle__c": "Morning and afternoon sorting shifts, Monday to Friday",
+      "GW_Volunteers__Location_Information__c": "<p><strong style=\"font-size: 16px;\">Getting there</strong></p><p>Harvest Regional Food Bank, 3801 Topping Ave. Park in the volunteer lot on the south side and enter at the <strong>Volunteer Center</strong> door. Arrive ten minutes early for the safety briefing.</p><p><strong style=\"font-size: 16px;\">What to wear and bring</strong></p><ul><li>Closed-toe shoes and comfortable clothes. The warehouse is cool year round.</li><li>A water bottle. Gloves and aprons are provided.</li><li>Ages 10 and up with an adult; groups up to 25 welcome.</li></ul>",
+      "FlowToolKit__cUnite_Confirmation_Page_Message__c": "<p><strong style=\"font-size: 16px;\">Thank you for sorting with us!</strong></p><p>Your shift is confirmed. Check in at the Volunteer Center door on Topping Avenue ten minutes before your start time.</p>"
+    },
+    {
+      "Name": "Weekend Food Sorting @ Food Bank",
+      "location": "harvest-food-bank",
+      "Remote__c": false,
+      "GW_Volunteers__Ongoing__c": false,
+      "FlowToolKit__cUnite_Subtitle__c": "Saturday sorting shifts for families and groups",
+      "GW_Volunteers__Location_Information__c": "<p><strong style=\"font-size: 16px;\">Getting there</strong></p><p>Harvest Regional Food Bank, 3801 Topping Ave. Park in the volunteer lot on the south side and enter at the <strong>Volunteer Center</strong> door. Arrive ten minutes early for the safety briefing.</p><p><strong style=\"font-size: 16px;\">What to wear and bring</strong></p><ul><li>Closed-toe shoes and comfortable clothes. The warehouse is cool year round.</li><li>A water bottle. Gloves and aprons are provided.</li><li>Ages 10 and up with an adult; groups up to 25 welcome.</li></ul>",
+      "FlowToolKit__cUnite_Confirmation_Page_Message__c": "<p><strong style=\"font-size: 16px;\">Thank you for sorting with us!</strong></p><p>Your Saturday shift is confirmed. Check in at the Volunteer Center door on Topping Avenue ten minutes before your start time.</p>"
+    }
+  ],
+  "jobStrays": [
+    {
+      "Name": "ALDS Royals Rally",
+      "finding": "Hidden, empty, no shifts, under the stray 2024 campaign.",
+      "proposed": "Delete.",
+      "needsConfirmation": true
+    }
+  ],
+  "shiftRules": {
+    "subtitleByTimeOfDay": {
+      "Early Morning": "Early Morning Shift",
+      "Morning": "Morning Shift",
+      "Afternoon": "Afternoon Shift",
+      "Evening": "Evening Shift"
+    },
+    "subtitleFallback": "Volunteer Shift",
+    "descriptionWhereEmpty": "Copy the job's Subtitle into the shift Description so the shift card and the shift details page carry one line of context.",
+    "scope": "Every shift from 30 days ago onward: 934 shifts. Subtitle is empty on all of them; Description is set on 216 (Food Bank jobs only, short labels) and left alone where it already has a value."
+  },
+  "galaShifts": {
+    "eventDate": "2027-05-15",
+    "note": "The Gala campaign runs to 2027-05-20 and its four jobs have no upcoming shifts. One shift each on the event date so the Gala renders in the finder.",
+    "shifts": [
+      {
+        "job": "Event Setup",
+        "start": "2027-05-15T12:00:00",
+        "durationHours": 4,
+        "desired": 20
+      },
+      {
+        "job": "Event Parking Support Team",
+        "start": "2027-05-15T16:30:00",
+        "durationHours": 3,
+        "desired": 12
+      },
+      {
+        "job": "Event Silent Auction Support",
+        "start": "2027-05-15T17:00:00",
+        "durationHours": 5,
+        "desired": 16
+      },
+      {
+        "job": "Event Cleanup",
+        "start": "2027-05-15T22:00:00",
+        "durationHours": 3,
+        "desired": 20
+      }
+    ]
+  },
+  "neighborhoodCleanupShifts": {
+    "note": "Last Saturday of each month for the next six months, 9 AM, three hours, 25 volunteers.",
+    "dates": [
+      "2026-10-31",
+      "2026-11-28",
+      "2026-12-26",
+      "2027-01-30",
+      "2027-02-27",
+      "2027-03-27"
+    ]
+  },
+  "skillsPicklist": {
+    "finding": "Skills Needed in cUnite_PBO has only: Computer usage, Manual Labor, Marketing, Fundraising, Event Planning, Landscaping, basic accounting. Five values the draft uses do not exist.",
+    "missingValues": [
+      "Animal Care",
+      "Cooking",
+      "Customer Service",
+      "Driving",
+      "Working with Children"
+    ],
+    "optionA": "Add the five values to the Skills Needed picklist in Setup (subscriber-added values on a managed multiselect are allowed), then apply the draft as written.",
+    "optionB": "Map to existing values: Silent Auction to Event Planning, White Mountain and Bike Park to Landscaping, and leave Skills empty on the driving, foster, ride support and kitchen jobs."
+  }
+}

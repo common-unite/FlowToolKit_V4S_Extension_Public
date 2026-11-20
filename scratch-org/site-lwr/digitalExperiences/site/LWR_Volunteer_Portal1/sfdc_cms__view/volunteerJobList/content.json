@@ -1,0 +1,43 @@
+{
+  "type": "sfdc_cms__view",
+  "title": "Volunteer Job List",
+  "urlName": "volunteer-job-list",
+  "contentBody": {
+    "component": {
+      "children": [
+        {
+          "children": [],
+          "id": "5a0f50aa-0050-4c50-8050-000000000020",
+          "name": "content",
+          "title": "Content",
+          "type": "region"
+        },
+        {
+          "children": [
+            {
+              "attributes": {
+                "customHeadTags": "",
+                "description": "",
+                "pageTitle": "Volunteer Job List",
+                "recordId": "{!recordId}"
+              },
+              "definition": "community_builder:seoAssistant",
+              "id": "5a0f50aa-0050-4c50-8050-000000000023",
+              "type": "component"
+            }
+          ],
+          "id": "5a0f50aa-0050-4c50-8050-000000000021",
+          "name": "sfdcHiddenRegion",
+          "title": "sfdcHiddenRegion",
+          "type": "region"
+        }
+      ],
+      "definition": "community_layout:sldsFlexibleLayout",
+      "id": "5a0f50aa-0050-4c50-8050-000000000022",
+      "type": "component"
+    },
+    "dataProviders": [],
+    "themeLayoutType": "Inner",
+    "viewType": "list-a03"
+  }
+}

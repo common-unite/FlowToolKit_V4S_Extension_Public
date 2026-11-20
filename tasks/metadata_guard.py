@@ -33,6 +33,7 @@ DIRECTORY_TYPE_MAP = {
     "communityThemeDefinitions": "CommunityThemeDefinition",
     "contentassets": "ContentAsset",
     "customMetadata": "CustomMetadata",
+    "digitalExperiences": "DigitalExperienceBundle",
     "experiences": "ExperienceBundle",
     "flexipages": "FlexiPage",
     "flows": "Flow",
@@ -50,6 +51,10 @@ DIRECTORY_TYPE_MAP = {
     "tabs": "CustomTab",
     "triggers": "ApexTrigger",
 }
+
+# Directories of one file per member, named <member>.<suffix>, whose members are each checked
+# against package.xml: a sharing rules file the manifest does not list deploys nothing (#50).
+MEMBER_CHECKED_DIRECTORIES = {"sharingRules"}
 
 
 class AssertMetadataPayload(BaseTask):
@@ -87,6 +92,7 @@ class AssertMetadataPayload(BaseTask):
         declared = self._declared_types(manifest)
         self._assert_required(path, declared)
         self._assert_no_orphans(path, declared)
+        self._assert_members_declared(path, declared)
 
         self.logger.info(
             f"{path} declares {len(declared)} metadata type(s): "
@@ -147,4 +153,24 @@ class AssertMetadataPayload(BaseTask):
                 f"{', '.join(orphans)}. They would be silently excluded from the "
                 "deploy, which still reports success. This is issue #29 all over "
                 "again. Add the missing <types> entries."
+            )
+
+    def _assert_members_declared(self, path, declared):
+        """Every file in a member-checked directory must be a declared member of its type."""
+        undeclared = []
+        for name in sorted(MEMBER_CHECKED_DIRECTORIES):
+            directory = path / name
+            if not directory.is_dir():
+                continue
+            members = set(declared.get(DIRECTORY_TYPE_MAP[name], []))
+            for child in sorted(directory.iterdir()):
+                if child.name.startswith(".") or child.name.endswith("-meta.xml"):
+                    continue
+                member = child.name.split(".", 1)[0]
+                if "*" not in members and member not in members:
+                    undeclared.append(f"{name}/{child.name}")
+        if undeclared:
+            raise CumulusCIException(
+                f"{path}/package.xml does not list {', '.join(undeclared)} as a member, "
+                "so the deploy would skip it and still report success. Add a <members> entry."
             )

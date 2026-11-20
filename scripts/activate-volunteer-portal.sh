@@ -1,10 +1,14 @@
 #!/bin/bash
-# Activates the demo site. Network.Status is not writable by Apex DML and the Connect API
+# Activates a demo site. Network.Status is not writable by Apex DML and the Connect API
 # exposes no activation verb, so the sObject REST endpoint is the only scriptable route.
+# Usage: activate-volunteer-portal.sh ["Site Name"] [guest-api]. guest-api also turns on guest API access (OptionsGuestChatterEnabled and
+# OptionsGuestFileAccessEnabled): an LWR guest's ui-api calls return 401 without it (#50).
 set -euo pipefail
 
-SITE_NAME="${SITE_NAME:-Volunteer Portal}"
+SITE_NAME="${1:-${SITE_NAME:-Volunteer Portal}}"
 API_VERSION="${API_VERSION:-65.0}"
+GUEST_API="${GUEST_API:-false}"
+[ "${2:-}" = "guest-api" ] && GUEST_API=true
 
 if [ -z "${SF_ACCESS_TOKEN:-}" ] || [ -z "${SF_ORG_INSTANCE_URL:-}" ]; then
     echo "SF_ACCESS_TOKEN and SF_ORG_INSTANCE_URL are required (CumulusCI SalesforceCommand supplies both)." >&2
@@ -26,14 +30,19 @@ if [ -z "$network_id" ]; then
     exit 0
 fi
 
+body='{"Status":"Live"}'
+if [ "$GUEST_API" = "true" ]; then
+    body='{"Status":"Live","OptionsGuestChatterEnabled":true,"OptionsGuestFileAccessEnabled":true}'
+fi
+
 status=$(curl -sS -o /dev/null -w '%{http_code}' -X PATCH \
     -H "Authorization: Bearer ${SF_ACCESS_TOKEN}" \
     -H "Content-Type: application/json" \
-    -d '{"Status":"Live"}' \
+    -d "$body" \
     "${SF_ORG_INSTANCE_URL}/services/data/v${API_VERSION}/sobjects/Network/${network_id}")
 
 if [ "$status" = "204" ]; then
-    echo "Site '${SITE_NAME}' is Live."
+    echo "Site '${SITE_NAME}' is Live$([ "$GUEST_API" = "true" ] && echo ' with guest API access')."
 else
     echo "Activation returned HTTP ${status} for '${SITE_NAME}'." >&2
     exit 1

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Volunteer Confirmation - Ongoing Role (Therapy Horse)</name>
+    <relatedEntityType>FlowToolKit__Form_Submission__c</relatedEntityType>
+    <style>none</style>
+    <subject>Welcome to Equine Therapy, {{{FlowToolKit__Form_Submission__c.FlowToolKit__Contact1_First_Name__c}}}</subject>
+    <type>custom</type>
+    <uiType>SFX</uiType>
+</EmailTemplate>

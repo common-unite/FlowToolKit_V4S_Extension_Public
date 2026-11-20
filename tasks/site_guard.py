@@ -35,6 +35,22 @@ class AssertSiteUsable(BaseSalesforceApiTask):
             ),
             "required": False,
         },
+        "guest_shared_records": {
+            "description": (
+                "Semicolon-separated Object:WHERE pairs, e.g. "
+                "FlowToolKit__Form_Template__c:FlowToolKit__IsActive__c = true. Every "
+                "matching record must carry a GuestRule share to the site's guest user."
+            ),
+            "required": False,
+        },
+        "active_flows": {
+            "description": "Comma-separated flow API names that must have an active version.",
+            "required": False,
+        },
+        "guest_api": {
+            "description": "True when the Network must allow guest API access (LWR guests get 401 without it).",
+            "required": False,
+        },
     }
 
     def _init_options(self, kwargs):
@@ -43,13 +59,22 @@ class AssertSiteUsable(BaseSalesforceApiTask):
         self.required_permission_sets = [
             name.strip() for name in raw.split(",") if name.strip()
         ] or list(REQUIRED_GUEST_PERMISSION_SETS)
+        self.guest_shared_records = [
+            pair.strip().split(":", 1)
+            for pair in (self.options.get("guest_shared_records") or "").split(";")
+            if ":" in pair
+        ]
+        self.active_flows = [
+            name.strip() for name in (self.options.get("active_flows") or "").split(",") if name.strip()
+        ]
+        self.guest_api = str(self.options.get("guest_api") or "").lower() == "true"
 
     def _run_task(self):
         network_name = self.options["network_name"]
         problems = []
 
         network = self._query_one(
-            "SELECT Id, Name, Status FROM Network WHERE Name = "
+            "SELECT Id, Name, Status, OptionsGuestChatterEnabled FROM Network WHERE Name = "
             f"'{self._escape(network_name)}'"
         )
         if not network:
@@ -64,7 +89,15 @@ class AssertSiteUsable(BaseSalesforceApiTask):
                 "redirected to the login page. Check activate_volunteer_portal."
             )
 
+        if self.guest_api and not network.get("OptionsGuestChatterEnabled"):
+            problems.append(
+                "Guest API access is off on the Network, so every ui-api call a "
+                "guest makes returns 401. Check activate-volunteer-portal.sh guest-api."
+            )
+
         problems.extend(self._guest_permission_problems(network_name))
+        problems.extend(self._guest_share_problems(network_name))
+        problems.extend(self._inactive_flow_problems())
 
         if problems:
             raise CumulusCIException(
@@ -105,6 +138,60 @@ class AssertSiteUsable(BaseSalesforceApiTask):
             f"The site's guest user is missing permission set(s): "
             f"{', '.join(missing)}. The Job Finder will show guests nothing. "
             "Check scripts/setup-volunteer-portal-site.apex."
+        ]
+
+    def _guest_share_problems(self, network_name):
+        if not self.guest_shared_records:
+            return []
+        guest_user_id = self._resolve_guest_user_id(network_name)
+        if not guest_user_id:
+            return []
+        # A guest sharing rule shares to the guest's GuestUserGroup, not to the user itself
+        recipients = [guest_user_id] + [
+            row["Id"]
+            for row in self._query_all(
+                f"SELECT Id FROM Group WHERE Type = 'GuestUserGroup' AND RelatedId = '{guest_user_id}'"
+            )
+        ]
+        recipient_list = ", ".join(f"'{recipient}'" for recipient in recipients)
+        problems = []
+        for object_name, where in self.guest_shared_records:
+            record_ids = {row["Id"] for row in self._query_all(f"SELECT Id FROM {object_name} WHERE {where}")}
+            if not record_ids:
+                continue
+            share_object = (object_name[:-3] + "__Share") if object_name.endswith("__c") else object_name + "Share"
+            parent_field = "ParentId" if object_name.endswith("__c") else object_name + "Id"
+            shared = {
+                row[parent_field]
+                for row in self._query_all(
+                    f"SELECT {parent_field} FROM {share_object} "
+                    f"WHERE RowCause = 'GuestRule' AND UserOrGroupId IN ({recipient_list})"
+                )
+            }
+            missing = record_ids - shared
+            if missing:
+                problems.append(
+                    f"{len(missing)} of {len(record_ids)} {object_name} records ({where}) "
+                    "are not shared to the guest user, so a guest cannot open them. "
+                    "Check the guest sharing rules in scratch-org/site/sharingRules."
+                )
+        return problems
+
+    def _inactive_flow_problems(self):
+        if not self.active_flows:
+            return []
+        names = ", ".join(f"'{name}'" for name in self.active_flows)
+        active = {
+            row["ApiName"]
+            for row in self._query_all(
+                f"SELECT ApiName FROM FlowDefinitionView WHERE ApiName IN ({names}) AND IsActive = true"
+            )
+        }
+        return [
+            f"Flow {name} is not active, so a guest save that needs it fails. "
+            "Check scripts/activate-guest-save-override.sh."
+            for name in self.active_flows
+            if name not in active
         ]
 
     def _resolve_guest_user_id(self, network_name):

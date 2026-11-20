@@ -1,3 +1,4 @@
+from cumulusci.core.exceptions import CumulusCIException
 from cumulusci.tasks.salesforce import BaseSalesforceApiTask
 
 
@@ -29,3 +30,15 @@ class CheckLWSEnabled(BaseSalesforceApiTask):
             self.logger.info("Lightning Web Security is ENABLED.")
         else:
             self.logger.warning("Lightning Web Security is DISABLED.")
+
+
+class AssertLWSEnabled(CheckLWSEnabled):
+    """Fails the flow when Lightning Web Security is off; orgs/dev.json turns it on (#50)."""
+
+    def _run_task(self):
+        super()._run_task()
+        if not self.return_values.get("is_enabled"):
+            raise CumulusCIException(
+                "Lightning Web Security is off. orgs/dev.json sets "
+                "securitySettings.sessionSettings.lockerServiceNext; check the org definition."
+            )

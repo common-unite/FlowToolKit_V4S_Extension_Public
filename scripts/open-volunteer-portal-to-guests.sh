@@ -7,7 +7,13 @@ set -euo pipefail
 SITE_DEV_NAME="${SITE_DEV_NAME:-Volunteer_Portal1}"
 SITE_NAME="${SITE_NAME:-Volunteer Portal}"
 WORK_DIR="$(mktemp -d)"
-trap 'rm -rf "$WORK_DIR"' EXIT
+MINTED_ALIAS=""
+# A second alias on the org's username hides the org from the sf CLI and Illuminated Cloud pickers (#50), so the minted one never outlives the script.
+cleanup() {
+    rm -rf "$WORK_DIR"
+    if [ -n "$MINTED_ALIAS" ]; then sf alias unset "$MINTED_ALIAS" >/dev/null 2>&1 || true; fi
+}
+trap cleanup EXIT
 
 # CumulusCI's SalesforceCommand supplies credentials but no org alias, so mint a throwaway one.
 if [ -z "${TARGET_ORG:-}" ]; then
@@ -16,6 +22,7 @@ if [ -z "${TARGET_ORG:-}" ]; then
         exit 1
     fi
     TARGET_ORG="volunteer_portal_guest_access"
+    MINTED_ALIAS="$TARGET_ORG"
     sf org login access-token --instance-url "$SF_ORG_INSTANCE_URL" --alias "$TARGET_ORG" --no-prompt >/dev/null
 fi
 

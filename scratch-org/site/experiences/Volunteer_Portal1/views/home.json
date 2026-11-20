@@ -11,10 +11,10 @@
   }, {
     "components" : [ {
       "componentAttributes" : {
-        "richTextValue" : "<div>     <p><span style='font-size: 48px;'>Let's get started!</span></p>     <ol>         <li><span style='font-size: 18px;'>Unfamiliar with Build Your Own? Click Take a Tour in the Help menu.</span></li>         <li><span style='font-size: 18px;'>Want to add more pages? Take a look at the Pages menu.</span></li>         <li><span style='font-size: 18px;'>Want more components on your page? Drag and drop components from the Components panel.</span></li>         <li><span style='font-size: 18px;'>Want your users to see your company logo? Head on over to the Theme panel.</span></li>         <li><span style='font-size: 18px;'>Refine the look of your site with a custom theme layout. See the Experience Cloud Developer Guide.</span></li>     </ol> </div>"
+        "properties" : "{\"jobListFormQualifiedApiName\": \"JobFinder_Highlight_Form\", \"blocksPerRow\": 3, \"recordsPerCategory\": 6}"
       },
-      "componentName" : "forceCommunity:richTextInline",
-      "id" : "aaa3d082-b6de-49c2-a7fa-f500ddafcebe",
+      "componentName" : "FlowToolKit:volunteerJobsFinderPage",
+      "id" : "763fd297-4813-48f9-adf8-a3773a46aeac",
       "renderPriority" : "NEUTRAL",
       "renditionMap" : { },
       "type" : "component"
